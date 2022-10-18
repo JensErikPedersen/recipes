@@ -1,0 +1,8 @@
+--- 
+databaseChangeLog: 
+  - 
+    include: 
+      file: db/changelog/ddl_create_base.yaml
+  - 
+    include: 
+      file: db/changelog/dml_insert_categories.yaml

@@ -1,0 +1,507 @@
+databaseChangeLog:
+- changeSet:
+    id: 1666021762739-1
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(64)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: created_by
+            type: VARCHAR(255)
+        - column:
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated
+            type: datetime
+        - column:
+            name: updated_by
+            type: VARCHAR(255)
+        tableName: category
+- changeSet:
+    id: 1666021762739-2
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(64)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: created_by
+            type: VARCHAR(255)
+        - column:
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated
+            type: datetime
+        - column:
+            name: updated_by
+            type: VARCHAR(255)
+        tableName: ingredient
+- changeSet:
+    id: 1666021762739-3
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(64)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: created_by
+            type: VARCHAR(255)
+        - column:
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated
+            type: datetime
+        - column:
+            name: updated_by
+            type: VARCHAR(255)
+        tableName: rating
+- changeSet:
+    id: 1666021762739-4
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(128)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: created_by
+            type: VARCHAR(255)
+        - column:
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated
+            type: datetime
+        - column:
+            name: updated_by
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: category_id
+            type: VARCHAR(36)
+        - column:
+            name: description
+            type: TEXT
+        - column:
+            name: instructions
+            type: TEXT
+        tableName: recipe
+- changeSet:
+    id: 1666021762739-5
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: recipe_id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: ingredient_id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: unit_id
+            type: VARCHAR(36)
+        - column:
+            name: amount
+            type: DECIMAL(4, 2)
+        tableName: recipe_ingredient
+- changeSet:
+    id: 1666021762739-6
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: recipe_id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: rating_id
+            type: VARCHAR(36)
+        tableName: recipe_rating
+- changeSet:
+    id: 1666021762739-7
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: recipe_id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: tag_id
+            type: VARCHAR(36)
+        tableName: recipe_tag
+- changeSet:
+    id: 1666021762739-8
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(64)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: created_by
+            type: VARCHAR(255)
+        - column:
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated
+            type: datetime
+        - column:
+            name: updated_by
+            type: VARCHAR(255)
+        tableName: tag
+- changeSet:
+    id: 1666021762739-9
+    author: jense (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: VARCHAR(36)
+        - column:
+            constraints:
+              unique: true
+            name: name
+            type: VARCHAR(64)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: created
+            type: datetime
+        - column:
+            constraints:
+              nullable: false
+            name: created_by
+            type: VARCHAR(255)
+        - column:
+            defaultValueComputed: CURRENT_TIMESTAMP
+            name: updated
+            type: datetime
+        - column:
+            name: updated_by
+            type: VARCHAR(255)
+        tableName: unit
+- changeSet:
+    id: 1666021762739-10
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: category_id
+        indexName: FK_recipe_category
+        tableName: recipe
+- changeSet:
+    id: 1666021762739-11
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: ingredient_id
+        indexName: FK_recipe_ingredient_ingredient
+        tableName: recipe_ingredient
+- changeSet:
+    id: 1666021762739-12
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: recipe_id
+        indexName: FK_recipe_ingredient_recipe
+        tableName: recipe_ingredient
+- changeSet:
+    id: 1666021762739-13
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: unit_id
+        indexName: FK_recipe_ingredient_unit
+        tableName: recipe_ingredient
+- changeSet:
+    id: 1666021762739-14
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: rating_id
+        indexName: FK_recipe_rating_rating
+        tableName: recipe_rating
+- changeSet:
+    id: 1666021762739-15
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: recipe_id
+        indexName: FK_recipe_rating_recipe
+        tableName: recipe_rating
+- changeSet:
+    id: 1666021762739-16
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: recipe_id
+        indexName: FK_recipe_tag_recipe
+        tableName: recipe_tag
+- changeSet:
+    id: 1666021762739-17
+    author: jense (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: tag_id
+        indexName: FK_recipe_tag_tag
+        tableName: recipe_tag
+- changeSet:
+    id: 1666021762739-18
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: category_id
+        baseTableName: recipe
+        constraintName: FK_recipe_category
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: category
+        validate: true
+- changeSet:
+    id: 1666021762739-19
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: ingredient_id
+        baseTableName: recipe_ingredient
+        constraintName: FK_recipe_ingredient_ingredient
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: ingredient
+        validate: true
+- changeSet:
+    id: 1666021762739-20
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: recipe_id
+        baseTableName: recipe_ingredient
+        constraintName: FK_recipe_ingredient_recipe
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: recipe
+        validate: true
+- changeSet:
+    id: 1666021762739-21
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: unit_id
+        baseTableName: recipe_ingredient
+        constraintName: FK_recipe_ingredient_unit
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: unit
+        validate: true
+- changeSet:
+    id: 1666021762739-22
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: rating_id
+        baseTableName: recipe_rating
+        constraintName: FK_recipe_rating_rating
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: rating
+        validate: true
+- changeSet:
+    id: 1666021762739-23
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: recipe_id
+        baseTableName: recipe_rating
+        constraintName: FK_recipe_rating_recipe
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: recipe
+        validate: true
+- changeSet:
+    id: 1666021762739-24
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: recipe_id
+        baseTableName: recipe_tag
+        constraintName: FK_recipe_tag_recipe
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: recipe
+        validate: true
+- changeSet:
+    id: 1666021762739-25
+    author: jense (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tag_id
+        baseTableName: recipe_tag
+        constraintName: FK_recipe_tag_tag
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: tag
+        validate: true
+

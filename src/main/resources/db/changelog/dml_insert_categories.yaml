@@ -1,0 +1,19 @@
+databaseChangeLog:
+- changeSet:
+    id: 1665943986049-1
+    author: jense (generated)
+    preConditions:
+      - onFail: MARK_RAN
+      - sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM category WHERE name = 'Brød'
+    changes:
+     - insert:
+         tableName: category
+         columns:
+           - column:
+               name: id
+               value: 14d4c0b0-46ea-498d-a3a5-56060a3d7a7c
+           - column:
+               name: name
+               value: Brød
