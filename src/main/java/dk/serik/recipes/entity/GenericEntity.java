@@ -38,22 +38,25 @@ public class GenericEntity implements Comparable {
 	    @Id
 	    @GenericGenerator(name = "uuid2", strategy = "uuid2")
 	    @GeneratedValue(generator = "uuid2")
-	    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+	    //@Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+	    @Column(updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
 	    @Type(type = "uuid-char")
 	    protected UUID id;
 
 	    @Setter(AccessLevel.PRIVATE)	    
-	    @Column(name = "created", nullable = false)
+	    //@Column(name = "created", nullable = false)
+	    @Column(nullable = false)
 	    protected OffsetDateTime created;
 
-	    @Column(name = "createdby", nullable = false)
+	    //@Column(name = "created_by", nullable = false)
+	    @Column(nullable = false)
 	    protected String createdBy;
 
 	    @Setter(AccessLevel.PRIVATE)
-	    @Column(name = "updated")
+	   // @Column(name = "updated")
 	    protected OffsetDateTime updated;
 
-	    @Column(name = "updatedby")
+	   // @Column(name = "updated_by")
 	    protected String updatedBy;
 
 	    @Override

@@ -17,3 +17,18 @@ databaseChangeLog:
            - column:
                name: name
                value: Brød
+           - column:
+               name: created_by
+               value: Jens
+     - insert:
+           tableName: category
+           columns:
+           - column:
+               name: id
+               value: 7f1fd066-2323-4a4c-ae44-6409e2ecc774
+           - column:
+               name: name
+               value: Hovedret
+           - column:
+               name: created_by
+               value: Majken

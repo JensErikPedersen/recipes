@@ -2,42 +2,49 @@ package dk.serik.recipes.jpa;
 
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.PhysicalNamingStrategy;
+import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
 
-public class SnakeCasePhysicalNamingStrategy implements PhysicalNamingStrategy {
+public class SnakeCasePhysicalNamingStrategy extends PhysicalNamingStrategyStandardImpl {
 
-    @Override
-    public Identifier toPhysicalCatalogName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
-    }
+	private static final long serialVersionUID = 8893366543532732035L;
+	
+	   @Override
+	    public Identifier toPhysicalCatalogName(Identifier name, JdbcEnvironment context) {
+	        return super.toPhysicalCatalogName(toSnakeCase(name), context);
+	    }
+	 
+	    @Override
+	    public Identifier toPhysicalColumnName(Identifier name, JdbcEnvironment context) {
+	        return super.toPhysicalColumnName(toSnakeCase(name), context);
+	    }
+	 
+	    @Override
+	    public Identifier toPhysicalSchemaName(Identifier name, JdbcEnvironment context) {
+	        return super.toPhysicalSchemaName(toSnakeCase(name), context);
+	    }
+	 
+	    @Override
+	    public Identifier toPhysicalSequenceName(Identifier name, JdbcEnvironment context) {
+	        return super.toPhysicalSequenceName(toSnakeCase(name), context);
+	    }
+	 
+	    @Override
+	    public Identifier toPhysicalTableName(Identifier name, JdbcEnvironment context) {
+	        return super.toPhysicalTableName(toSnakeCase(name), context);
+	    }
+	     
+	    private Identifier toSnakeCase(Identifier id) {
+	        if (id == null)
+	            return id;
+	             
+	        String name = id.getText();
+	        String snakeName = name.replaceAll("([a-z]+)([A-Z]+)", "$1\\_$2").toLowerCase();
+	        if (!snakeName.equals(name))
+	            return new Identifier(snakeName, id.isQuoted());
+	        else
+	            return id;
+	    }
 
-    @Override
-    public Identifier toPhysicalColumnName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
-    }
-
-    @Override
-    public Identifier toPhysicalSchemaName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
-    }
-
-    @Override
-    public Identifier toPhysicalSequenceName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
-    }
-
-    @Override
-    public Identifier toPhysicalTableName(final Identifier identifier, final JdbcEnvironment jdbcEnv) {
-        return convertToSnakeCase(identifier);
-    }
-
-    private Identifier convertToSnakeCase(final Identifier identifier) {
-        final String regex = "([a-z])([A-Z])";
-        final String replacement = "$1_$2";
-        final String newName = identifier.getText()
-          .replaceAll(regex, replacement)
-          .toLowerCase();
-        return Identifier.toIdentifier(newName);
-    }
-
+   
 }
