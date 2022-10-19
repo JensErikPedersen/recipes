@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1666021762739-1
+    id: 1666104673429-1
     author: jense (generated)
     changes:
     - createTable:
@@ -17,6 +17,9 @@ databaseChangeLog:
             name: name
             type: VARCHAR(64)
         - column:
+            name: description
+            type: VARCHAR(255)
+        - column:
             constraints:
               nullable: false
             defaultValueComputed: CURRENT_TIMESTAMP
@@ -26,17 +29,17 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: created_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         - column:
             defaultValueComputed: CURRENT_TIMESTAMP
             name: updated
             type: datetime
         - column:
             name: updated_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         tableName: category
 - changeSet:
-    id: 1666021762739-2
+    id: 1666104673429-2
     author: jense (generated)
     changes:
     - createTable:
@@ -54,6 +57,9 @@ databaseChangeLog:
             name: name
             type: VARCHAR(64)
         - column:
+            name: description
+            type: VARCHAR(255)
+        - column:
             constraints:
               nullable: false
             defaultValueComputed: CURRENT_TIMESTAMP
@@ -63,17 +69,17 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: created_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         - column:
             defaultValueComputed: CURRENT_TIMESTAMP
             name: updated
             type: datetime
         - column:
             name: updated_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         tableName: ingredient
 - changeSet:
-    id: 1666021762739-3
+    id: 1666104673429-3
     author: jense (generated)
     changes:
     - createTable:
@@ -85,9 +91,11 @@ databaseChangeLog:
             name: id
             type: VARCHAR(36)
         - column:
-            constraints:
-              nullable: false
-            name: name
+            defaultValueNumeric: 0
+            name: rating
+            type: TINYINT
+        - column:
+            name: description
             type: VARCHAR(64)
         - column:
             constraints:
@@ -107,9 +115,14 @@ databaseChangeLog:
         - column:
             name: updated_by
             type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: recipe_id
+            type: VARCHAR(36)
         tableName: rating
 - changeSet:
-    id: 1666021762739-4
+    id: 1666104673429-4
     author: jense (generated)
     changes:
     - createTable:
@@ -124,7 +137,7 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: name
-            type: VARCHAR(128)
+            type: VARCHAR(255)
         - column:
             constraints:
               nullable: false
@@ -135,14 +148,14 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: created_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         - column:
             defaultValueComputed: CURRENT_TIMESTAMP
             name: updated
             type: datetime
         - column:
             name: updated_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         - column:
             constraints:
               nullable: false
@@ -156,7 +169,7 @@ databaseChangeLog:
             type: TEXT
         tableName: recipe
 - changeSet:
-    id: 1666021762739-5
+    id: 1666104673429-5
     author: jense (generated)
     changes:
     - createTable:
@@ -187,7 +200,7 @@ databaseChangeLog:
             type: DECIMAL(4, 2)
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666021762739-6
+    id: 1666104673429-6
     author: jense (generated)
     changes:
     - createTable:
@@ -210,7 +223,7 @@ databaseChangeLog:
             type: VARCHAR(36)
         tableName: recipe_rating
 - changeSet:
-    id: 1666021762739-7
+    id: 1666104673429-7
     author: jense (generated)
     changes:
     - createTable:
@@ -233,7 +246,7 @@ databaseChangeLog:
             type: VARCHAR(36)
         tableName: recipe_tag
 - changeSet:
-    id: 1666021762739-8
+    id: 1666104673429-8
     author: jense (generated)
     changes:
     - createTable:
@@ -247,8 +260,8 @@ databaseChangeLog:
         - column:
             constraints:
               nullable: false
-            name: name
-            type: VARCHAR(64)
+            name: label
+            type: VARCHAR(255)
         - column:
             constraints:
               nullable: false
@@ -259,17 +272,17 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: created_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         - column:
             defaultValueComputed: CURRENT_TIMESTAMP
             name: updated
             type: datetime
         - column:
             name: updated_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         tableName: tag
 - changeSet:
-    id: 1666021762739-9
+    id: 1666104673429-9
     author: jense (generated)
     changes:
     - createTable:
@@ -282,8 +295,14 @@ databaseChangeLog:
             type: VARCHAR(36)
         - column:
             constraints:
+              nullable: false
               unique: true
-            name: name
+            name: label
+            type: VARCHAR(25)
+        - column:
+            constraints:
+              nullable: false
+            name: description
             type: VARCHAR(64)
         - column:
             constraints:
@@ -295,17 +314,17 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: created_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         - column:
             defaultValueComputed: CURRENT_TIMESTAMP
             name: updated
             type: datetime
         - column:
             name: updated_by
-            type: VARCHAR(255)
+            type: VARCHAR(64)
         tableName: unit
 - changeSet:
-    id: 1666021762739-10
+    id: 1666104673429-10
     author: jense (generated)
     changes:
     - createIndex:
@@ -315,7 +334,7 @@ databaseChangeLog:
         indexName: FK_recipe_category
         tableName: recipe
 - changeSet:
-    id: 1666021762739-11
+    id: 1666104673429-11
     author: jense (generated)
     changes:
     - createIndex:
@@ -325,7 +344,7 @@ databaseChangeLog:
         indexName: FK_recipe_ingredient_ingredient
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666021762739-12
+    id: 1666104673429-12
     author: jense (generated)
     changes:
     - createIndex:
@@ -335,7 +354,7 @@ databaseChangeLog:
         indexName: FK_recipe_ingredient_recipe
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666021762739-13
+    id: 1666104673429-13
     author: jense (generated)
     changes:
     - createIndex:
@@ -345,7 +364,7 @@ databaseChangeLog:
         indexName: FK_recipe_ingredient_unit
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666021762739-14
+    id: 1666104673429-14
     author: jense (generated)
     changes:
     - createIndex:
@@ -355,7 +374,7 @@ databaseChangeLog:
         indexName: FK_recipe_rating_rating
         tableName: recipe_rating
 - changeSet:
-    id: 1666021762739-15
+    id: 1666104673429-15
     author: jense (generated)
     changes:
     - createIndex:
@@ -365,7 +384,7 @@ databaseChangeLog:
         indexName: FK_recipe_rating_recipe
         tableName: recipe_rating
 - changeSet:
-    id: 1666021762739-16
+    id: 1666104673429-16
     author: jense (generated)
     changes:
     - createIndex:
@@ -375,7 +394,7 @@ databaseChangeLog:
         indexName: FK_recipe_tag_recipe
         tableName: recipe_tag
 - changeSet:
-    id: 1666021762739-17
+    id: 1666104673429-17
     author: jense (generated)
     changes:
     - createIndex:
@@ -385,7 +404,7 @@ databaseChangeLog:
         indexName: FK_recipe_tag_tag
         tableName: recipe_tag
 - changeSet:
-    id: 1666021762739-18
+    id: 1666104673429-18
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -400,7 +419,7 @@ databaseChangeLog:
         referencedTableName: category
         validate: true
 - changeSet:
-    id: 1666021762739-19
+    id: 1666104673429-19
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -415,7 +434,7 @@ databaseChangeLog:
         referencedTableName: ingredient
         validate: true
 - changeSet:
-    id: 1666021762739-20
+    id: 1666104673429-20
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -430,7 +449,7 @@ databaseChangeLog:
         referencedTableName: recipe
         validate: true
 - changeSet:
-    id: 1666021762739-21
+    id: 1666104673429-21
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -445,7 +464,7 @@ databaseChangeLog:
         referencedTableName: unit
         validate: true
 - changeSet:
-    id: 1666021762739-22
+    id: 1666104673429-22
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -460,7 +479,7 @@ databaseChangeLog:
         referencedTableName: rating
         validate: true
 - changeSet:
-    id: 1666021762739-23
+    id: 1666104673429-23
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -475,7 +494,7 @@ databaseChangeLog:
         referencedTableName: recipe
         validate: true
 - changeSet:
-    id: 1666021762739-24
+    id: 1666104673429-24
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -490,7 +509,7 @@ databaseChangeLog:
         referencedTableName: recipe
         validate: true
 - changeSet:
-    id: 1666021762739-25
+    id: 1666104673429-25
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:

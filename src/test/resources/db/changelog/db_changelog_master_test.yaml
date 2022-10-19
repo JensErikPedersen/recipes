@@ -5,4 +5,4 @@ databaseChangeLog:
       file: db/changelog/db_changelog_master.yaml
   - 
     include: 
-      file: db/changelog/dml_insert_categories.yaml
+      file: db/changelog/dml_insert_base_data.yaml

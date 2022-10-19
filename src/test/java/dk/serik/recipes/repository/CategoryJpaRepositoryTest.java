@@ -1,5 +1,6 @@
 package dk.serik.recipes.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -40,8 +41,8 @@ public class CategoryJpaRepositoryTest {
 	}
 	
 	@Test
-	public void givenCategoryHovedretIsPresent_WhenFetchingCategoryHovedret_ThenOk() {
-		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Hovedret");
+	public void givenCategoryKagerIsPresent_WhenFetchingCategoryKager_ThenOk() {
+		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Kager");
 		Assertions.assertTrue(categoryEntity.isPresent());
 		Assertions.assertEquals("Majken", categoryEntity.get().getCreatedBy());
 	}
@@ -55,6 +56,28 @@ public class CategoryJpaRepositoryTest {
 		
 	}
 	
+	@Test
+	public void givenThreeCategories_WhenFetchingAll_ThenFourInList() {
+		List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+		Assertions.assertFalse(categoryEntities.isEmpty());
+		Assertions.assertEquals(4, categoryEntities.size());
+	}
+	
+	@Test
+	public void givenExistingCategory_WhenNameIsChanged_ThenOk() {
+		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Brød");
+		Assertions.assertTrue(categoryEntity.isPresent());
+		categoryEntity.get().setName("Bread");
+		CategoryEntity savedCategory = categoryRepository.saveAndFlush(categoryEntity.get());
+		Assertions.assertEquals("Bread", savedCategory.getName());
+	}
+	
+	@Test
+	public void givenExistingCategories_WhenLookupByName_er_ThenFindTwo() {
+		Optional<List<CategoryEntity>> opCategories = categoryRepository.findAllByNameContains("er");
+		Assertions.assertTrue(opCategories.isPresent());
+		Assertions.assertEquals(2, opCategories.get().size());
+	}
 	
 	private CategoryEntity buildWienerBreadEntity() {
 		CategoryEntity categoryEntity = new CategoryEntity();

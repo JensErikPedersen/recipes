@@ -25,7 +25,8 @@ public class GenericEntityListener {
 
     @PrePersist
     public void prePersist(GenericEntity genericEntity) {
-        genericEntity.setCreatedBy(session.getUserName());        
+        genericEntity.setCreatedBy(session.getUserName());  
+        log.info("createdBy is set to: {}", session.getUserName());
     }
 
     @PostPersist
@@ -43,7 +44,7 @@ public class GenericEntityListener {
     @PreUpdate
     public void preUpdate(GenericEntity genericEntity) {
         genericEntity.setUpdatedBy(session.getUserName());
-        //log.info(sessionAware.getSessionId() + " : preUpdate(): entity=" + genericEntity.getClass().getSimpleName() + " : " + genericEntity.getEntityId());
+        log.info("updateBy is set to: {}", session.getUserName());
     }
 
     @PostUpdate
