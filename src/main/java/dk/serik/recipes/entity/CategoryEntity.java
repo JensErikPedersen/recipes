@@ -20,15 +20,12 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-//@EqualsAndHashCode(callSuper=true)
-//@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="category")
 public class CategoryEntity extends GenericEntity {
 	
-	// @Column(name="name", nullable = false)
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 
 	private String description;	

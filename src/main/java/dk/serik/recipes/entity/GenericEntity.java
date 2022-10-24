@@ -2,7 +2,6 @@ package dk.serik.recipes.entity;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -19,11 +18,9 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")

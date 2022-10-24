@@ -34,13 +34,11 @@ public class RecipeIngredientEntity {
 
 	@Id	
 	@ManyToOne
-//	@MapsId("recipeId")
 	@JoinColumn(name="recipe_id", nullable=false)  
 	private RecipeEntity recipeId;
 	
 	@Id
 	@ManyToOne
-//	@MapsId("ingredientId")
 	@JoinColumn(name="ingredient_id", nullable = false)
 	private IngredientEntity ingredientId;
 	

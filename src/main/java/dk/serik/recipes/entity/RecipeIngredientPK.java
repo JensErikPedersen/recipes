@@ -2,36 +2,23 @@ package dk.serik.recipes.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Type;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("serial")
-//@Embeddable
+@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Slf4j
 public class RecipeIngredientPK implements Serializable {
-	
-//	private RecipeEntity recipeEntity;
-//	
-//	private IngredientEntity ingredientEntity;
 		
 	private String recipeId;
 	
