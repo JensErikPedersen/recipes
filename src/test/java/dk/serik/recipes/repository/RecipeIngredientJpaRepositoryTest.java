@@ -69,7 +69,6 @@ public class RecipeIngredientJpaRepositoryTest {
 		RecipeIngredientEntity recipeIngredientEntity = new RecipeIngredientEntity();
 		recipeIngredientEntity.setAmount(new BigDecimal(1));
 		recipeIngredientEntity.setUnitEntity(opUnit.get());
-//		recipeIngredientEntity.setId(new RecipeIngredientKey(opRecipe.get(), opIngredient.get()));
 		recipeIngredientEntity.setIngredientId(opIngredient.get());
 		recipeIngredientEntity.setRecipeId(opRecipe.get());
 		log.info("RecipeIngredientEntity to be persisted: {}", recipeIngredientEntity);
