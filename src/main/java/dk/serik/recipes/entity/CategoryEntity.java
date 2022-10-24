@@ -1,9 +1,11 @@
 package dk.serik.recipes.entity;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,9 +18,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper=true)
-@ToString(callSuper = true)
+@Getter
+@Setter
+//@EqualsAndHashCode(callSuper=true)
+//@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="category")
@@ -30,7 +33,13 @@ public class CategoryEntity extends GenericEntity {
 
 	private String description;	
 	
-	 @OneToMany(mappedBy="categoryEntity")
+	 @OneToMany(mappedBy="categoryEntity", fetch= FetchType.LAZY)
 	 private Set<RecipeEntity> recipeEntities;
+
+	@Override
+	public String toString() {
+		return "CategoryEntity [name=" + name + ", description=" + description + ", id=" + id + "]";
+	}
+  
 	
 }

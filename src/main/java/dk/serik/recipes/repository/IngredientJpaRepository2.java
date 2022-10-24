@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import dk.serik.recipes.entity.IngredientEntity;
 
 @Repository
-public interface IngredientJpaRepository extends JpaRepository<IngredientEntity, String> {
+public interface IngredientJpaRepository2 extends JpaRepository<IngredientEntity, UUID> {
 	
 	Optional<List<IngredientEntity>> findAllByNameContains(String name);
 	

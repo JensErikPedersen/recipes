@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import dk.serik.recipes.entity.CategoryEntity;
 
 @Repository
-public interface CategoryJpaRepository extends JpaRepository<CategoryEntity,String>{
+public interface CategoryJpaRepository2 extends JpaRepository<CategoryEntity,UUID>{
 	Optional<CategoryEntity> findByName(String name);
 	
 	Optional<List<CategoryEntity>> findAllByNameContains(String name);

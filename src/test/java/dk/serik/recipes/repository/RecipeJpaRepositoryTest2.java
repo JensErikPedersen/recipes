@@ -23,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
-public class RecipeJpaRepositoryTest {
+public class RecipeJpaRepositoryTest2 {
 
 	@Autowired
-	private RecipeJpaRepository recipeJpaRepository;
+	private RecipeJpaRepository2 recipeJpaRepository;
 	
 	@Autowired
-	private CategoryJpaRepository categoryRepository;
+	private CategoryJpaRepository2 categoryRepository;
 	
 	@MockBean
 	private Session session;
@@ -50,7 +50,7 @@ public class RecipeJpaRepositoryTest {
 	@Test
 	@Sql("/db/test-data/insert_recipes.sql")
 	public void givenExistingRecipe_WhenFetchingByKnownUUID_ThenOk() {
-		Optional<RecipeEntity> reOptional = recipeJpaRepository.findById("4ea753a3-07ff-47ce-82bb-9dcc1aa25477");
+		Optional<RecipeEntity> reOptional = recipeJpaRepository.findById(UUID.fromString("4ea753a3-07ff-47ce-82bb-9dcc1aa25477"));
 		Assertions.assertTrue(reOptional.isPresent());
 		Assertions.assertEquals("Stegt flæsk med persillesovs og kogte kartofler", reOptional.get().getName());
 		Assertions.assertEquals("En klassisk menu til herremiddagen", reOptional.get().getDescription());
@@ -79,10 +79,10 @@ public class RecipeJpaRepositoryTest {
 	@Test
 	@Sql("/db/test-data/insert_recipes.sql")
 	public void givenExistingRecipe_WhenDeleted_ThenOk() {
-		Optional<RecipeEntity> reOptional = recipeJpaRepository.findById("4ea753a3-07ff-47ce-82bb-9dcc1aa25477");
+		Optional<RecipeEntity> reOptional = recipeJpaRepository.findById(UUID.fromString("4ea753a3-07ff-47ce-82bb-9dcc1aa25477"));
 		Assertions.assertTrue(reOptional.isPresent());
 		recipeJpaRepository.delete(reOptional.get());
-		reOptional = recipeJpaRepository.findById("4ea753a3-07ff-47ce-82bb-9dcc1aa25477");
+		reOptional = recipeJpaRepository.findById(UUID.fromString("4ea753a3-07ff-47ce-82bb-9dcc1aa25477"));
 		Assertions.assertFalse(reOptional.isPresent());
 		List<RecipeEntity> recipes = recipeJpaRepository.findAll();
 		Assertions.assertFalse(recipes.isEmpty());
@@ -92,7 +92,7 @@ public class RecipeJpaRepositoryTest {
 	@Test
 	@Sql("/db/test-data/insert_recipes.sql")
 	public void givenExistingRecipe_WhenNameIsChanged_ThenOk() {
-		Optional<RecipeEntity> reOptional = recipeJpaRepository.findById("195f5356-2230-4122-9a23-a266151f865c");
+		Optional<RecipeEntity> reOptional = recipeJpaRepository.findById(UUID.fromString("195f5356-2230-4122-9a23-a266151f865c"));
 		Assertions.assertTrue(reOptional.isPresent());		
 		reOptional.get().setName("Kylling og bacon rykker!");
 		RecipeEntity saveAndFlush = recipeJpaRepository.saveAndFlush(reOptional.get());

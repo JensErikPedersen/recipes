@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import dk.serik.recipes.entity.RecipeEntity;
 
 @Repository
-public interface RecipeJpaRepository extends JpaRepository<RecipeEntity, String> {
+public interface RecipeJpaRepository2 extends JpaRepository<RecipeEntity, UUID> {
 	
 	List<RecipeEntity> findAllByCategoryEntityName(String categoryName);
 	

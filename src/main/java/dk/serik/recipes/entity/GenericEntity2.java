@@ -23,24 +23,25 @@ import org.hibernate.annotations.Type;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 
 @SuppressWarnings("rawtypes")
 @Data
 @MappedSuperclass
 @EntityListeners(GenericEntityListener.class)
-public class GenericEntity implements Comparable {
+public class GenericEntity2 implements Comparable {
 
 	    @Transient
 	    protected final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
 
 	    @Setter(AccessLevel.NONE)	    
 	    @Id
-	    @GenericGenerator(name = "generator", strategy = "uuid2")
-	    @GeneratedValue(generator = "generator")
-	    @Column(updatable = false, nullable = false, columnDefinition = "uniqueidentifier")	   
-	    protected String id;
+	    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+	    @GeneratedValue(generator = "uuid2")
+	    //@Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+	    @Column(updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+	    @Type(type = "uuid-char")
+	    protected UUID id;
 
 	    @Setter(AccessLevel.PRIVATE)	    
 	    //@Column(name = "created", nullable = false)

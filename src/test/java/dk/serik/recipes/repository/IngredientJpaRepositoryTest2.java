@@ -21,10 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
-public class IngredientJpaRepositoryTest {
+public class IngredientJpaRepositoryTest2 {
 	
 	@Autowired
-	private IngredientJpaRepository repository;
+	private IngredientJpaRepository2 repository;
 	
 	@MockBean
 	private Session session;
@@ -75,10 +75,10 @@ public class IngredientJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingIngredient_WhenDeleted_ThenOk() {
-		Optional<IngredientEntity> opIngredient = repository.findById("e00aec55-2eb7-4eeb-a594-0bbb948f09c1");
+		Optional<IngredientEntity> opIngredient = repository.findById(UUID.fromString("e00aec55-2eb7-4eeb-a594-0bbb948f09c1"));
 		Assertions.assertTrue(opIngredient.isPresent());
 		repository.delete(opIngredient.get());
-		opIngredient = repository.findById("e00aec55-2eb7-4eeb-a594-0bbb948f09c1");
+		opIngredient = repository.findById(UUID.fromString("e00aec55-2eb7-4eeb-a594-0bbb948f09c1"));
 		Assertions.assertFalse(opIngredient.isPresent());
 		
 		List<IngredientEntity> ingredients = repository.findAll();
@@ -88,7 +88,7 @@ public class IngredientJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingIngredient_WhenUpdateDescription_ThenOk() {
-		Optional<IngredientEntity> opIngredient = repository.findById("9d2b8e95-e897-470a-b1dd-0cf03fb01465");
+		Optional<IngredientEntity> opIngredient = repository.findById(UUID.fromString("9d2b8e95-e897-470a-b1dd-0cf03fb01465"));
 		Assertions.assertTrue(opIngredient.isPresent());
 		opIngredient.get().setDescription("Bare rugmel");
 		IngredientEntity saveAndFlush = repository.saveAndFlush(opIngredient.get());

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import dk.serik.recipes.entity.UnitEntity;
 
 @Repository
-public interface UnitJpaRepository extends JpaRepository<UnitEntity, String> {
+public interface UnitJpaRepository2 extends JpaRepository<UnitEntity, UUID> {
 	Optional<UnitEntity> findByDescriptionContains(String description);
 	
 	Optional<List<UnitEntity>> findAllByDescriptionContains(String description);

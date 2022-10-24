@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1666104673429-1
+    id: 1666530438941-1
     author: jense (generated)
     changes:
     - createTable:
@@ -39,7 +39,7 @@ databaseChangeLog:
             type: VARCHAR(64)
         tableName: category
 - changeSet:
-    id: 1666104673429-2
+    id: 1666530438941-2
     author: jense (generated)
     changes:
     - createTable:
@@ -79,7 +79,7 @@ databaseChangeLog:
             type: VARCHAR(64)
         tableName: ingredient
 - changeSet:
-    id: 1666104673429-3
+    id: 1666530438941-3
     author: jense (generated)
     changes:
     - createTable:
@@ -122,7 +122,7 @@ databaseChangeLog:
             type: VARCHAR(36)
         tableName: rating
 - changeSet:
-    id: 1666104673429-4
+    id: 1666530438941-4
     author: jense (generated)
     changes:
     - createTable:
@@ -169,7 +169,7 @@ databaseChangeLog:
             type: TEXT
         tableName: recipe
 - changeSet:
-    id: 1666104673429-5
+    id: 1666530438941-5
     author: jense (generated)
     changes:
     - createTable:
@@ -178,16 +178,12 @@ databaseChangeLog:
             constraints:
               nullable: false
               primaryKey: true
-            name: id
-            type: VARCHAR(36)
-        - column:
-            constraints:
-              nullable: false
             name: recipe_id
             type: VARCHAR(36)
         - column:
             constraints:
               nullable: false
+              primaryKey: true
             name: ingredient_id
             type: VARCHAR(36)
         - column:
@@ -197,10 +193,10 @@ databaseChangeLog:
             type: VARCHAR(36)
         - column:
             name: amount
-            type: DECIMAL(4, 2)
+            type: DECIMAL(6, 2)
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666104673429-6
+    id: 1666530438941-6
     author: jense (generated)
     changes:
     - createTable:
@@ -223,7 +219,7 @@ databaseChangeLog:
             type: VARCHAR(36)
         tableName: recipe_rating
 - changeSet:
-    id: 1666104673429-7
+    id: 1666530438941-7
     author: jense (generated)
     changes:
     - createTable:
@@ -246,7 +242,7 @@ databaseChangeLog:
             type: VARCHAR(36)
         tableName: recipe_tag
 - changeSet:
-    id: 1666104673429-8
+    id: 1666530438941-8
     author: jense (generated)
     changes:
     - createTable:
@@ -282,7 +278,7 @@ databaseChangeLog:
             type: VARCHAR(64)
         tableName: tag
 - changeSet:
-    id: 1666104673429-9
+    id: 1666530438941-9
     author: jense (generated)
     changes:
     - createTable:
@@ -324,7 +320,7 @@ databaseChangeLog:
             type: VARCHAR(64)
         tableName: unit
 - changeSet:
-    id: 1666104673429-10
+    id: 1666530438941-10
     author: jense (generated)
     changes:
     - createIndex:
@@ -334,7 +330,7 @@ databaseChangeLog:
         indexName: FK_recipe_category
         tableName: recipe
 - changeSet:
-    id: 1666104673429-11
+    id: 1666530438941-11
     author: jense (generated)
     changes:
     - createIndex:
@@ -344,17 +340,7 @@ databaseChangeLog:
         indexName: FK_recipe_ingredient_ingredient
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666104673429-12
-    author: jense (generated)
-    changes:
-    - createIndex:
-        columns:
-        - column:
-            name: recipe_id
-        indexName: FK_recipe_ingredient_recipe
-        tableName: recipe_ingredient
-- changeSet:
-    id: 1666104673429-13
+    id: 1666530438941-12
     author: jense (generated)
     changes:
     - createIndex:
@@ -364,7 +350,7 @@ databaseChangeLog:
         indexName: FK_recipe_ingredient_unit
         tableName: recipe_ingredient
 - changeSet:
-    id: 1666104673429-14
+    id: 1666530438941-13
     author: jense (generated)
     changes:
     - createIndex:
@@ -374,7 +360,7 @@ databaseChangeLog:
         indexName: FK_recipe_rating_rating
         tableName: recipe_rating
 - changeSet:
-    id: 1666104673429-15
+    id: 1666530438941-14
     author: jense (generated)
     changes:
     - createIndex:
@@ -384,7 +370,7 @@ databaseChangeLog:
         indexName: FK_recipe_rating_recipe
         tableName: recipe_rating
 - changeSet:
-    id: 1666104673429-16
+    id: 1666530438941-15
     author: jense (generated)
     changes:
     - createIndex:
@@ -394,7 +380,7 @@ databaseChangeLog:
         indexName: FK_recipe_tag_recipe
         tableName: recipe_tag
 - changeSet:
-    id: 1666104673429-17
+    id: 1666530438941-16
     author: jense (generated)
     changes:
     - createIndex:
@@ -404,7 +390,7 @@ databaseChangeLog:
         indexName: FK_recipe_tag_tag
         tableName: recipe_tag
 - changeSet:
-    id: 1666104673429-18
+    id: 1666530438941-17
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -419,7 +405,7 @@ databaseChangeLog:
         referencedTableName: category
         validate: true
 - changeSet:
-    id: 1666104673429-19
+    id: 1666530438941-18
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -434,7 +420,7 @@ databaseChangeLog:
         referencedTableName: ingredient
         validate: true
 - changeSet:
-    id: 1666104673429-20
+    id: 1666530438941-19
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -449,7 +435,7 @@ databaseChangeLog:
         referencedTableName: recipe
         validate: true
 - changeSet:
-    id: 1666104673429-21
+    id: 1666530438941-20
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -464,7 +450,7 @@ databaseChangeLog:
         referencedTableName: unit
         validate: true
 - changeSet:
-    id: 1666104673429-22
+    id: 1666530438941-21
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -479,7 +465,7 @@ databaseChangeLog:
         referencedTableName: rating
         validate: true
 - changeSet:
-    id: 1666104673429-23
+    id: 1666530438941-22
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -494,7 +480,7 @@ databaseChangeLog:
         referencedTableName: recipe
         validate: true
 - changeSet:
-    id: 1666104673429-24
+    id: 1666530438941-23
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
@@ -509,7 +495,7 @@ databaseChangeLog:
         referencedTableName: recipe
         validate: true
 - changeSet:
-    id: 1666104673429-25
+    id: 1666530438941-24
     author: jense (generated)
     changes:
     - addForeignKeyConstraint:
