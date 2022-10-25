@@ -1,5 +1,10 @@
 package dk.serik.recipes.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,11 +64,13 @@ public class UnitJpaRepositoryTest {
 	
 	@Test
 	public void givenValidUnitEntity_WhenSavedToDatabase_ThenOk() {
+		OffsetDateTime now = OffsetDateTime.now();
 		UnitEntity saveAndFlush = repository.saveAndFlush(buildUnitEntity());
 		List<UnitEntity> unitEntities = repository.findAll();
 		Assertions.assertFalse(unitEntities.isEmpty());
-		Assertions.assertEquals(5, unitEntities.size());		
-		Assertions.assertEquals("Jens", saveAndFlush.getCreatedBy());
+		Assertions.assertEquals(5, unitEntities.size());
+		assertThat(now).isCloseTo(saveAndFlush.getCreated(), within(0, ChronoUnit.SECONDS));
+		assertThat("Jens").isEqualTo(saveAndFlush.getCreatedBy());		
 		Assertions.assertEquals("Knivspids", saveAndFlush.getDescription());		
 	}
 	
@@ -72,11 +79,22 @@ public class UnitJpaRepositoryTest {
 	public void givenExistingUnitEntity_WhenDeleted_ThenOk() {
 		Optional<UnitEntity> opUnit = repository.findByDescriptionContains("Gram");
 		Assertions.assertTrue(opUnit.isPresent());
-		Assertions.assertEquals("gr", opUnit.get().getLabel());
-		
+		Assertions.assertEquals("gr", opUnit.get().getLabel());		
 		repository.delete(opUnit.get());
 		opUnit = repository.findByDescriptionContains("Gram");
-		Assertions.assertFalse(opUnit.isPresent());
+		Assertions.assertTrue(opUnit.isEmpty());
+	}
+	
+	@Test
+	public void givenExistingUnitEntity_WhenUpdateDescription_ThenOk() {
+		Optional<UnitEntity> opUnit = repository.findByDescriptionContains("Gram");
+		Assertions.assertTrue(opUnit.isPresent());
+		opUnit.get().setDescription("Kilogram");
+		OffsetDateTime now = OffsetDateTime.now();
+		UnitEntity saveAndFlush = repository.saveAndFlush(opUnit.get());
+		assertThat(now).isCloseTo(saveAndFlush.getUpdated(), within(0, ChronoUnit.SECONDS));
+		assertThat("Jens").isEqualTo(saveAndFlush.getUpdatedBy());
+		assertThat(saveAndFlush.getDescription()).isEqualTo("Kilogram");
 	}
 	
 	

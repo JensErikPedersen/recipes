@@ -1,12 +1,9 @@
 package dk.serik.recipes.entity;
 
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
@@ -16,8 +13,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -32,42 +27,18 @@ public class GenericEntity implements Comparable {
 	    @Transient
 	    protected final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
 
-	    @Setter(AccessLevel.NONE)	    
-	    @Id
-	    @GenericGenerator(name = "generator", strategy = "uuid2")
-	    @GeneratedValue(generator = "generator")
-	    @Column(updatable = false, nullable = false, columnDefinition = "uniqueidentifier")	   
-	    protected String id;
-
 	    @Setter(AccessLevel.PRIVATE)	    
-	    //@Column(name = "created", nullable = false)
 	    @Column(nullable = false)
 	    protected OffsetDateTime created;
 
-	    //@Column(name = "created_by", nullable = false)
 	    @Column(nullable = false)
 	    protected String createdBy;
 
 	    @Setter(AccessLevel.PRIVATE)
-	   // @Column(name = "updated")
 	    protected OffsetDateTime updated;
 
-	   // @Column(name = "updated_by")
 	    protected String updatedBy;
-
-	    @Override
-	    public boolean equals(Object o) {
-	        if (this == o) return true;
-	        if (o == null || getClass() != o.getClass()) return false;
-	        GenericEntity that = (GenericEntity) o;
-	        if(id==null && that.id==null) return false;
-	        return Objects.equals(id, that.id);
-	    }
-
-	    @Override
-	    public int hashCode() {
-	        return Objects.hash(id);
-	    }
+	
 
 	    @PrePersist
 	    public void prePersist() {

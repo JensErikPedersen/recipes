@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("serial")
 @Embeddable
@@ -17,16 +16,15 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Getter
 @Setter
-@Slf4j
 public class RecipeIngredientPK implements Serializable {
 		
-	private String recipeId;
+	private String recipeEntity;
 	
-	private String ingredientId;
+	private String ingredientEntity;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ingredientId, recipeId);
+		return Objects.hash(ingredientEntity, recipeEntity);
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class RecipeIngredientPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RecipeIngredientPK other = (RecipeIngredientPK) obj;
-		return Objects.equals(ingredientId, other.ingredientId) && Objects.equals(recipeId, other.recipeId);
+		return Objects.equals(ingredientEntity, other.ingredientEntity) && Objects.equals(recipeEntity, other.recipeEntity);
 	}
 	
 	

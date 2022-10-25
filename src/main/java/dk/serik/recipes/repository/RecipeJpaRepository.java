@@ -15,5 +15,7 @@ public interface RecipeJpaRepository extends JpaRepository<RecipeEntity, String>
 	List<RecipeEntity> findAllByCategoryEntityName(String categoryName);
 	
 	Optional<List<RecipeEntity>> findAllByNameContains(String name);
+	
+	Optional<RecipeEntity> findByName(String name);
 
 }

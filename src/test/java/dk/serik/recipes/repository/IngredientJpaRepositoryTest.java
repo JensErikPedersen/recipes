@@ -1,5 +1,10 @@
 package dk.serik.recipes.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -38,7 +43,7 @@ public class IngredientJpaRepositoryTest {
 	public void givenExistingIngredients_WhenFetchingAll_ThenReturnEight() {
 		List<IngredientEntity> ingredients = repository.findAll();
 		Assertions.assertFalse(ingredients.isEmpty());
-		Assertions.assertEquals(8, ingredients.size());
+		Assertions.assertEquals(9, ingredients.size());
 	}
 	
 	@Test
@@ -52,25 +57,26 @@ public class IngredientJpaRepositoryTest {
 	public void givenExistingIngredientFlour_WhenFetchingByNameContains_ThenReturnTwo() {
 		Optional<List<IngredientEntity>> opIngredients = repository.findAllByNameContains("mel");
 		Assertions.assertTrue(opIngredients.isPresent());
-		Assertions.assertEquals(2, opIngredients.get().size());
+		Assertions.assertEquals(3, opIngredients.get().size());
 	}
 
 	@Test
 	public void giventExistingIngredientsKimAndSkaldele_WhenFetchingByDescriptionContains_TheReturnTwo() {
 		Optional<List<IngredientEntity>> opIngredients = repository.findAllByDescriptionContains("skaldele og kim");
 		Assertions.assertTrue(opIngredients.isPresent());
-		Assertions.assertEquals(2, opIngredients.get().size());
+		Assertions.assertEquals(3, opIngredients.get().size());
 	}
 	
 	@Test
 	public void givenValidIngredient_WhenSaved_ThenOk() {		
+		OffsetDateTime now = OffsetDateTime.now();
 		IngredientEntity saveAndFlush = repository.saveAndFlush(buildIngredientEntity());
 		Assertions.assertEquals("Hakket oksekød", saveAndFlush.getName());
-		Assertions.assertEquals("Majken", saveAndFlush.getCreatedBy());
-		
+		assertThat(now).isCloseTo(saveAndFlush.getCreated(), within(0, ChronoUnit.SECONDS));
+		assertThat("Majken").isEqualTo(saveAndFlush.getCreatedBy());
 		List<IngredientEntity> ingredients = repository.findAll();
 		Assertions.assertFalse(ingredients.isEmpty());
-		Assertions.assertEquals(9, ingredients.size());
+		Assertions.assertEquals(10, ingredients.size());
 	}
 	
 	@Test
@@ -83,7 +89,7 @@ public class IngredientJpaRepositoryTest {
 		
 		List<IngredientEntity> ingredients = repository.findAll();
 		Assertions.assertFalse(ingredients.isEmpty());
-		Assertions.assertEquals(7, ingredients.size());
+		Assertions.assertEquals(8, ingredients.size());
 	}
 	
 	@Test

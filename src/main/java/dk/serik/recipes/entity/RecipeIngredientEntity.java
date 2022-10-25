@@ -2,22 +2,16 @@ package dk.serik.recipes.entity;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.UUID;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,18 +23,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @IdClass(RecipeIngredientPK.class)
 @Table(name = "recipe_ingredient")
-public class RecipeIngredientEntity {
+public class RecipeIngredientEntity extends GenericEntity {
 	
 
 	@Id	
 	@ManyToOne
 	@JoinColumn(name="recipe_id", nullable=false)  
-	private RecipeEntity recipeId;
+	private RecipeEntity recipeEntity;
 	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="ingredient_id", nullable = false)
-	private IngredientEntity ingredientId;
+	private IngredientEntity ingredientEntity;
 	
 	@Column(nullable=false)
 	private BigDecimal amount;
@@ -49,9 +43,10 @@ public class RecipeIngredientEntity {
 	@JoinColumn(name="unit_id", nullable=false)
 	private UnitEntity unitEntity;
 
+  	
 	@Override
 	public int hashCode() {
-		return Objects.hash(ingredientId.id, recipeId.id);
+		return Objects.hash(ingredientEntity.id, recipeEntity.id);
 	}
 
 	@Override
@@ -63,13 +58,13 @@ public class RecipeIngredientEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		RecipeIngredientEntity other = (RecipeIngredientEntity) obj;
-		return Objects.equals(ingredientId.id, other.ingredientId.id)
-				&& Objects.equals(recipeId.id, other.recipeId.id);
+		return Objects.equals(ingredientEntity.id, other.ingredientEntity.id)
+				&& Objects.equals(recipeEntity.id, other.recipeEntity.id);
 	}
 
 	@Override
 	public String toString() {
-		return "RecipeIngredientEntity [recipeEntity=" + recipeId + ", ingredientEntity=" + ingredientId
+		return "RecipeIngredientEntity [recipeEntity=" + recipeEntity + ", ingredientEntity=" + ingredientEntity
 				+ ", amount=" + amount + ", unitEntity=" + unitEntity + "]";
 	}
 

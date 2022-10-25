@@ -19,14 +19,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ingredient")
-public class IngredientEntity extends GenericEntity {
+public class IngredientEntity extends GenericIdentifierEntity {
 	
 	@Column(nullable = false, unique = true)
 	private String name;
 	
 	private String description;
 	
-	@OneToMany(mappedBy="ingredientId", fetch= FetchType.LAZY)
+	@OneToMany(mappedBy="ingredientEntity", fetch= FetchType.LAZY)
 	private Set<RecipeIngredientEntity> recipeIngredientEntities;
 
 	@Override

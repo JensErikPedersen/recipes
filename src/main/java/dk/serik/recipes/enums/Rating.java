@@ -2,7 +2,7 @@ package dk.serik.recipes.enums;
 
 public enum Rating {
 	
-	VERY_POOR("Meget dårlig"), POOR("Dårlig"), AVERAGE("Middelmådig"), GOOD("God"), VERY_GOOD("Meget god");
+	POOR("Ikke god"), AVERAGE("Middelmådig"), GOOD("God"), VERY_GOOD("Meget god"), FANTASTIC("Fantastisk");
 	
 	private String label;
 	

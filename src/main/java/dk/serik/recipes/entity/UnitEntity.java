@@ -19,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="unit")
-public class UnitEntity extends GenericEntity {
+public class UnitEntity extends GenericIdentifierEntity {
 	
 	@Column(nullable = false, unique = true)
 	private String label;

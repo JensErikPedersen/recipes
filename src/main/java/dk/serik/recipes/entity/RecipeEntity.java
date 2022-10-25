@@ -2,6 +2,7 @@ package dk.serik.recipes.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "recipe")
-public class RecipeEntity extends GenericEntity {
+public class RecipeEntity extends GenericIdentifierEntity {
 	
 	@Column(nullable = false, unique = true)
 	private String name;
@@ -34,9 +35,14 @@ public class RecipeEntity extends GenericEntity {
 	@JoinColumn(name="category_id", nullable=false)
 	private CategoryEntity categoryEntity;
 	
-	@OneToMany(mappedBy="recipeId", fetch= FetchType.LAZY)
+	@OneToMany(mappedBy="recipeEntity", fetch= FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<RecipeIngredientEntity> recipeIngredientEntities;
+	
+	@OneToMany(mappedBy="recipeEntity", fetch= FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<RecipeRatingEntity> recipeRatingEntities;
 
+	@OneToMany(mappedBy="recipeEntity", fetch= FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<RecipeTagEntity> recipeTagEntities;
 
 	@Override
 	public String toString() {

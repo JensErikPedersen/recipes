@@ -15,8 +15,14 @@ databaseChangeLog:
             name: description
             value: Hverdags brød til morgen, middag og aften
         - column:
+            name: created
+            value: 2022-10-24T17:49:28
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -33,8 +39,14 @@ databaseChangeLog:
             name: description
             value: Den søde afrundning på en god middag
         - column:
+            name: created
+            value: 2022-10-24T17:49:28
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -51,8 +63,14 @@ databaseChangeLog:
             name: description
             value: Måltider som udgør hovedparten af et måltid
         - column:
+            name: created
+            value: 2022-10-24T17:49:28
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -69,8 +87,14 @@ databaseChangeLog:
             name: description
             value: Kager til alle lejligheder
         - column:
+            name: created
+            value: 2022-10-24T17:49:28
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -91,8 +115,14 @@ databaseChangeLog:
             name: description
             value: Magert kød af kyllingebryst
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -109,8 +139,14 @@ databaseChangeLog:
             name: description
             value: Tynd surdej til bagning af lette brød
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -127,8 +163,14 @@ databaseChangeLog:
             name: description
             value: Fuldkorns hvedemel med skaldele og kim
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -145,8 +187,14 @@ databaseChangeLog:
             name: description
             value: Sigtet hvedemel uden skaldele og kim
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -163,8 +211,14 @@ databaseChangeLog:
             name: description
             value: Gær med god hæveevne
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -181,8 +235,14 @@ databaseChangeLog:
             name: description
             value: Revel mozarella ost til ex. pizza topping
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -199,8 +259,14 @@ databaseChangeLog:
             name: description
             value: Groft rugmel med skaldele og kim
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -217,8 +283,14 @@ databaseChangeLog:
             name: description
             value: Almindelig postevand fra hanen
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -235,8 +307,14 @@ databaseChangeLog:
             name: description
             value: Groft salt til madlavning
         - column:
+            name: created
+            value: 2022-10-24T17:49:22
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -257,8 +335,14 @@ databaseChangeLog:
             name: description
             value: Teske
         - column:
+            name: created
+            value: 2022-10-24T17:49:33
+        - column:
             name: created_by
             value: Jens
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
@@ -275,8 +359,14 @@ databaseChangeLog:
             name: description
             value: Spiseske
         - column:
+            name: created
+            value: 2022-10-24T17:49:33
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
@@ -293,8 +383,14 @@ databaseChangeLog:
             name: description
             value: Deciliter
         - column:
+            name: created
+            value: 2022-10-24T17:49:33
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
@@ -311,9 +407,16 @@ databaseChangeLog:
             name: description
             value: Gram
         - column:
+            name: created
+            value: 2022-10-24T17:49:33
+        - column:
             name: created_by
             value: Majken
+        - column:
+            name: updated
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
         tableName: unit
+

@@ -1,5 +1,10 @@
 package dk.serik.recipes.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,11 +54,11 @@ public class CategoryJpaRepositoryTest {
 	
 	@Test
 	public void givenCategoryEntityWienerBread_WhenSavingCategory_ThenOk() {
-		CategoryEntity categoryEntity = categoryRepository.saveAndFlush(buildWienerBreadEntity());
-		log.info("New Category: {}", categoryEntity);
-		Assertions.assertEquals("Jens", categoryEntity.getCreatedBy());
-		Assertions.assertEquals("Wienerbrød", categoryEntity.getName());
-		
+		OffsetDateTime now = OffsetDateTime.now();
+		CategoryEntity categoryEntity = categoryRepository.saveAndFlush(buildWienerBreadEntity());		
+		assertThat(now).isCloseTo(categoryEntity.getCreated(), within(0, ChronoUnit.SECONDS));
+		assertThat("Jens").isEqualTo(categoryEntity.getCreatedBy());
+		Assertions.assertEquals("Wienerbrød", categoryEntity.getName());		
 	}
 	
 	@Test
@@ -68,8 +73,11 @@ public class CategoryJpaRepositoryTest {
 		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Brød");
 		Assertions.assertTrue(categoryEntity.isPresent());
 		categoryEntity.get().setName("Bread");
+		OffsetDateTime now = OffsetDateTime.now();
 		CategoryEntity savedCategory = categoryRepository.saveAndFlush(categoryEntity.get());
 		Assertions.assertEquals("Bread", savedCategory.getName());
+		assertThat(now).isCloseTo(savedCategory.getUpdated(), within(0, ChronoUnit.SECONDS));
+		assertThat("Jens").isEqualTo(savedCategory.getUpdatedBy());
 	}
 	
 	@Test
