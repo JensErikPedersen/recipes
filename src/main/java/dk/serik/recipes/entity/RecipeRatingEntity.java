@@ -23,7 +23,7 @@ public class RecipeRatingEntity extends GenericIdentifierEntity {
 	private RecipeEntity recipeEntity;
 	
 	@ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "rating_id", nullable = false)
 	private RatingEntity ratingEntity;
 	
 	private String description;

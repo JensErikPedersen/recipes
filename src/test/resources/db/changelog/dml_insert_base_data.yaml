@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1666626627229-1
+    id: 1666769865991-1
     author: jense (generated)
     changes:
     - insert:
@@ -13,10 +13,10 @@ databaseChangeLog:
             value: Brød
         - column:
             name: description
-            value: Hverdags brød til morgen, middag og aften
+            value: Hverdags brød til morgen, middag og aften       
         - column:
             name: created_by
-            value: Jens
+            value: Jens        
         - column:
             name: updated_by
             value: ''
@@ -31,10 +31,10 @@ databaseChangeLog:
             value: Dessert
         - column:
             name: description
-            value: Den søde afrundning på en god middag
+            value: Den søde afrundning på en god middag      
         - column:
             name: created_by
-            value: Majken
+            value: Majken      
         - column:
             name: updated_by
             value: ''
@@ -49,10 +49,10 @@ databaseChangeLog:
             value: Hovedret
         - column:
             name: description
-            value: Måltider som udgør hovedparten af et måltid
+            value: Måltider som udgør hovedparten af et måltid      
         - column:
             name: created_by
-            value: Jens
+            value: Jens       
         - column:
             name: updated_by
             value: ''
@@ -67,16 +67,16 @@ databaseChangeLog:
             value: Kager
         - column:
             name: description
-            value: Kager til alle lejligheder
+            value: Kager til alle lejligheder     
         - column:
             name: created_by
-            value: Majken
+            value: Majken     
         - column:
             name: updated_by
             value: ''
         tableName: category
 - changeSet:
-    id: 1666626627229-2
+    id: 1666769865991-2
     author: jense (generated)
     changes:
     - insert:
@@ -89,10 +89,10 @@ databaseChangeLog:
             value: Kyllingebryst
         - column:
             name: description
-            value: Magert kød af kyllingebryst
+            value: Magert kød af kyllingebryst      
         - column:
             name: created_by
-            value: Majken
+            value: Majken      
         - column:
             name: updated_by
             value: ''
@@ -107,10 +107,10 @@ databaseChangeLog:
             value: Surdej
         - column:
             name: description
-            value: Tynd surdej til bagning af lette brød
+            value: Tynd surdej til bagning af lette brød     
         - column:
             name: created_by
-            value: Jens
+            value: Jens     
         - column:
             name: updated_by
             value: ''
@@ -125,10 +125,10 @@ databaseChangeLog:
             value: Fuldkorns hvedemel
         - column:
             name: description
-            value: Fuldkorns hvedemel med skaldele og kim
+            value: Fuldkorns hvedemel med skaldele og kim     
         - column:
             name: created_by
-            value: Majken
+            value: Majken      
         - column:
             name: updated_by
             value: ''
@@ -143,10 +143,10 @@ databaseChangeLog:
             value: Hvedemel
         - column:
             name: description
-            value: Sigtet hvedemel uden skaldele og kim
+            value: Sigtet hvedemel uden skaldele og kim     
         - column:
             name: created_by
-            value: Majken
+            value: Majken       
         - column:
             name: updated_by
             value: ''
@@ -161,10 +161,10 @@ databaseChangeLog:
             value: Gær
         - column:
             name: description
-            value: Gær med god hæveevne
+            value: Gær med god hæveevne       
         - column:
             name: created_by
-            value: Jens
+            value: Jens      
         - column:
             name: updated_by
             value: ''
@@ -179,10 +179,10 @@ databaseChangeLog:
             value: Revet Mozarella
         - column:
             name: description
-            value: Revel mozarella ost til ex. pizza topping
+            value: Revel mozarella ost til ex. pizza topping      
         - column:
             name: created_by
-            value: Majken
+            value: Majken       
         - column:
             name: updated_by
             value: ''
@@ -197,7 +197,7 @@ databaseChangeLog:
             value: Rugmel
         - column:
             name: description
-            value: Groft rugmel med skaldele og kim
+            value: Groft rugmel med skaldele og kim      
         - column:
             name: created_by
             value: Jens
@@ -242,7 +242,101 @@ databaseChangeLog:
             value: ''
         tableName: ingredient
 - changeSet:
-    id: 1666626627229-3
+    id: 1666769865991-3
+    author: jense (generated)
+    changes:
+    - insert:
+        columns:
+        - column:
+            name: id
+            value: 26f09c94-79ec-439c-9776-d826efad187e
+        - column:
+            name: rating
+            valueNumeric: 5
+        - column:
+            name: description
+            value: Fantastisk
+        - column:
+            name: created_by
+            value: Jens
+        - column:
+            name: updated_by
+            value: ''
+        tableName: rating
+    - insert:
+        columns:
+        - column:
+            name: id
+            value: 2ea87b61-3ffa-433f-bc29-3fdfc43168e2
+        - column:
+            name: rating
+            valueNumeric: 3
+        - column:
+            name: description
+            value: Godt
+        - column:
+            name: created_by
+            value: Jens
+        - column:
+            name: updated_by
+            value: ''
+        tableName: rating
+    - insert:
+        columns:
+        - column:
+            name: id
+            value: 4a45aebf-1b85-421b-a669-fd77527aa856
+        - column:
+            name: rating
+            valueNumeric: 2
+        - column:
+            name: description
+            value: Lidt kedeligt
+        - column:
+            name: created_by
+            value: Jens
+        - column:
+            name: updated_by
+            value: ''
+        tableName: rating
+    - insert:
+        columns:
+        - column:
+            name: id
+            value: 62149cc5-73e4-45ef-8ac2-4d725815d5cf
+        - column:
+            name: rating
+            valueNumeric: 4
+        - column:
+            name: description
+            value: Virkelig godt
+        - column:
+            name: created_by
+            value: Jens
+        - column:
+            name: updated_by
+            value: ''
+        tableName: rating
+    - insert:
+        columns:
+        - column:
+            name: id
+            value: 66946e5d-d798-474a-8111-4989bd4c04cd
+        - column:
+            name: rating
+            valueNumeric: 1
+        - column:
+            name: description
+            value: Ikke så godt
+        - column:
+            name: created_by
+            value: Jens
+        - column:
+            name: updated_by
+            value: ''
+        tableName: rating
+- changeSet:
+    id: 1666769865991-4
     author: jense (generated)
     changes:
     - insert:
@@ -273,10 +367,10 @@ databaseChangeLog:
             value: spsk
         - column:
             name: description
-            value: Spiseske
+            value: Spiseske 
         - column:
             name: created_by
-            value: Majken
+            value: Majken 
         - column:
             name: updated_by
             value: ''
@@ -312,8 +406,9 @@ databaseChangeLog:
             value: Gram
         - column:
             name: created_by
-            value: Majken
+            value: Majken 
         - column:
             name: updated_by
             value: ''
         tableName: unit
+

@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -38,19 +40,14 @@ public class CategoryJpaRepositoryTest {
 		Mockito.when(session.getUserName()).thenReturn("Jens");
 	}
 	
-	@Test
-	public void givenCategoryBreadIsPresent_WhenFetchingCategoryBread_ThenOk() {
-		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Brød");
+	@ParameterizedTest
+	@CsvSource(value={"Brød:Jens", "Kager:Majken"}, delimiter = ':')
+	public void givenCategoryIsPresent_WhenFetchingCategory_ThenCreatedByOk(String category, String createdBy) {
+		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName(category);
 		Assertions.assertTrue(categoryEntity.isPresent());
-		Assertions.assertEquals("Jens", categoryEntity.get().getCreatedBy());
+		Assertions.assertEquals(createdBy, categoryEntity.get().getCreatedBy());
 	}
 	
-	@Test
-	public void givenCategoryKagerIsPresent_WhenFetchingCategoryKager_ThenOk() {
-		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Kager");
-		Assertions.assertTrue(categoryEntity.isPresent());
-		Assertions.assertEquals("Majken", categoryEntity.get().getCreatedBy());
-	}
 	
 	@Test
 	public void givenCategoryEntityWienerBread_WhenSavingCategory_ThenOk() {

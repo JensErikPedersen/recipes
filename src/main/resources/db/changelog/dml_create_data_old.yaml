@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1666769865991-1
+    id: 1666626627229-1
     author: jense (generated)
     changes:
     - insert:
@@ -16,13 +16,13 @@ databaseChangeLog:
             value: Hverdags brød til morgen, middag og aften
         - column:
             name: created
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -40,13 +40,13 @@ databaseChangeLog:
             value: Den søde afrundning på en god middag
         - column:
             name: created
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -64,13 +64,13 @@ databaseChangeLog:
             value: Måltider som udgør hovedparten af et måltid
         - column:
             name: created
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
@@ -88,19 +88,19 @@ databaseChangeLog:
             value: Kager til alle lejligheder
         - column:
             name: created
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:43
+            value: 2022-10-24T17:49:28
         - column:
             name: updated_by
             value: ''
         tableName: category
 - changeSet:
-    id: 1666769865991-2
+    id: 1666626627229-2
     author: jense (generated)
     changes:
     - insert:
@@ -116,13 +116,13 @@ databaseChangeLog:
             value: Magert kød af kyllingebryst
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -140,13 +140,13 @@ databaseChangeLog:
             value: Tynd surdej til bagning af lette brød
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -164,13 +164,13 @@ databaseChangeLog:
             value: Fuldkorns hvedemel med skaldele og kim
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -188,13 +188,13 @@ databaseChangeLog:
             value: Sigtet hvedemel uden skaldele og kim
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -212,13 +212,13 @@ databaseChangeLog:
             value: Gær med god hæveevne
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -236,13 +236,13 @@ databaseChangeLog:
             value: Revel mozarella ost til ex. pizza topping
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -260,13 +260,13 @@ databaseChangeLog:
             value: Groft rugmel med skaldele og kim
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -284,13 +284,13 @@ databaseChangeLog:
             value: Almindelig postevand fra hanen
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
@@ -308,143 +308,19 @@ databaseChangeLog:
             value: Groft salt til madlavning
         - column:
             name: created
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:30
+            value: 2022-10-24T17:49:22
         - column:
             name: updated_by
             value: ''
         tableName: ingredient
 - changeSet:
-    id: 1666769865991-3
-    author: jense (generated)
-    changes:
-    - insert:
-        columns:
-        - column:
-            name: id
-            value: 26f09c94-79ec-439c-9776-d826efad187e
-        - column:
-            name: rating
-            valueNumeric: 5
-        - column:
-            name: description
-            value: Fantastisk
-        - column:
-            name: created
-            value: 2022-10-25T17:41:03
-        - column:
-            name: created_by
-            value: Jens
-        - column:
-            name: updated
-            value: 2022-10-25T17:41:03
-        - column:
-            name: updated_by
-            value: ''
-        tableName: rating
-    - insert:
-        columns:
-        - column:
-            name: id
-            value: 2ea87b61-3ffa-433f-bc29-3fdfc43168e2
-        - column:
-            name: rating
-            valueNumeric: 3
-        - column:
-            name: description
-            value: Godt
-        - column:
-            name: created
-            value: 2022-10-25T17:35:03
-        - column:
-            name: created_by
-            value: Jens
-        - column:
-            name: updated
-            value: 2022-10-25T17:35:03
-        - column:
-            name: updated_by
-            value: ''
-        tableName: rating
-    - insert:
-        columns:
-        - column:
-            name: id
-            value: 4a45aebf-1b85-421b-a669-fd77527aa856
-        - column:
-            name: rating
-            valueNumeric: 2
-        - column:
-            name: description
-            value: Lidt kedeligt
-        - column:
-            name: created
-            value: 2022-10-25T17:36:03
-        - column:
-            name: created_by
-            value: Jens
-        - column:
-            name: updated
-            value: 2022-10-25T17:36:03
-        - column:
-            name: updated_by
-            value: ''
-        tableName: rating
-    - insert:
-        columns:
-        - column:
-            name: id
-            value: 62149cc5-73e4-45ef-8ac2-4d725815d5cf
-        - column:
-            name: rating
-            valueNumeric: 4
-        - column:
-            name: description
-            value: Virkelig godt
-        - column:
-            name: created
-            value: 2022-10-25T17:40:03
-        - column:
-            name: created_by
-            value: Jens
-        - column:
-            name: updated
-            value: 2022-10-25T17:40:03
-        - column:
-            name: updated_by
-            value: ''
-        tableName: rating
-    - insert:
-        columns:
-        - column:
-            name: id
-            value: 66946e5d-d798-474a-8111-4989bd4c04cd
-        - column:
-            name: rating
-            valueNumeric: 1
-        - column:
-            name: description
-            value: Ikke så godt
-        - column:
-            name: created
-            value: 2022-10-25T17:34:03
-        - column:
-            name: created_by
-            value: Jens
-        - column:
-            name: updated
-            value: 2022-10-25T17:34:03
-        - column:
-            name: updated_by
-            value: ''
-        tableName: rating
-- changeSet:
-    id: 1666769865991-4
+    id: 1666626627229-3
     author: jense (generated)
     changes:
     - insert:
@@ -460,13 +336,13 @@ databaseChangeLog:
             value: Teske
         - column:
             name: created
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: created_by
             value: Jens
         - column:
             name: updated
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
@@ -484,13 +360,13 @@ databaseChangeLog:
             value: Spiseske
         - column:
             name: created
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
@@ -508,13 +384,13 @@ databaseChangeLog:
             value: Deciliter
         - column:
             name: created
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
@@ -532,13 +408,13 @@ databaseChangeLog:
             value: Gram
         - column:
             name: created
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: created_by
             value: Majken
         - column:
             name: updated
-            value: 2022-10-26T09:34:13
+            value: 2022-10-24T17:49:33
         - column:
             name: updated_by
             value: ''
