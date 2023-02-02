@@ -16,8 +16,14 @@
 	<properties>	
 		<liquibase-maven-plugin-version>4.17.0</liquibase-maven-plugin-version>
 		<lombok-version>1.18.24</lombok-version>
+		<jacoco-version>0.8.8</jacoco-version>
 		<java.version>11</java.version>
+		<surefire-version>3.0.0-M7</surefire-version>
+		
+		<!--  project -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,6 +54,13 @@
 			<artifactId>hibernate-validator</artifactId>		
 		</dependency>
 		
+		<!--
+		<dependency>
+		    <groupId>org.jacoco</groupId>
+		    <artifactId>jacoco-maven-plugin</artifactId>
+		    <version>${jacoco-version}</version>
+		</dependency>
+-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -82,7 +95,62 @@
 				</configuration>
 			</plugin>
 			
+			<plugin>
+				<groupId>org.jacoco</groupId>
+			    <artifactId>jacoco-maven-plugin</artifactId>
+			    <version>${jacoco-version}</version>
+			    <executions>
+					<execution>
+			            <id>jacoco-initialize</id>
+			            <goals>
+			                <goal>prepare-agent</goal>
+			            </goals>
+			        </execution>
+			        <execution>
+			            <id>jacoco-site</id>
+			            <phase>test</phase>
+			            <goals>
+			                <goal>report</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-surefire-plugin</artifactId>
+    			<configuration>
+    			<argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+			    <!--
+			        <excludes>
+			            <exclude>DataTest.java</exclude>
+			        </excludes>
+			        <includes>
+			            <include>DataCheck.java</include>
+			        </includes>
+			        -->
+			    </configuration>			
+			</plugin>
 			<!--
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.14.1</version>
+				<configuration>
+					<reuseForks>true</reuseForks>
+					<argLine>-Xmx4096m -XX:MaxPermSize=512M ${itCoverageAgent}</argLine>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<plugin>
 		        <groupId>org.liquibase</groupId>
 		        <artifactId>liquibase-maven-plugin</artifactId>

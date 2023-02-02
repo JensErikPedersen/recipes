@@ -19,7 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import dk.serik.recipes.Session;
-import dk.serik.recipes.entity.UnitEntity;
+import dk.serik.recipes.model.UnitEntity;
 import lombok.extern.slf4j.Slf4j;
 
 @ExtendWith(SpringExtension.class)

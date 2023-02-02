@@ -1,4 +1,4 @@
-package dk.serik.recipes.entity;
+package dk.serik.recipes.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -23,8 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @IdClass(RecipeIngredientPK.class)
 @Table(name = "recipe_ingredient")
-public class RecipeIngredientEntity extends GenericEntity {
-	
+public class RecipeIngredientEntity extends GenericEntity {	
 
 	@Id	
 	@ManyToOne

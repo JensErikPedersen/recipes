@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import dk.serik.recipes.entity.RecipeIngredientEntity;
+import dk.serik.recipes.model.RecipeIngredientEntity;
 
 @Repository
 public interface RecipeIngredientJpaRepository extends JpaRepository<RecipeIngredientEntity, String> {

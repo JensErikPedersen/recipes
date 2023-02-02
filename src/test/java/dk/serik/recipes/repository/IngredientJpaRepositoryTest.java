@@ -7,8 +7,6 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import dk.serik.recipes.Session;
-import dk.serik.recipes.entity.IngredientEntity;
+import dk.serik.recipes.model.IngredientEntity;
 import lombok.extern.slf4j.Slf4j;
 
 @ExtendWith(SpringExtension.class)

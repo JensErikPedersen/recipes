@@ -1,7 +1,8 @@
-package dk.serik.recipes.entity;
+package dk.serik.recipes.model;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,14 +17,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="rating")
-public class RatingEntity extends GenericIdentifierEntity {
+@Table(name = "tag")
+public class TagEntity extends GenericIdentifierEntity {
 	
-	@OneToMany(mappedBy = "ratingEntity")
-	private Set<RecipeRatingEntity> recipeRatingEntities;
-		
-	private Integer rating;
+	@OneToMany(mappedBy="tagEntity")
+	private Set<RecipeTagEntity> recipeTagEntities;
 	
-	private String description;
-
+	@Column(nullable = false)	
+	private String label;
 }

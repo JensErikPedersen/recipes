@@ -16,20 +16,23 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import dk.serik.recipes.RecipesTestConfiguration;
-import dk.serik.recipes.entity.CategoryEntity;
+import dk.serik.recipes.dto.CategoryDTO;
+import dk.serik.recipes.model.CategoryEntity;
+import dk.serik.recipes.mapper.CategoryMapper;
 import dk.serik.recipes.repository.CategoryJpaRepository;
 
 @ExtendWith(SpringExtension.class)
 @Import(RecipesTestConfiguration.class)
-@DirtiesContext(methodMode=DirtiesContext.MethodMode.AFTER_METHOD)
 public class CategoryServiceTest {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private CategoryMapper categoryMappper;
 	
 	@MockBean
 	private CategoryJpaRepository categoryJpaRepository;
@@ -57,7 +60,7 @@ public class CategoryServiceTest {
 		List<CategoryEntity> all = new ArrayList<>();
 		all.add(mockWater());
 		when(categoryJpaRepository.findAll()).thenReturn(all);
-		Optional<List<CategoryEntity>> findAll = categoryService.findAll();
+		Optional<List<CategoryDTO>> findAll = categoryService.findAll();
 		assertThat(findAll).isPresent();
 		assertThat(findAll.get().size()).isEqualTo(1);
 		verify(categoryJpaRepository, times(1)).findAll();
@@ -99,7 +102,11 @@ public class CategoryServiceTest {
 	// utilities, mocks etc.
 	
 	private CategoryEntity mockWater() {
-		return new CategoryEntity("1", "Vand", "Det er postevand", null);
+		CategoryEntity entity = new CategoryEntity();
+		entity.setName("Vand");
+		entity.setDescription("Det er postevand");
+		entity.setRecipeEntities(null);
+		return entity;
 	}
 
 }

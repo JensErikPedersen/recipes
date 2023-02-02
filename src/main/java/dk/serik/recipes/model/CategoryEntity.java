@@ -1,4 +1,4 @@
-package dk.serik.recipes.entity;
+package dk.serik.recipes.model;
 
 import java.util.Set;
 
@@ -18,23 +18,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ingredient")
-public class IngredientEntity extends GenericIdentifierEntity {
-	
+@Table(name="category")
+public class CategoryEntity extends GenericIdentifierEntity {	
+
 	@Column(nullable = false, unique = true)
 	private String name;
+
+	private String description;	
 	
-	private String description;
-	
-	@OneToMany(mappedBy="ingredientEntity", fetch= FetchType.LAZY)
-	private Set<RecipeIngredientEntity> recipeIngredientEntities;
+	 @OneToMany(mappedBy="categoryEntity", fetch= FetchType.LAZY)
+	 private Set<RecipeEntity> recipeEntities;
 
 	@Override
 	public String toString() {
-		return "IngredientEntity [name=" + name + ", description=" + description + ", recipeIngredientEntities="
-				+ recipeIngredientEntities + ", id=" + id + "]";
+		return "CategoryEntity [name=" + name + ", description=" + description + ", id=" + id + "]";
 	}
-
-	
+  
 	
 }

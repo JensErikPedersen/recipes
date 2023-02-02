@@ -1,4 +1,4 @@
-package dk.serik.recipes.entity;
+package dk.serik.recipes.model;
 
 public interface GenericModel {
 

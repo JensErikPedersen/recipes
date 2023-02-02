@@ -10,8 +10,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.ConstraintViolationException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +21,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import dk.serik.recipes.Session;
-import dk.serik.recipes.entity.RatingEntity;
+import dk.serik.recipes.model.RatingEntity;
 import lombok.extern.slf4j.Slf4j;
 
 @ExtendWith(SpringExtension.class)
@@ -35,8 +33,7 @@ public class RatingJpaRepositotyTest {
 	private RatingJpaRepository ratingJpaRepository;
 	
 	@MockBean
-	private Session session;
-	
+	private Session session;	
 	
 	@BeforeEach
 	public void initTest() {

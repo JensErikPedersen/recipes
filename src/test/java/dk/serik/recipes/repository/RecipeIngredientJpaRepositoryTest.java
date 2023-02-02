@@ -9,10 +9,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -20,15 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import dk.serik.recipes.Session;
-import dk.serik.recipes.entity.CategoryEntity;
-import dk.serik.recipes.entity.IngredientEntity;
-import dk.serik.recipes.entity.RecipeEntity;
-import dk.serik.recipes.entity.RecipeIngredientEntity;
-import dk.serik.recipes.entity.UnitEntity;
+import dk.serik.recipes.model.CategoryEntity;
+import dk.serik.recipes.model.IngredientEntity;
+import dk.serik.recipes.model.RecipeEntity;
+import dk.serik.recipes.model.RecipeIngredientEntity;
+import dk.serik.recipes.model.UnitEntity;
 import lombok.extern.slf4j.Slf4j;
 
 @ExtendWith(SpringExtension.class)

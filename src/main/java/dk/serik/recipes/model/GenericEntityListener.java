@@ -1,4 +1,4 @@
-package dk.serik.recipes.entity;
+package dk.serik.recipes.model;
 
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
