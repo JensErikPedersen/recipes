@@ -17,15 +17,17 @@ import javax.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("rawtypes")
 @Data
 @MappedSuperclass
 @EntityListeners(GenericEntityListener.class)
+@Slf4j
 public class GenericEntity implements Comparable {
 
-	    @Transient
-	    protected final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
+//	    @Transient
+//	    protected final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
 
 	    @Setter(AccessLevel.PRIVATE)	    
 	    @Column(nullable = false)
@@ -38,7 +40,6 @@ public class GenericEntity implements Comparable {
 	    protected OffsetDateTime updated;
 
 	    protected String updatedBy;
-	
 
 	    @PrePersist
 	    public void prePersist() {

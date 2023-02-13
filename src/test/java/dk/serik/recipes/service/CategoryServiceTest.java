@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import dk.serik.recipes.dto.CategoryDTO;
 import dk.serik.recipes.model.CategoryEntity;
 import dk.serik.recipes.mapper.CategoryMapper;
 import dk.serik.recipes.repository.CategoryJpaRepository;
+import org.springframework.test.util.ReflectionTestUtils;
 
 @ExtendWith(SpringExtension.class)
 @Import(RecipesTestConfiguration.class)
@@ -43,24 +45,33 @@ public class CategoryServiceTest {
 	}
 	
 	@Test
+	@DisplayName("Context is checked ok")
 	public void contextIsOk() {
 		assertThat(categoryService).isNotNull();
 		assertThat(categoryJpaRepository).isNotNull();		
 	}
 	
 	@Test
-	public void givenContextOk_WhenNoCategories_ThenListSizeIsZero() {
+	@DisplayName("Given No Categories When FindAll Then list size is Zero")
+	public void givenNoCategories_WhenFindAll_ThenListSizeIsZero() {
 		when(categoryJpaRepository.findAll()).thenReturn(new ArrayList<>());
 		assertThat(categoryService.findAll()).isEmpty();
 		verify(categoryJpaRepository, times(1)).findAll();
 	}
 	
 	@Test
-	public void givenContextOk_WhenOneCategory_ThenListSizeIsOne() throws Exception{
+	@DisplayName("Given No Categories When FindAll Then list size is One")
+	public void givenOneCategory_WhenFindAll_ThenListSizeIsOne() throws Exception{
+
+		// given
 		List<CategoryEntity> all = new ArrayList<>();
 		all.add(mockWater());
+
+		// when
 		when(categoryJpaRepository.findAll()).thenReturn(all);
 		Optional<List<CategoryDTO>> findAll = categoryService.findAll();
+
+		// then
 		assertThat(findAll).isPresent();
 		assertThat(findAll.get().size()).isEqualTo(1);
 		verify(categoryJpaRepository, times(1)).findAll();
@@ -68,33 +79,45 @@ public class CategoryServiceTest {
 
 	
 	@Test
-	public void givenContextOk_WhenFetchingByUnknwonId_ThenNotFound() {
+	@DisplayName("Given No Categories When FindById Then none is found")
+	public void givenNoCatregories_WhenFetchingByUnknwonId_ThenNotFound() {
 		when(categoryJpaRepository.findById("0")).thenReturn(Optional.empty());
 		assertThat(categoryService.findById("0")).isEmpty();
 		verify(categoryJpaRepository).findById(any());
 	}
 	
 	@Test
-	public void givenContextOk_WhenFetchingByKnownId_ThenOneIsFound() {
+	@DisplayName("Given Known Category When FindById Then one is found")
+	public void givenKnownCategory_WhenFetchingByKnownId_ThenOneIsFound() {
 		when(categoryJpaRepository.findById("1")).thenReturn(Optional.of(mockWater()));
 		assertThat(categoryService.findById("1")).isPresent();
 		verify(categoryJpaRepository).findById(any());
 	}
 	
 	@Test
-	public void givenContextOk_WhenFetchingByName_ThenNoneIsFound() {
+	@DisplayName("Given Known Category When FindByName Then none is found")
+	public void givenKnownCategory_WhenFetchingByName_ThenNoneIsFound() {
 		when(categoryJpaRepository.findByName("Vand")).thenReturn(Optional.of(mockWater()));  // name: Water
 		assertThat(categoryService.findByName("Brød")).isEmpty();
 		verify(categoryJpaRepository).findByName("Brød");
 	}
 	
 	@Test
-	public void givenContextOk_WhenFetchingByName_ThenOneIsFound() {
+	@DisplayName("Given Known Category When FindByName Then one is found")
+	public void givenKnownCategory_WhenFetchingByName_ThenOneIsFound() {
 		when(categoryJpaRepository.findByName("Vand")).thenReturn(Optional.of(mockWater()));  // name: Water
 		assertThat(categoryService.findByName("Vand")).isPresent();
 		verify(categoryJpaRepository).findByName(any());
 	}
-	
+
+	@Test
+	@DisplayName("Given Valid Category DTO When saving Category Then valid category DTO is returned")
+	public void givenValidCategoryDTO_WhenSavingCategoryDTO_ThenValidCategoryDtoIsReturned() {
+		when(categoryJpaRepository.saveAndFlush(any())).thenReturn(savedMockWater());
+		CategoryDTO savedDto = categoryService.save(mockToBeSavedWaterDTO());
+		assertThat(savedDto.getId()).isEqualTo("1234");
+		verify(categoryJpaRepository, times(1)).saveAndFlush(any());
+	}
 	
 	
 	// TODO: Test coverages
@@ -107,6 +130,32 @@ public class CategoryServiceTest {
 		entity.setDescription("Det er postevand");
 		entity.setRecipeEntities(null);
 		return entity;
+	}
+
+	private CategoryEntity savedMockWater() {
+		CategoryEntity entity = new CategoryEntity();
+		entity.setName("Vand");
+		entity.setDescription("Det er postevand");
+		ReflectionTestUtils.setField(entity, "id", "1234");
+		entity.setRecipeEntities(null);
+		return entity;
+	}
+
+	private CategoryDTO mockSavedWaterDTO() {
+		CategoryDTO dto = new CategoryDTO();
+		dto.setName("Vand");
+		dto.setDescription("Det er postevand");
+		dto.setRecipeEntities(null);
+		dto.setId("1234");
+		return dto;
+	}
+
+	private CategoryDTO mockToBeSavedWaterDTO() {
+		CategoryDTO dto = new CategoryDTO();
+		dto.setName("Vand");
+		dto.setDescription("Det er postevand");
+		dto.setRecipeEntities(null);
+		return dto;
 	}
 
 }

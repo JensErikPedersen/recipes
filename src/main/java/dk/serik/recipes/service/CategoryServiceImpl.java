@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,6 +23,7 @@ import lombok.AllArgsConstructor;
 		  propagation = Propagation.REQUIRED, 
 		  readOnly = false, 
 		  timeout = 5)
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
 	
 	private CategoryJpaRepository categoryJpaRepository;
@@ -36,7 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		
 		List<CategoryDTO> dtos = all.stream()
-				.map(e -> categoryMapper.from(e))
+				.map(e -> categoryMapper.fromEntity(e))
 				.collect(Collectors.toList());
 		
 		return Optional.of(dtos);
@@ -46,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Optional<CategoryDTO> findById(String id) {
 		Optional<CategoryEntity> categoryEntity = categoryJpaRepository.findById(id);
 		if(categoryEntity.isPresent()) {
-			return Optional.ofNullable(categoryMapper.from(categoryEntity.get()));
+			return Optional.ofNullable(categoryMapper.fromEntity(categoryEntity.get()));
 		}
 		
 		return Optional.empty();
@@ -57,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Optional<CategoryEntity> categoryEntity =  categoryJpaRepository.findByName(name);
 		
 		if(categoryEntity.isPresent()) {
-			return Optional.ofNullable(categoryMapper.from(categoryEntity.get()));
+			return Optional.ofNullable(categoryMapper.fromEntity(categoryEntity.get()));
 		}
 		
 		return Optional.empty();
@@ -65,8 +67,10 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDTO save(CategoryDTO categoryDto) {
-		// TODO Auto-generated method stub
-		return null;
+		CategoryEntity from = categoryMapper.fromDto(categoryDto);
+		log.info("Mapped entity: {}", from);
+		CategoryEntity managedEntity = categoryJpaRepository.saveAndFlush(from);
+		return categoryMapper.fromEntity(managedEntity);
 	}
 
 	@Override

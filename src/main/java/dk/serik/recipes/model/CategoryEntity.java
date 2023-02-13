@@ -1,5 +1,6 @@
 package dk.serik.recipes.model;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -33,6 +34,5 @@ public class CategoryEntity extends GenericIdentifierEntity {
 	public String toString() {
 		return "CategoryEntity [name=" + name + ", description=" + description + ", id=" + id + "]";
 	}
-  
-	
+
 }
