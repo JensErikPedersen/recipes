@@ -8,14 +8,15 @@ import org.springframework.stereotype.Component;
 public class CategoryMapper {
 	
 	public CategoryDTO fromEntity(Category entity) {
-		CategoryDTO dto = new CategoryDTO();
-		dto.setId(entity.getId());
-		dto.setCreated(entity.getCreated());
-		dto.setCreatedBy(entity.getCreatedBy());
-		dto.setDescription(entity.getDescription());
-		dto.setName(entity.getName());
-		dto.setUpdated(entity.getUpdated());
-		dto.setUpdatedBy(entity.getUpdatedBy());
+		CategoryDTO dto = CategoryDTO.builder()
+				.id(entity.getId())
+				.created(entity.getCreated())
+				.createdBy(entity.getCreatedBy())
+				.description(entity.getDescription())
+				.name(entity.getName())
+				.updated(entity.getUpdated())
+				.updatedBy(entity.getUpdatedBy())
+				.build();
 		return dto;
 	}
 
@@ -23,6 +24,8 @@ public class CategoryMapper {
 		Category entity = new Category();
 		entity.setDescription(dto.getDescription());
 		entity.setName(dto.getName());
+		entity.setCreatedBy(dto.getCreatedBy());
+		entity.setUpdatedBy(dto.getUpdatedBy());
 		return entity;
 	}
 

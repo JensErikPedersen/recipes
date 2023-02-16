@@ -1,13 +1,11 @@
 package dk.serik.recipes;
 
 import dk.serik.recipes.mapper.CategoryMapper;
-import dk.serik.recipes.service.IngredientService;
-import org.springframework.context.annotation.Bean;
-import org.springframework.boot.test.context.TestConfiguration;
-
 import dk.serik.recipes.repository.CategoryJpaRepository;
 import dk.serik.recipes.service.CategoryService;
 import dk.serik.recipes.service.CategoryServiceImpl;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 
 @TestConfiguration
 public class RecipesTestConfiguration {
@@ -17,9 +15,6 @@ public class RecipesTestConfiguration {
 		return new CategoryServiceImpl(categoryJpaRepository, categoryMapper);
 	}
 
-	@Bean
-	public CategoryMapper categoryMapper() {
-		return new CategoryMapper();
-	}
+
 
 }

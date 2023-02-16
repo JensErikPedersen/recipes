@@ -2,6 +2,7 @@ package dk.serik.recipes.model;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,7 +16,8 @@ import java.util.Objects;
 @MappedSuperclass
 public class BaseIdentifierEntity extends BaseEntity {
 
-	    @Setter(AccessLevel.NONE)	    
+	    @Setter(AccessLevel.NONE)
+		@Getter(AccessLevel.PUBLIC)
 	    @Id
 	    @GenericGenerator(name = "generator", strategy = "uuid2")
 	    @GeneratedValue(generator = "generator")

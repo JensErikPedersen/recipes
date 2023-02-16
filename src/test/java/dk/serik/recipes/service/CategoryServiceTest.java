@@ -1,5 +1,6 @@
 package dk.serik.recipes.service;
 
+import dk.serik.recipes.MapperTestConfiguration;
 import dk.serik.recipes.RecipesTestConfiguration;
 import dk.serik.recipes.dto.CategoryDTO;
 import dk.serik.recipes.mapper.CategoryMapper;
@@ -24,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-@Import(RecipesTestConfiguration.class)
+@Import({RecipesTestConfiguration.class, MapperTestConfiguration.class})
 public class CategoryServiceTest {
 	
 	@Autowired
@@ -139,19 +140,19 @@ public class CategoryServiceTest {
 	}
 
 	private CategoryDTO mockSavedWaterDTO() {
-		CategoryDTO dto = new CategoryDTO();
-		dto.setName("Vand");
-		dto.setDescription("Det er postevand");
-		dto.setRecipeEntities(null);
-		dto.setId("1234");
+		CategoryDTO dto = CategoryDTO.builder()
+				.name("Vand")
+				.description("Det er postevand")
+				.recipeEntities(null)
+				.id("1234").build();
 		return dto;
 	}
 
 	private CategoryDTO mockToBeSavedWaterDTO() {
-		CategoryDTO dto = new CategoryDTO();
-		dto.setName("Vand");
-		dto.setDescription("Det er postevand");
-		dto.setRecipeEntities(null);
+		CategoryDTO dto = CategoryDTO.builder()
+				.name("Vand")
+				.description("Det er postevand")
+				.recipeEntities(null).build();
 		return dto;
 	}
 
