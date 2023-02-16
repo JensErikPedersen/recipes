@@ -1,17 +1,12 @@
 package dk.serik.recipes.model;
 
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="unit")
-public class UnitEntity extends GenericIdentifierEntity {
+public class Unit extends BaseIdentifierEntity {
 	
 	@Column(nullable = false, unique = true)
 	private String label;
@@ -27,8 +22,8 @@ public class UnitEntity extends GenericIdentifierEntity {
 	@Column(nullable = false)
 	private String description;
 	
-	@OneToMany(mappedBy="unitEntity",  fetch= FetchType.LAZY)
-	private Set<RecipeIngredientEntity> recipeIngredientEntities;
+	@OneToMany(mappedBy= "unit",  fetch= FetchType.LAZY)
+	private Set<RecipeIngredient> recipeIngredientEntities;
 
 	@Override
 	public String toString() {

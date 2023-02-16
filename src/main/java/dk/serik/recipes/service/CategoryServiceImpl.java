@@ -1,20 +1,19 @@
 package dk.serik.recipes.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import dk.serik.recipes.dto.CategoryDTO;
+import dk.serik.recipes.mapper.CategoryMapper;
+import dk.serik.recipes.model.Category;
+import dk.serik.recipes.repository.CategoryJpaRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import dk.serik.recipes.dto.CategoryDTO;
-import dk.serik.recipes.model.CategoryEntity;
-import dk.serik.recipes.mapper.CategoryMapper;
-import dk.serik.recipes.repository.CategoryJpaRepository;
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,12 +26,12 @@ import lombok.AllArgsConstructor;
 public class CategoryServiceImpl implements CategoryService {
 	
 	private CategoryJpaRepository categoryJpaRepository;
-	
+
 	private CategoryMapper categoryMapper;
 
 	@Override
 	public Optional<List<CategoryDTO>> findAll() {
-		List<CategoryEntity> all = categoryJpaRepository.findAll();
+		List<Category> all = categoryJpaRepository.findAll();
 		if(all.size() == 0) {
 			return Optional.empty();
 		}
@@ -46,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Optional<CategoryDTO> findById(String id) {
-		Optional<CategoryEntity> categoryEntity = categoryJpaRepository.findById(id);
+		Optional<Category> categoryEntity = categoryJpaRepository.findById(id);
 		if(categoryEntity.isPresent()) {
 			return Optional.ofNullable(categoryMapper.fromEntity(categoryEntity.get()));
 		}
@@ -56,7 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Optional<CategoryDTO> findByName(String name) {
-		Optional<CategoryEntity> categoryEntity =  categoryJpaRepository.findByName(name);
+		Optional<Category> categoryEntity =  categoryJpaRepository.findByName(name);
 		
 		if(categoryEntity.isPresent()) {
 			return Optional.ofNullable(categoryMapper.fromEntity(categoryEntity.get()));
@@ -67,9 +66,9 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDTO save(CategoryDTO categoryDto) {
-		CategoryEntity from = categoryMapper.fromDto(categoryDto);
+		Category from = categoryMapper.fromDto(categoryDto);
 		log.info("Mapped entity: {}", from);
-		CategoryEntity managedEntity = categoryJpaRepository.saveAndFlush(from);
+		Category managedEntity = categoryJpaRepository.saveAndFlush(from);
 		return categoryMapper.fromEntity(managedEntity);
 	}
 

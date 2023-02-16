@@ -1,14 +1,14 @@
 package dk.serik.recipes.model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Getter
@@ -16,15 +16,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "recipe_rating")
-public class RecipeRatingEntity extends GenericIdentifierEntity {
+public class RecipeRating extends BaseIdentifierEntity {
 
 	@ManyToOne
     @JoinColumn(name = "recipe_id", nullable = false )
-	private RecipeEntity recipeEntity;
+	private Recipe recipe;
 	
 	@ManyToOne
     @JoinColumn(name = "rating_id", nullable = false)
-	private RatingEntity ratingEntity;
+	private Rating rating;
 	
 	private String description;
 	

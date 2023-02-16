@@ -1,13 +1,8 @@
 package dk.serik.recipes.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
-
-import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Optional;
-
+import dk.serik.recipes.bean.Session;
+import dk.serik.recipes.model.Unit;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +13,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import dk.serik.recipes.Session;
-import dk.serik.recipes.model.UnitEntity;
-import lombok.extern.slf4j.Slf4j;
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -40,7 +39,7 @@ public class UnitJpaRepositoryTest {
 	
 	@Test
 	public void givenExistFourUnits_WhenFetchingAll_ThenFourIsReturned() {
-		List<UnitEntity> unitEntities = repository.findAll();
+		List<Unit> unitEntities = repository.findAll();
 		Assertions.assertFalse(unitEntities.isEmpty());
 		Assertions.assertEquals(4, unitEntities.size());
 		
@@ -48,7 +47,7 @@ public class UnitJpaRepositoryTest {
 	
 	@Test
 	public void givenExistUnitDeciliter_WhenLookupUnitByAbbreviationDecil_ThenOk() {
-		Optional<UnitEntity> opUnit = repository.findByDescriptionContains("Decil");
+		Optional<Unit> opUnit = repository.findByDescriptionContains("Decil");
 		Assertions.assertTrue(opUnit.isPresent());
 		Assertions.assertEquals("dl", opUnit.get().getLabel());
 		Assertions.assertEquals("Deciliter", opUnit.get().getDescription());
@@ -56,7 +55,7 @@ public class UnitJpaRepositoryTest {
 	
 	@Test
 	public void givenExistUnitThe_TableSpoon_WhenLookupUnitByDescription_ske_ThenTwoIsReturned() {
-		Optional<List<UnitEntity>> opUnitList = repository.findAllByDescriptionContains("ske");
+		Optional<List<Unit>> opUnitList = repository.findAllByDescriptionContains("ske");
 		Assertions.assertTrue(opUnitList.isPresent());
 		Assertions.assertEquals(2, opUnitList.get().size());		
 	}
@@ -65,8 +64,8 @@ public class UnitJpaRepositoryTest {
 	@Test
 	public void givenValidUnitEntity_WhenSavedToDatabase_ThenOk() {
 		OffsetDateTime now = OffsetDateTime.now();
-		UnitEntity saveAndFlush = repository.saveAndFlush(buildUnitEntity());
-		List<UnitEntity> unitEntities = repository.findAll();
+		Unit saveAndFlush = repository.saveAndFlush(buildUnitEntity());
+		List<Unit> unitEntities = repository.findAll();
 		Assertions.assertFalse(unitEntities.isEmpty());
 		Assertions.assertEquals(5, unitEntities.size());
 		assertThat(now).isCloseTo(saveAndFlush.getCreated(), within(0, ChronoUnit.SECONDS));
@@ -77,7 +76,7 @@ public class UnitJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingUnitEntity_WhenDeleted_ThenOk() {
-		Optional<UnitEntity> opUnit = repository.findByDescriptionContains("Gram");
+		Optional<Unit> opUnit = repository.findByDescriptionContains("Gram");
 		Assertions.assertTrue(opUnit.isPresent());
 		Assertions.assertEquals("gr", opUnit.get().getLabel());		
 		repository.delete(opUnit.get());
@@ -87,11 +86,11 @@ public class UnitJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingUnitEntity_WhenUpdateDescription_ThenOk() {
-		Optional<UnitEntity> opUnit = repository.findByDescriptionContains("Gram");
+		Optional<Unit> opUnit = repository.findByDescriptionContains("Gram");
 		Assertions.assertTrue(opUnit.isPresent());
 		opUnit.get().setDescription("Kilogram");
 		OffsetDateTime now = OffsetDateTime.now();
-		UnitEntity saveAndFlush = repository.saveAndFlush(opUnit.get());
+		Unit saveAndFlush = repository.saveAndFlush(opUnit.get());
 		assertThat(now).isCloseTo(saveAndFlush.getUpdated(), within(0, ChronoUnit.SECONDS));
 		assertThat("Jens").isEqualTo(saveAndFlush.getUpdatedBy());
 		assertThat(saveAndFlush.getDescription()).isEqualTo("Kilogram");
@@ -99,8 +98,8 @@ public class UnitJpaRepositoryTest {
 	
 	
 	
-	private UnitEntity buildUnitEntity() {
-		UnitEntity unit = new UnitEntity();
+	private Unit buildUnitEntity() {
+		Unit unit = new Unit();
 		unit.setLabel("knvsps");
 		unit.setDescription("Knivspids");
 		return unit;

@@ -1,30 +1,27 @@
 package dk.serik.recipes.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.within;
-
-import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Optional;
-
+import dk.serik.recipes.bean.Session;
+import dk.serik.recipes.model.Category;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import dk.serik.recipes.Session;
-import dk.serik.recipes.model.CategoryEntity;
-import lombok.extern.slf4j.Slf4j;
+import java.time.OffsetDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 
-@ExtendWith(SpringExtension.class)
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+
+//@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
 public class CategoryJpaRepositoryTest {
@@ -43,35 +40,35 @@ public class CategoryJpaRepositoryTest {
 	@ParameterizedTest
 	@CsvSource(value={"Brød:Jens", "Kager:Majken"}, delimiter = ':')
 	public void givenCategoryIsPresent_WhenFetchingCategory_ThenCreatedByOk(String category, String createdBy) {
-		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName(category);
+		Optional<Category> categoryEntity = categoryRepository.findByName(category);
 		Assertions.assertTrue(categoryEntity.isPresent());
 		Assertions.assertEquals(createdBy, categoryEntity.get().getCreatedBy());
 	}
 	
 	
 	@Test
-	public void givenCategoryEntityWienerBread_WhenSavingCategory_ThenOk() {
+	public void givenCategoryWienerBread_WhenSavingCategory_ThenOk() {
 		OffsetDateTime now = OffsetDateTime.now();
-		CategoryEntity categoryEntity = categoryRepository.saveAndFlush(buildWienerBreadEntity());		
-		assertThat(now).isCloseTo(categoryEntity.getCreated(), within(0, ChronoUnit.SECONDS));
-		assertThat("Jens").isEqualTo(categoryEntity.getCreatedBy());
-		Assertions.assertEquals("Wienerbrød", categoryEntity.getName());		
+		Category category = categoryRepository.saveAndFlush(buildWienerBreadEntity());
+		assertThat(now).isCloseTo(category.getCreated(), within(0, ChronoUnit.SECONDS));
+		assertThat("Jens").isEqualTo(category.getCreatedBy());
+		Assertions.assertEquals("Wienerbrød", category.getName());
 	}
 	
 	@Test
 	public void givenThreeCategories_WhenFetchingAll_ThenFourInList() {
-		List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+		List<Category> categoryEntities = categoryRepository.findAll();
 		Assertions.assertFalse(categoryEntities.isEmpty());
 		Assertions.assertEquals(4, categoryEntities.size());
 	}
 	
 	@Test
 	public void givenExistingCategory_WhenNameIsChanged_ThenOk() {
-		Optional<CategoryEntity> categoryEntity = categoryRepository.findByName("Brød");
+		Optional<Category> categoryEntity = categoryRepository.findByName("Brød");
 		Assertions.assertTrue(categoryEntity.isPresent());
 		categoryEntity.get().setName("Bread");
 		OffsetDateTime now = OffsetDateTime.now();
-		CategoryEntity savedCategory = categoryRepository.saveAndFlush(categoryEntity.get());
+		Category savedCategory = categoryRepository.saveAndFlush(categoryEntity.get());
 		Assertions.assertEquals("Bread", savedCategory.getName());
 		assertThat(now).isCloseTo(savedCategory.getUpdated(), within(0, ChronoUnit.SECONDS));
 		assertThat("Jens").isEqualTo(savedCategory.getUpdatedBy());
@@ -79,14 +76,14 @@ public class CategoryJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingCategories_WhenLookupByName_er_ThenFindTwo() {
-		Optional<List<CategoryEntity>> opCategories = categoryRepository.findAllByNameContains("er");
+		Optional<List<Category>> opCategories = categoryRepository.findAllByNameContains("er");
 		Assertions.assertTrue(opCategories.isPresent());
 		Assertions.assertEquals(2, opCategories.get().size());
 	}
 	
-	private CategoryEntity buildWienerBreadEntity() {
-		CategoryEntity categoryEntity = new CategoryEntity();
-		categoryEntity.setName("Wienerbrød");
-		return categoryEntity;
+	private Category buildWienerBreadEntity() {
+		Category category = new Category();
+		category.setName("Wienerbrød");
+		return category;
 	}
 }

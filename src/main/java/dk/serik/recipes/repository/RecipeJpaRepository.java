@@ -1,20 +1,19 @@
 package dk.serik.recipes.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import dk.serik.recipes.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import dk.serik.recipes.model.RecipeEntity;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface RecipeJpaRepository extends JpaRepository<RecipeEntity, String> {
+public interface RecipeJpaRepository extends JpaRepository<Recipe, String> {
 	
-	List<RecipeEntity> findAllByCategoryEntityName(String categoryName);
+	List<Recipe> findAllByCategoryName(String categoryName);
 	
-	Optional<List<RecipeEntity>> findAllByNameContains(String name);
+	Optional<List<Recipe>> findAllByNameContains(String name);
 	
-	Optional<RecipeEntity> findByName(String name);
+	Optional<Recipe> findByName(String name);
 
 }

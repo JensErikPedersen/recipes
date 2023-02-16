@@ -1,15 +1,10 @@
 package dk.serik.recipes.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import dk.serik.recipes.RecipesTestConfiguration;
+import dk.serik.recipes.dto.CategoryDTO;
+import dk.serik.recipes.mapper.CategoryMapper;
+import dk.serik.recipes.model.Category;
+import dk.serik.recipes.repository.CategoryJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,13 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import dk.serik.recipes.RecipesTestConfiguration;
-import dk.serik.recipes.dto.CategoryDTO;
-import dk.serik.recipes.model.CategoryEntity;
-import dk.serik.recipes.mapper.CategoryMapper;
-import dk.serik.recipes.repository.CategoryJpaRepository;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @Import(RecipesTestConfiguration.class)
@@ -64,7 +61,7 @@ public class CategoryServiceTest {
 	public void givenOneCategory_WhenFindAll_ThenListSizeIsOne() throws Exception{
 
 		// given
-		List<CategoryEntity> all = new ArrayList<>();
+		List<Category> all = new ArrayList<>();
 		all.add(mockWater());
 
 		// when
@@ -124,16 +121,16 @@ public class CategoryServiceTest {
 	
 	// utilities, mocks etc.
 	
-	private CategoryEntity mockWater() {
-		CategoryEntity entity = new CategoryEntity();
+	private Category mockWater() {
+		Category entity = new Category();
 		entity.setName("Vand");
 		entity.setDescription("Det er postevand");
 		entity.setRecipeEntities(null);
 		return entity;
 	}
 
-	private CategoryEntity savedMockWater() {
-		CategoryEntity entity = new CategoryEntity();
+	private Category savedMockWater() {
+		Category entity = new Category();
 		entity.setName("Vand");
 		entity.setDescription("Det er postevand");
 		ReflectionTestUtils.setField(entity, "id", "1234");

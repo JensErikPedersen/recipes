@@ -1,33 +1,20 @@
 package dk.serik.recipes.model;
 
-import java.time.OffsetDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PostLoad;
-import javax.persistence.PostPersist;
-import javax.persistence.PostRemove;
-import javax.persistence.PostUpdate;
-import javax.persistence.PrePersist;
-import javax.persistence.PreRemove;
-import javax.persistence.PreUpdate;
-import javax.persistence.Transient;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+
 @SuppressWarnings("rawtypes")
 @Data
 @MappedSuperclass
-@EntityListeners(GenericEntityListener.class)
+@EntityListeners(BaseEntityListener.class)
 @Slf4j
-public class GenericEntity implements Comparable {
-
-//	    @Transient
-//	    protected final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
+public class BaseEntity implements Comparable, Serializable {
 
 	    @Setter(AccessLevel.PRIVATE)	    
 	    @Column(nullable = false)
@@ -35,10 +22,11 @@ public class GenericEntity implements Comparable {
 
 	    @Column(nullable = false)
 	    protected String createdBy;
-
-	    @Setter(AccessLevel.PRIVATE)
+		@Setter(AccessLevel.PRIVATE)
+		@Column(nullable = false)
 	    protected OffsetDateTime updated;
 
+		@Column(nullable = false)
 	    protected String updatedBy;
 
 	    @PrePersist
@@ -67,8 +55,8 @@ public class GenericEntity implements Comparable {
 
 	    @Override
 	    public int compareTo(Object o) {
-	        if(o!=null && o instanceof GenericEntity && created!=null && ((GenericEntity) o).created!=null) {
-	            return created.compareTo(((GenericEntity) o).created);
+	        if(o!=null && o instanceof BaseEntity && created!=null && ((BaseEntity) o).created!=null) {
+	            return created.compareTo(((BaseEntity) o).created);
 	        }
 	        return -1;
 	    }

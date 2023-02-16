@@ -1,14 +1,13 @@
 package dk.serik.recipes.model;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-import javax.persistence.Embeddable;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
 
 @SuppressWarnings("serial")
 @Embeddable
@@ -18,13 +17,13 @@ import lombok.Setter;
 @Setter
 public class RecipeIngredientPK implements Serializable {
 		
-	private String recipeEntity;
+	private String recipe;
 	
-	private String ingredientEntity;
+	private String ingredient;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ingredientEntity, recipeEntity);
+		return Objects.hash(ingredient, recipe);
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class RecipeIngredientPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RecipeIngredientPK other = (RecipeIngredientPK) obj;
-		return Objects.equals(ingredientEntity, other.ingredientEntity) && Objects.equals(recipeEntity, other.recipeEntity);
+		return Objects.equals(ingredient, other.ingredient) && Objects.equals(recipe, other.recipe);
 	}
 	
 	

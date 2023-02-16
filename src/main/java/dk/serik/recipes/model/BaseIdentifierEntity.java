@@ -1,21 +1,19 @@
 package dk.serik.recipes.model;
 
-import java.util.Objects;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
-import org.hibernate.annotations.GenericGenerator;
-
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import java.util.Objects;
 
 @Data
 @MappedSuperclass
-public class GenericIdentifierEntity extends GenericEntity {
+public class BaseIdentifierEntity extends BaseEntity {
 
 	    @Setter(AccessLevel.NONE)	    
 	    @Id
@@ -28,7 +26,7 @@ public class GenericIdentifierEntity extends GenericEntity {
 	    public boolean equals(Object o) {
 	        if (this == o) return true;
 	        if (o == null || getClass() != o.getClass()) return false;
-	        GenericIdentifierEntity that = (GenericIdentifierEntity) o;
+	        BaseIdentifierEntity that = (BaseIdentifierEntity) o;
 	        if(id==null && that.getId()==null) return false;
 	        return Objects.equals(id, that.getId());
 	    }

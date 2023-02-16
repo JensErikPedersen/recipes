@@ -1,11 +1,10 @@
 package dk.serik.recipes.repository;
 
+import dk.serik.recipes.model.RecipeRating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import dk.serik.recipes.model.RecipeRatingEntity;
-
 @Repository
-public interface RecipeRatingJpaRepository extends JpaRepository<RecipeRatingEntity, String> {
+public interface RecipeRatingJpaRepository extends JpaRepository<RecipeRating, String> {
 
 }

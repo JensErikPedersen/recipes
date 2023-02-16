@@ -1,19 +1,18 @@
 package dk.serik.recipes.repository;
 
-import java.util.List;
-import java.util.Optional;
-
+import dk.serik.recipes.model.RecipeIngredient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import dk.serik.recipes.model.RecipeIngredientEntity;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface RecipeIngredientJpaRepository extends JpaRepository<RecipeIngredientEntity, String> {
+public interface RecipeIngredientJpaRepository extends JpaRepository<RecipeIngredient, String> {
 
-	Optional<RecipeIngredientEntity> findByRecipeEntityIdAndIngredientEntityId(String recipeId, String ingredientId);
+	Optional<RecipeIngredient> findByRecipeIdAndIngredientId(String recipeId, String ingredientId);
 	
-	Optional<List<RecipeIngredientEntity>> findAllByRecipeEntityId(String recipeId);
+	Optional<List<RecipeIngredient>> findAllByRecipeId(String recipeId);
 	
-	Optional<List<RecipeIngredientEntity>> findAllByIngredientEntityId(String ingredientId);
+	Optional<List<RecipeIngredient>> findAllByIngredientId(String ingredientId);
 }
