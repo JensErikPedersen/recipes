@@ -1,12 +1,12 @@
 package dk.serik.recipes.model;
 
 import dk.serik.recipes.bean.Session;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
 
 @Component
 @Slf4j

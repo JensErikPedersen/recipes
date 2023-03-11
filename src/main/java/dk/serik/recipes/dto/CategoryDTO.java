@@ -1,39 +1,29 @@
 package dk.serik.recipes.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Set;
 
 @JsonInclude(Include.NON_NULL)
-@Builder
 @Getter
-@Setter
 public class CategoryDTO extends GenericDTO {
-
-
-	private String id;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private OffsetDateTime created;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private OffsetDateTime updated;
-
-	private String updatedBy;
-
-	private String createdBy;
 	private String name;
-
 	private String description;
-	
 	private Set<RecipeDTO> recipeEntities;
+
+	@Builder
+	public CategoryDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, Set<RecipeDTO> recipeEntities) {
+		super(id, created, createdBy, updated, updatedBy);
+		this.name = name;
+		this.description = description;
+		this.recipeEntities = recipeEntities;
+	}
+
 
 	@Override
 	public String toString() {

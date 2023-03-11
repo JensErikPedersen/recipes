@@ -1,23 +1,40 @@
 package dk.serik.recipes.dto;
 
-import java.time.OffsetDateTime;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import lombok.Data;
-
-@Data
+import java.time.OffsetDateTime;
+import java.util.Objects;
+@AllArgsConstructor
+@Getter
 @JsonInclude(Include.NON_NULL)
 public class GenericDTO {
 
-	private String id;
-	
-	private OffsetDateTime created;
+	public String id;
 
-	private String createdBy;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	public OffsetDateTime created;
 
-	private OffsetDateTime updated;
+	public String createdBy;
 
-	private String updatedBy;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	public OffsetDateTime updated;
+
+	public String updatedBy;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		GenericDTO that = (GenericDTO) o;
+		return id.equals(that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

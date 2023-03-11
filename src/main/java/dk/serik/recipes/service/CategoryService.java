@@ -1,9 +1,9 @@
 package dk.serik.recipes.service;
 
+import dk.serik.recipes.dto.CategoryDTO;
+
 import java.util.List;
 import java.util.Optional;
-
-import dk.serik.recipes.dto.CategoryDTO;
 
 public interface CategoryService {
 

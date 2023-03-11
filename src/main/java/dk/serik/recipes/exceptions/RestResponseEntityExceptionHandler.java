@@ -1,12 +1,12 @@
 package dk.serik.recipes.exceptions;
 
-import org.hibernate.exception.ConstraintViolationException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Path;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
@@ -43,9 +41,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = { javax.validation.ConstraintViolationException.class })
+    @ExceptionHandler(value = { ConstraintViolationException.class })
     @ResponseBody
-    public ExceptionEnvelope handleConstraintViolationException(javax.validation.ConstraintViolationException ex) {
+    public ExceptionEnvelope handleConstraintViolationException(ConstraintViolationException ex) {
         logger.info("handle ConstraintViolationException: " + ex);
         ExceptionEnvelope exceptionEnvelope = new ExceptionEnvelope(100, "Validation Exception",
                 "One or more fields, parameters or type do not pass violation criteria");
