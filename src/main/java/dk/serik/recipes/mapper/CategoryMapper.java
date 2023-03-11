@@ -4,10 +4,9 @@ import dk.serik.recipes.dto.CategoryDTO;
 import dk.serik.recipes.model.Category;
 import org.springframework.stereotype.Component;
 
-@Component
 public class CategoryMapper {
 	
-	public CategoryDTO fromEntity(Category entity) {
+	public static CategoryDTO fromEntity(Category entity) {
 		CategoryDTO dto = CategoryDTO.builder()
 				.id(entity.getId())
 				.created(entity.getCreated())
@@ -20,7 +19,7 @@ public class CategoryMapper {
 		return dto;
 	}
 
-	public Category fromDto(CategoryDTO dto) {
+	public static Category fromDto(CategoryDTO dto) {
 		Category entity = new Category();
 		entity.setDescription(dto.getDescription());
 		entity.setName(dto.getName());

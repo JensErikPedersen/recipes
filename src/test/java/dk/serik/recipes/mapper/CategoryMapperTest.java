@@ -13,17 +13,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-@ExtendWith(SpringExtension.class)
-@Import(MapperTestConfiguration.class)
 public class CategoryMapperTest {
-
-    @Autowired
-    private CategoryMapper mapper;
 
     @Test
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
     public void passMapperFromValidEntityToDto() {
-        CategoryDTO mappedDto = mapper.fromEntity(mockCategory());
+        CategoryDTO mappedDto = CategoryMapper.fromEntity(mockCategory());
         Assertions.assertThat(mappedDto).isNotNull();
         Assertions.assertThat(mappedDto).isEqualTo(mockCategoryDTO());
     }
@@ -31,7 +26,7 @@ public class CategoryMapperTest {
     @Test
     @DisplayName("Given valid dto, When mapped by mapper, Then Entity is Ok")
     public void passMapperFromValidDtoToEntity() {
-        Category mappedEntity = mapper.fromDto(mockCategoryDTO());
+        Category mappedEntity = CategoryMapper.fromDto(mockCategoryDTO());
         Assertions.assertThat(mappedEntity).isNotNull();
         Assertions.assertThat(mappedEntity.getName()).isEqualTo(mockCategory().getName());
         Assertions.assertThat(mappedEntity.getDescription()).isEqualTo(mockCategory().getDescription());
