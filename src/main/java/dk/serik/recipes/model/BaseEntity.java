@@ -1,11 +1,11 @@
 package dk.serik.recipes.model;
 
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 

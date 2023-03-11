@@ -1,29 +1,21 @@
 package dk.serik.recipes.mapper;
 
-import dk.serik.recipes.MapperTestConfiguration;
 import dk.serik.recipes.dto.CategoryDTO;
 import dk.serik.recipes.model.Category;
 import dk.serik.recipes.testutil.OffsetDateTimeProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mapstruct.factory.Mappers;
 import org.springframework.test.util.ReflectionTestUtils;
 
-@ExtendWith(SpringExtension.class)
-@Import(MapperTestConfiguration.class)
 public class CategoryMapperTest {
 
-    @Autowired
-    private CategoryMapper mapper;
-
+    private CategoryMapper mapper = Mappers.getMapper(CategoryMapper.class);
     @Test
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
     public void passMapperFromValidEntityToDto() {
-        CategoryDTO mappedDto = mapper.fromEntity(mockCategory());
+        CategoryDTO mappedDto = mapper.category(mockCategory());
         Assertions.assertThat(mappedDto).isNotNull();
         Assertions.assertThat(mappedDto).isEqualTo(mockCategoryDTO());
     }
@@ -31,7 +23,7 @@ public class CategoryMapperTest {
     @Test
     @DisplayName("Given valid dto, When mapped by mapper, Then Entity is Ok")
     public void passMapperFromValidDtoToEntity() {
-        Category mappedEntity = mapper.fromDto(mockCategoryDTO());
+        Category mappedEntity = mapper.categoryDTO(mockCategoryDTO());
         Assertions.assertThat(mappedEntity).isNotNull();
         Assertions.assertThat(mappedEntity.getName()).isEqualTo(mockCategory().getName());
         Assertions.assertThat(mappedEntity.getDescription()).isEqualTo(mockCategory().getDescription());

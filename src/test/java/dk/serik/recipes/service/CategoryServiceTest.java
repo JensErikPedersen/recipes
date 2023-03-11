@@ -3,7 +3,6 @@ package dk.serik.recipes.service;
 import dk.serik.recipes.MapperTestConfiguration;
 import dk.serik.recipes.RecipesTestConfiguration;
 import dk.serik.recipes.dto.CategoryDTO;
-import dk.serik.recipes.mapper.CategoryMapper;
 import dk.serik.recipes.model.Category;
 import dk.serik.recipes.repository.CategoryJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,9 +29,6 @@ public class CategoryServiceTest {
 	
 	@Autowired
 	private CategoryService categoryService;
-	
-	@Autowired
-	private CategoryMapper categoryMappper;
 	
 	@MockBean
 	private CategoryJpaRepository categoryJpaRepository;
