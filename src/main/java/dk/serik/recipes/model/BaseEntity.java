@@ -16,7 +16,7 @@ import java.time.OffsetDateTime;
 @Slf4j
 public class BaseEntity implements Comparable, Serializable {
 
-	    @Setter(AccessLevel.PRIVATE)	    
+	    @Setter(AccessLevel.PRIVATE)
 	    @Column(nullable = false)
 	    protected OffsetDateTime created;
 

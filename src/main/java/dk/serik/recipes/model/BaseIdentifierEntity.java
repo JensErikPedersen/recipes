@@ -5,14 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
 
-@Data
 @MappedSuperclass
 public class BaseIdentifierEntity extends BaseEntity {
 
@@ -37,4 +35,15 @@ public class BaseIdentifierEntity extends BaseEntity {
 	    public int hashCode() {
 	        return Objects.hash(id);
 	    }
+
+	@Override
+	public String toString() {
+		return "BaseIdentifierEntity{" +
+				"id='" + id + '\'' +
+				", created=" + created +
+				", createdBy='" + createdBy + '\'' +
+				", updated=" + updated +
+				", updatedBy='" + updatedBy + '\'' +
+				'}';
+	}
 }

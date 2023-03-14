@@ -41,6 +41,20 @@ public class CategoryMapperTest {
         return mock;
     }
 
+    @Test
+    @DisplayName("Given Unit is null, When mapped to DTO, Then DTO is Null")
+    public void passMapperFromNullEntityToNullDto() {
+        CategoryDTO mappedDto = mapper.category(null);
+        Assertions.assertThat(mappedDto).isNull();
+    }
+
+    @Test
+    @DisplayName("Given UnitDTO is null, When mapped to Entity, Then Entity is Null")
+    public void passMapperFromNullDtoToNullEntity() {
+        Category mappedDto = mapper.categoryDTO(null);
+        Assertions.assertThat(mappedDto).isNull();
+    }
+
     private CategoryDTO mockCategoryDTO() {
         CategoryDTO dto = CategoryDTO.builder()
                 .id("12345")
