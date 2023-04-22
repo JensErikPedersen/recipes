@@ -122,7 +122,7 @@ public class CategoryServiceTest {
 		Category entity = new Category();
 		entity.setName("Vand");
 		entity.setDescription("Det er postevand");
-		entity.setRecipeEntities(null);
+		entity.setRecipes(null);
 		return entity;
 	}
 
@@ -131,7 +131,7 @@ public class CategoryServiceTest {
 		entity.setName("Vand");
 		entity.setDescription("Det er postevand");
 		ReflectionTestUtils.setField(entity, "id", "1234");
-		entity.setRecipeEntities(null);
+		entity.setRecipes(null);
 		return entity;
 	}
 
@@ -139,7 +139,7 @@ public class CategoryServiceTest {
 		CategoryDTO dto = CategoryDTO.builder()
 				.name("Vand")
 				.description("Det er postevand")
-				.recipeEntities(null)
+				.recipes(null)
 				.id("1234").build();
 		return dto;
 	}
@@ -148,7 +148,7 @@ public class CategoryServiceTest {
 		CategoryDTO dto = CategoryDTO.builder()
 				.name("Vand")
 				.description("Det er postevand")
-				.recipeEntities(null).build();
+				.recipes(null).build();
 		return dto;
 	}
 

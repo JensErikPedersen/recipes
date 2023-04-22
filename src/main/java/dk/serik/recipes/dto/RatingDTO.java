@@ -1,31 +1,30 @@
 package dk.serik.recipes.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import dk.serik.recipes.model.RecipeIngredient;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
-public class UnitDTO extends BaseDTO {
-
-    private String label;
+public class RatingDTO extends BaseDTO {
+    private Integer rating;
 
     private String description;
 
     @Builder
-    public UnitDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String label, String description) {
+    public RatingDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, Integer rating, String description) {
         super(id, created, createdBy, updated, updatedBy);
-        this.label = label;
+        this.rating = rating;
         this.description = description;
     }
 
     @Override
     public String toString() {
-        return "UnitDTO{" +
-                "label='" + label + '\'' +
+        return "RatingDTO{" +
+                ", rating=" + rating +
                 ", description='" + description + '\'' +
                 ", id='" + id + '\'' +
                 ", created=" + created +

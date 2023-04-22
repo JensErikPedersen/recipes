@@ -11,7 +11,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Getter
 @JsonInclude(Include.NON_NULL)
-public class GenericDTO {
+public class BaseDTO {
 
 	public String id;
 
@@ -29,7 +29,7 @@ public class GenericDTO {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		GenericDTO that = (GenericDTO) o;
+		BaseDTO that = (BaseDTO) o;
 		return id.equals(that.id);
 	}
 

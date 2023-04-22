@@ -19,7 +19,7 @@ import java.util.Set;
 public class Rating extends BaseIdentifierEntity {
 	
 	@OneToMany(mappedBy = "rating")
-	private Set<RecipeRating> recipeRatingEntities;
+	private Set<RecipeRating> recipeRatings;
 		
 	private Integer rating;
 	

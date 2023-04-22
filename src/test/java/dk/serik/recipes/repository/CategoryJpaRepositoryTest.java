@@ -24,7 +24,8 @@ import static org.assertj.core.api.Assertions.within;
 //@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
-public class CategoryJpaRepositoryTest {
+public class
+CategoryJpaRepositoryTest {
 
 	@Autowired
 	private CategoryJpaRepository categoryRepository;

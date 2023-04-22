@@ -22,12 +22,12 @@ public class Ingredient extends BaseIdentifierEntity {
 	private String description;
 	
 	@OneToMany(mappedBy= "ingredient", fetch= FetchType.LAZY)
-	private Set<RecipeIngredient> recipeIngredientEntities;
+	private Set<RecipeIngredient> recipeIngredients;
 
 	@Override
 	public String toString() {
-		return "IngredientEntity [name=" + name + ", description=" + description + ", recipeIngredientEntities="
-				+ recipeIngredientEntities + ", id=" + id + "]";
+		return "IngredientEntity [name=" + name + ", description=" + description + ", recipeIngredients="
+				+ recipeIngredients + ", id=" + id + "]";
 	}
 
 	

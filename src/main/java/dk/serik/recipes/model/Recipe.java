@@ -28,13 +28,18 @@ public class Recipe extends BaseIdentifierEntity {
 	private Category category;
 	
 	@OneToMany(mappedBy= "recipe", fetch= FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<RecipeIngredient> recipeIngredientEntities;
-	
-	@OneToMany(mappedBy= "recipe", fetch= FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<RecipeRating> recipeRatingEntities;
+	private Set<RecipeIngredient> recipeIngredients;
 
 	@OneToMany(mappedBy= "recipe", fetch= FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<RecipeTag> recipeTagEntities;
+	private Set<RecipeRating> recipeRatings;
+
+	@ManyToMany
+	@JoinTable(
+			name = "recipe_tag",
+			joinColumns = @JoinColumn(name = "recipe_id"),
+			inverseJoinColumns = @JoinColumn(name = "tag_id")
+	)
+	private Set<Tag> tags;
 
 	@Override
 	public String toString() {
@@ -44,9 +49,9 @@ public class Recipe extends BaseIdentifierEntity {
 		sb.append(	", description='" + description + '\'');
 		sb.append(", instructions='" + instructions + '\'');
 		sb.append(	", category=" + category);
-		recipeIngredientEntities.forEach(ri -> sb.append("Ingredient: " + ri.getIngredient().getName() + ", Amount: " + ri.getAmount() + " " + ri.getUnit().getLabel() + ", "));
-		recipeRatingEntities.forEach(rr -> sb.append("Rating: " + rr.getRating().getRating()));
-		recipeTagEntities.forEach(rt -> sb.append("Tag: " + rt.getTag().getLabel()));
+		recipeIngredients.forEach(ri -> sb.append("Ingredient: " + ri.getIngredient().getName() + ", Amount: " + ri.getAmount() + " " + ri.getUnit().getLabel() + ", "));
+		recipeRatings.forEach(rr -> sb.append("Rating: " + rr.getRating().getRating()));
+		tags.forEach(rt -> sb.append("Tag: " + rt.getLabel()));
 		sb.append(", id='" + id + '\'');
 		sb.append(", created=" + created);
 		sb.append(", createdBy='" + createdBy + '\'');

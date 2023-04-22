@@ -17,24 +17,22 @@ import java.util.Objects;
 @IdClass(RecipeIngredientPK.class)
 @Table(name = "recipe_ingredient")
 public class RecipeIngredient extends BaseEntity {
-
 	@Id
 	@ManyToOne
 	@JoinColumn(name="recipe_id", nullable=false)  
 	private Recipe recipe;
-	
+
 	@Id
 	@ManyToOne
 	@JoinColumn(name="ingredient_id", nullable = false)
 	private Ingredient ingredient;
-	
+
 	@Column(nullable=false)
 	private BigDecimal amount;
-	
+
 	@ManyToOne
 	@JoinColumn(name="unit_id", nullable=false)
 	private Unit unit;
-
   	
 	@Override
 	public int hashCode() {
@@ -56,10 +54,15 @@ public class RecipeIngredient extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "RecipeIngredientEntity [recipeEntity=" + recipe + ", ingredientEntity=" + ingredient
-				+ ", amount=" + amount + ", unitEntity=" + unit + "]";
+		return "RecipeIngredient{" +
+				"recipe=" + recipe +
+				", ingredient=" + ingredient +
+				", amount=" + amount +
+				", unit=" + unit +
+				", created=" + created +
+				", createdBy='" + createdBy + '\'' +
+				", updated=" + updated +
+				", updatedBy='" + updatedBy + '\'' +
+				'}';
 	}
-
-
-
 }

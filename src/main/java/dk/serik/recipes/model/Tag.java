@@ -1,9 +1,6 @@
 package dk.serik.recipes.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "tag")
 public class Tag extends BaseIdentifierEntity {
-	
-	@OneToMany(mappedBy= "tag")
-	private Set<RecipeTag> recipeTagEntities;
+	@ManyToMany(mappedBy = "tags")
+	private Set<Recipe> recipes;
 	
 	@Column(nullable = false)
 	private String label;

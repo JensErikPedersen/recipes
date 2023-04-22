@@ -22,7 +22,7 @@ public class Category extends BaseIdentifierEntity {
 	private String description;	
 	
 	 @OneToMany(mappedBy= "category", fetch= FetchType.LAZY)
-	 private Set<Recipe> recipeEntities;
+	 private Set<Recipe> recipes;
 
 	@Override
 	public String toString() {

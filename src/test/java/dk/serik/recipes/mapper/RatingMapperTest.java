@@ -1,48 +1,47 @@
 package dk.serik.recipes.mapper;
 
-import dk.serik.recipes.dto.CategoryDTO;
-import dk.serik.recipes.model.Category;
-import dk.serik.recipes.mockutil.MockCategoryDTOUtil;
-import dk.serik.recipes.mockutil.MockCategoryUtil;
+import dk.serik.recipes.dto.RatingDTO;
+import dk.serik.recipes.mockutil.MockRatingDTOUtil;
+import dk.serik.recipes.model.Rating;
+import dk.serik.recipes.mockutil.MockRatingUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-public class CategoryMapperTest {
+public class RatingMapperTest {
 
-    private CategoryMapper mapper = Mappers.getMapper(CategoryMapper.class);
+    private RatingMapper mapper = Mappers.getMapper(RatingMapper.class);
     @Test
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
     public void passMapperFromValidEntityToDto() {
-        CategoryDTO mappedDto = mapper.categoryToDTO(MockCategoryUtil.mockBread());
+        RatingDTO mappedDto = mapper.ratingToRatingDTO(MockRatingUtil.mockRating5());
         Assertions.assertThat(mappedDto).isNotNull();
-        Assertions.assertThat(mappedDto).isEqualTo(MockCategoryDTOUtil.mockCategoryDTO());
+        Assertions.assertThat(mappedDto).isEqualTo(MockRatingDTOUtil.mockRatingDTO5());
     }
 
     @Test
     @DisplayName("Given valid dto, When mapped by mapper, Then Entity is Ok")
     public void passMapperFromValidDtoToEntity() {
-        Category mappedEntity = mapper.categoryDTOToCategory(MockCategoryDTOUtil.mockCategoryDTO());
+        Rating mappedEntity = mapper.ratingDtoToRating(MockRatingDTOUtil.mockRatingDTO5());
         Assertions.assertThat(mappedEntity).isNotNull();
-        Assertions.assertThat(mappedEntity.getName()).isEqualTo(MockCategoryUtil.mockBread().getName());
-        Assertions.assertThat(mappedEntity.getDescription()).isEqualTo(MockCategoryUtil.mockBread().getDescription());
+        Assertions.assertThat(mappedEntity.getRating()).isEqualTo(MockRatingUtil.mockRating5().getRating());
+        Assertions.assertThat(mappedEntity.getDescription()).isEqualTo(MockRatingUtil.mockRating5().getDescription());
     }
 
 
     @Test
     @DisplayName("Given Unit is null, When mapped to DTO, Then DTO is Null")
     public void passMapperFromNullEntityToNullDto() {
-        CategoryDTO mappedDto = mapper.categoryToDTO(null);
+        RatingDTO mappedDto = mapper.ratingToRatingDTO(null);
         Assertions.assertThat(mappedDto).isNull();
     }
 
     @Test
     @DisplayName("Given UnitDTO is null, When mapped to Entity, Then Entity is Null")
     public void passMapperFromNullDtoToNullEntity() {
-        Category mappedDto = mapper.categoryDTOToCategory(null);
+        Rating mappedDto = mapper.ratingDtoToRating(null);
         Assertions.assertThat(mappedDto).isNull();
     }
-
 
 }

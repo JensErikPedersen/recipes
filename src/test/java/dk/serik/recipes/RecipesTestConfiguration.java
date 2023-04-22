@@ -15,6 +15,4 @@ public class RecipesTestConfiguration {
 		return new CategoryServiceImpl(categoryJpaRepository, categoryMapper);
 	}
 
-
-
 }

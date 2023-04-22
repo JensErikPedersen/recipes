@@ -128,7 +128,7 @@ public class RecipeJpaRepositoryTest {
 		Optional<Recipe> reOptional = recipeJpaRepository.findById("ce07075c-38b4-4b52-831c-5a9ce105e4af");  // Hvedebrød med Rugmel
 		Assertions.assertTrue(reOptional.isPresent());
 		log.info("Recipe: {}", reOptional.get());
-		Set<RecipeIngredient> recipeIngredients = reOptional.get().getRecipeIngredientEntities();
+		Set<RecipeIngredient> recipeIngredients = reOptional.get().getRecipeIngredients();
 		Assertions.assertTrue(!recipeIngredients.isEmpty());
 		Assertions.assertEquals(6, recipeIngredients.size());
 	}

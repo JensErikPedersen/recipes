@@ -11,17 +11,17 @@ import java.util.Set;
 
 @JsonInclude(Include.NON_NULL)
 @Getter
-public class CategoryDTO extends GenericDTO {
+public class CategoryDTO extends BaseDTO {
 	private String name;
 	private String description;
-	private Set<RecipeDTO> recipeEntities;
+	private Set<RecipeDTO> recipes;
 
 	@Builder
-	public CategoryDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, Set<RecipeDTO> recipeEntities) {
+	public CategoryDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, Set<RecipeDTO> recipes) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.name = name;
 		this.description = description;
-		this.recipeEntities = recipeEntities;
+		this.recipes = recipes;
 	}
 
 
@@ -35,21 +35,8 @@ public class CategoryDTO extends GenericDTO {
 				", createdBy='" + createdBy + '\'' +
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
-				", recipeEntities=" + recipeEntities +
+				", recipeEntities=" + recipes +
 				'}';
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-		CategoryDTO that = (CategoryDTO) o;
-		return id.equals(that.id) && created.equals(that.created) && updated.equals(that.updated) && updatedBy.equals(that.updatedBy) && createdBy.equals(that.createdBy) && name.equals(that.name) && Objects.equals(description, that.description) && Objects.equals(recipeEntities, that.recipeEntities);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), id, created, updated, updatedBy, createdBy, name, description, recipeEntities);
-	}
 }
