@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
-import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @JsonInclude(Include.NON_NULL)
 @Getter
@@ -18,36 +17,45 @@ public class RecipeDTO extends BaseDTO {
 	
 	private String instructions;
 
-	private CategoryDTO category;
-	private Set<RecipeIngredientDTO> recipeIngredients;
+	private String categoryId;
 
-	private Set<RecipeRatingDTO> recipeRatings;
+	private String categoryName;
 
-	private Set<TagDTO> tags;
+	private List<RecipeIngredientDTO> recipeIngredients;
+
+	private List<RecipeRatingDTO> recipeRatings;
+
+	private List<TagDTO> tags;
 
 	@Builder
-	public RecipeDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, String instructions, CategoryDTO category, Set<RecipeIngredientDTO> recipeIngredients, Set<RecipeRatingDTO> recipeRatings, Set<TagDTO> tags) {
+	public RecipeDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, String instructions, String categoryId, String categoryName, List<RecipeIngredientDTO> recipeIngredients, List<RecipeRatingDTO> recipeRatings, List<TagDTO> tags) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.name = name;
 		this.description = description;
 		this.instructions = instructions;
-		this.category = category;
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
 		this.recipeIngredients = recipeIngredients;
 		this.recipeRatings = recipeRatings;
 		this.tags = tags;
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-		RecipeDTO recipeDTO = (RecipeDTO) o;
-		return Objects.equals(name, recipeDTO.name) && Objects.equals(description, recipeDTO.description) && Objects.equals(instructions, recipeDTO.instructions) && Objects.equals(category, recipeDTO.category) && Objects.equals(recipeIngredients, recipeDTO.recipeIngredients) && Objects.equals(recipeRatings, recipeDTO.recipeRatings) && Objects.equals(tags, recipeDTO.tags);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), name, description, instructions, category, recipeIngredients, recipeRatings, tags);
+	public String toString() {
+		return "RecipeDTO{" +
+				"name='" + name + '\'' +
+				", description='" + description + '\'' +
+				", instructions='" + instructions + '\'' +
+				", categoryId='" + categoryId + '\'' +
+				", categoryName='" + categoryName + '\'' +
+				", recipeIngredients=" + recipeIngredients +
+				", recipeRatings=" + recipeRatings +
+				", tags=" + tags +
+				", id='" + id + '\'' +
+				", created=" + created +
+				", createdBy='" + createdBy + '\'' +
+				", updated=" + updated +
+				", updatedBy='" + updatedBy + '\'' +
+				'}';
 	}
 }

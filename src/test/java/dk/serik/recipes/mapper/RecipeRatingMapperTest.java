@@ -2,48 +2,65 @@ package dk.serik.recipes.mapper;
 
 
 import dk.serik.recipes.dto.RecipeRatingDTO;
-import dk.serik.recipes.mockutil.MockRecipeRatingDTOUtil;
 import dk.serik.recipes.model.RecipeRating;
+import dk.serik.recipes.repository.RecipeRatingJpaRepository;
+import dk.serik.recipes.testutil.OffsetDateTimeProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
-import dk.serik.recipes.mockutil.MockRecipeRatingUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@DataJpaTest
+@Slf4j
 public class RecipeRatingMapperTest {
 
-    private RecipeRatingMapper mapper = Mappers.getMapper(RecipeRatingMapper.class);
-
+    @Autowired
+    private RecipeRatingJpaRepository recipeRatingJpaRepository;
     @Test
+    @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
     public void passMapperFromValidEntityToDto() {
-        RecipeRatingDTO mappedDto = mapper.recipeRatingToRecipeRatingDTO(MockRecipeRatingUtil.mockRecipeHvedebreadRating1());
-        Assertions.assertThat(mappedDto).isNotNull();
-        Assertions.assertThat(mappedDto).isEqualTo(MockRecipeRatingDTOUtil.mockRecipeHvedebreadRatingDTO1());
+        //Given
+        Optional<RecipeRating> recipeRating = recipeRatingJpaRepository.findById("72d00adc-99c7-4c51-b4e9-29c9e769a231");
+        assertThat(recipeRating.isPresent()).isTrue();
+
+        // When
+        RecipeRatingDTO dto = RecipeRatingMapper.from(recipeRating.get());
+
+        // Then
+        log.info("DTO: {}", dto);
+        assertThat(dto).isEqualTo(expectedDto());
     }
 
-    @Test
-    @DisplayName("Given valid dto, When mapped by mapper, Then Entity is Ok")
-    public void passMapperFromValidDtoToEntity() {
-        RecipeRating mappedEntity = mapper.recipeRatingDTOToRecipeRating(MockRecipeRatingDTOUtil.mockRecipeHvedebreadRatingDTO1());
-        Assertions.assertThat(mappedEntity).isNotNull();
-        Assertions.assertThat(mappedEntity.getRating()).isEqualTo(MockRecipeRatingUtil.mockRecipeHvedebreadRating1().getRating());
-        Assertions.assertThat(mappedEntity.getDescription()).isEqualTo(MockRecipeRatingUtil.mockRecipeHvedebreadRating1().getDescription());
-    }
 
 
     @Test
-    @DisplayName("Given Unit is null, When mapped to DTO, Then DTO is Null")
+    @DisplayName("Given Entity is null, When mapped to DTO, Then DTO is Null")
     public void passMapperFromNullEntityToNullDto() {
-        RecipeRatingDTO mappedDto = mapper.recipeRatingToRecipeRatingDTO(null);
+        RecipeRatingDTO mappedDto = RecipeRatingMapper.from(null);
         Assertions.assertThat(mappedDto).isNull();
     }
 
-    @Test
-    @DisplayName("Given UnitDTO is null, When mapped to Entity, Then Entity is Null")
-    public void passMapperFromNullDtoToNullEntity() {
-        RecipeRating mappedDto = mapper.recipeRatingDTOToRecipeRating(null);
-        Assertions.assertThat(mappedDto).isNull();
+
+    private RecipeRatingDTO expectedDto() {
+        RecipeRatingDTO dto = RecipeRatingDTO.builder()
+                .id("72d00adc-99c7-4c51-b4e9-29c9e769a231")
+                .ratingId("26f09c94-79ec-439c-9776-d826efad187e")
+                .recipeId("06309a26-9ef8-43d2-82a0-f88e0be094e0")
+                .description("Fantastisk")
+                .rating(5)
+                .createdBy("Jens")
+                .created(OffsetDateTimeProvider.provide("2023-04-18T19:22:15"))
+                .updated(OffsetDateTimeProvider.provide("2023-05-22T22:06:24"))
+                .build();
+        return dto;
     }
 
 }

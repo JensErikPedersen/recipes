@@ -1,61 +1,69 @@
 package dk.serik.recipes.mapper;
 
-import org.mapstruct.factory.Mappers;
+import dk.serik.recipes.dto.RecipeIngredientDTO;
+import dk.serik.recipes.model.RecipeIngredient;
+import dk.serik.recipes.repository.RecipeIngredientJpaRepository;
+import dk.serik.recipes.testutil.OffsetDateTimeProvider;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+
+@DataJpaTest
+@Slf4j
 public class RecipientIngredientMapperTest {
 
-    private RecipeIngredientMapper mapper = Mappers.getMapper(RecipeIngredientMapper.class);
+    @Autowired
+    private RecipeIngredientJpaRepository recipeIngredientJpaRepository;
 
-//    @Test
-//    @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
-//    public void passMapperFromValidEntityToDto() {
-//        RecipeIngredientDTO mappedDto = mapper.recipeIngredient(MockRecipeIngredientUtil.mockRecipeIngredientSalt());
-//        Assertions.assertThat(mappedDto).isNotNull();
-//        Assertions.assertThat(mappedDto).isEqualTo(mockRatingDTO());
-//    }
+    @Test
+    @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ingredients.sql"})
+    @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
+    public void passMapperFromValidEntityToDto() {
+        // Given
+        Optional<RecipeIngredient> recIngrOp = recipeIngredientJpaRepository.findByRecipeIdAndIngredientId("ce07075c-38b4-4b52-831c-5a9ce105e4af", "713ff039-25f2-471f-a1a4-ab8fc9efc8b0"); // Hvedebrød med Rugmel -> Gær
+        assertThat(recIngrOp.isPresent()).isTrue();
+        log.info("Gær: {}", recIngrOp.get());
 
-//
-//    private RecipeIngredientDTO mockRecipeIngredientDTO() {
-//        RecipeIngredientDTO mock = RecipeIngredientDTO.builder()
-//                .ingredient(mockIngredientDTO())
-//                .amount(new BigDecimal(16))
-//                .recipe(MockRecipeUtil.mockRecipeHvedebread())
-//    }
-//
-//    private IngredientDTO mockIngredientDTO() {
-//        IngredientDTO mock = IngredientDTO.builder()
-//                .id("12345_hvedemel")
-//                .name("Hvedemel")
-//                .description("Sigtet hvedemel uden skalder og kim")
-//                .createdBy("Majken")
-//                .updatedBy("Jens")
-//                .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-//                .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
-//                .build();
-//        return mock;
-//    }
-//
-//    private RecipeDTO mockRecipeDTO() {
-//        RecipeDTO dto = RecipeDTO.builder()
-//                .category(mockCategoryDTO())
-//                .r
-//    }
-//
-//
-//    private Set<RatingDTO> mockRatingDTO() {
-//        RatingDTO dto = RatingDTO.builder()
-//                .id("56789_rating5")
-//                .rating(5)
-//                .description("Outstanding")
-//                .createdBy("Majken")
-//                .updatedBy("Jens")
-//                .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-//                .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
-//                .build();
-//        Set<RatingDTO> dtos = new HashSet<>();
-//        dtos.add(dto);
-//        return dtos;
-//    }
+        // When
+        RecipeIngredientDTO dto = RecipeIngredientMapper.from(recIngrOp.get());
+        log.info("DTO: {}", dto);
+
+        // Then
+        assertThat(dto.getIngredientId()).isEqualTo(expectedDto().getIngredientId());
+        assertThat(dto.getIngredientName()).isEqualTo(expectedDto().getIngredientName());
+        assertThat(dto.getUnitId()).isEqualTo(expectedDto().getUnitId());
+        assertThat(dto.getUnitLabel()).isEqualTo(expectedDto().getUnitLabel());
+        assertThat(dto.getRecipeId()).isEqualTo(expectedDto().getRecipeId());
+        assertThat(dto.getAmount()).isEqualTo(expectedDto().getAmount().setScale(2, RoundingMode.CEILING));
+        assertThat(dto.getCreated()).isCloseTo(expectedDto().getCreated(), within(0, ChronoUnit.SECONDS));
+        assertThat(dto.getCreatedBy()).isEqualTo(expectedDto().getCreatedBy());
+    }
+
+    private RecipeIngredientDTO expectedDto() {
+        RecipeIngredientDTO dto = RecipeIngredientDTO.builder()
+                .ingredientId("713ff039-25f2-471f-a1a4-ab8fc9efc8b0")
+                .ingredientName("Gær")
+                .amount(new BigDecimal(5.00))
+                .unitLabel("gr")
+                .unitId("c5173731-3a7e-498c-84b1-b2d3abe68cef")
+                .recipeId("ce07075c-38b4-4b52-831c-5a9ce105e4af")
+                .createdBy("Jens")
+                .created(OffsetDateTimeProvider.provide("2022-10-18T17:34:02"))
+                .build();
+        return dto;
+
+    }
 
 
 

@@ -27,8 +27,6 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	private CategoryJpaRepository categoryJpaRepository;
 
-	private CategoryMapper categoryMapper;
-
 	@Override
 	public Optional<List<CategoryDTO>> findAll() {
 		List<Category> all = categoryJpaRepository.findAll();
@@ -37,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 		
 		List<CategoryDTO> dtos = all.stream()
-				.map(e -> categoryMapper.categoryToDTO(e))
+				.map(e -> CategoryMapper.from(e))
 				.collect(Collectors.toList());
 		
 		return Optional.of(dtos);
@@ -47,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Optional<CategoryDTO> findById(String id) {
 		Optional<Category> categoryEntity = categoryJpaRepository.findById(id);
 		if(categoryEntity.isPresent()) {
-			return Optional.ofNullable(categoryMapper.categoryToDTO(categoryEntity.get()));
+			return Optional.ofNullable(CategoryMapper.from(categoryEntity.get()));
 		}
 		
 		return Optional.empty();
@@ -58,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Optional<Category> categoryEntity =  categoryJpaRepository.findByName(name);
 		
 		if(categoryEntity.isPresent()) {
-			return Optional.ofNullable(categoryMapper.categoryToDTO(categoryEntity.get()));
+			return Optional.ofNullable(CategoryMapper.from(categoryEntity.get()));
 		}
 		
 		return Optional.empty();
@@ -66,10 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDTO save(CategoryDTO categoryDto) {
-		Category from = categoryMapper.categoryDTOToCategory(categoryDto);
-		log.info("Mapped entity: {}", from);
-		Category managedEntity = categoryJpaRepository.saveAndFlush(from);
-		return categoryMapper.categoryToDTO(managedEntity);
+		return null;
 	}
 
 	@Override

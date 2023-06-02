@@ -1,5 +1,0 @@
---- 
-databaseChangeLog: 
-  - 
-    include: 
-      file: db/changelog/ddl_create_schema.yaml

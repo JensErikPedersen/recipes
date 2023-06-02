@@ -1,14 +1,8 @@
 package dk.serik.recipes.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import dk.serik.recipes.model.BaseIdentifierEntity;
-import dk.serik.recipes.model.Rating;
-import dk.serik.recipes.model.Recipe;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.OffsetDateTime;
 
@@ -16,15 +10,32 @@ import java.time.OffsetDateTime;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RecipeRatingDTO extends BaseDTO {
-	private RecipeDTO recipe;
-	private RatingDTO rating;
+	private String recipeId;
+	private String ratingId;
+	private Integer rating;
 	private String description;
 
 	@Builder
-	public RecipeRatingDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, RecipeDTO recipe, RatingDTO rating, String description) {
+	public RecipeRatingDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String recipeId, String ratingId, Integer rating, String description) {
 		super(id, created, createdBy, updated, updatedBy);
-		this.recipe = recipe;
+		this.recipeId = recipeId;
 		this.rating = rating;
+		this.ratingId = ratingId;
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "RecipeRatingDTO{" +
+				"recipeId='" + recipeId + '\'' +
+				", ratingId='" + ratingId + '\'' +
+				", rating=" + rating +
+				", description='" + description + '\'' +
+				", id='" + id + '\'' +
+				", created=" + created +
+				", createdBy='" + createdBy + '\'' +
+				", updated=" + updated +
+				", updatedBy='" + updatedBy + '\'' +
+				'}';
 	}
 }

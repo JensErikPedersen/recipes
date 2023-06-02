@@ -2,11 +2,27 @@ package dk.serik.recipes.mapper;
 
 import dk.serik.recipes.dto.UnitDTO;
 import dk.serik.recipes.model.Unit;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
+import lombok.extern.slf4j.Slf4j;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UnitMapper {
-    Unit unitDTOToUnit(UnitDTO unitDTO);
-    UnitDTO unitToUnitDTO(Unit unit);
+import java.util.Objects;
+
+@Slf4j
+public class UnitMapper {
+
+    public static UnitDTO from(Unit entity) {
+        if(Objects.isNull(entity)) {
+            return null;
+        }
+
+        UnitDTO dto = UnitDTO.builder()
+                .id(entity.getId())
+                .label(entity.getLabel())
+                .createdBy(entity.getCreatedBy())
+                .created(entity.getCreated())
+                .updatedBy(entity.getUpdatedBy())
+                .updatedBy(entity.getUpdatedBy())
+                .build();
+        log.info("Mapped DTO: {}", dto);
+        return dto;
+    }
 }

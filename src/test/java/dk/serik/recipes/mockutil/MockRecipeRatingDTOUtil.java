@@ -10,8 +10,8 @@ public class MockRecipeRatingDTOUtil {
     public static RecipeRatingDTO mockRecipeHvedebreadRatingDTO1() {
         return RecipeRatingDTO.builder()
                 .description("Den er i skabet")
-                .rating(MockRatingDTOUtil.mockRatingDTO4())
-                .recipe(MockRecipeDTOUtil.mockRecipeHvedeBreadDTO())
+                .rating(4)
+                .recipeId("56789_rating4")
                 .id("34567_hvedebroed_rating1")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .createdBy("Majken")
@@ -21,8 +21,8 @@ public class MockRecipeRatingDTOUtil {
     public static RecipeRatingDTO mockRecipeHvedebreadRatingDTO2() {
         return RecipeRatingDTO.builder()
                 .description("Den er perfekt")
-                .rating(MockRatingDTOUtil.mockRatingDTO5())
-                .recipe(MockRecipeDTOUtil.mockRecipeHvedeBreadDTO())
+                .rating(5)
+                .recipeId("56789_rating4")
                 .id("34567_hvedebroed_rating2")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .createdBy("Jens")
@@ -32,8 +32,8 @@ public class MockRecipeRatingDTOUtil {
     public static RecipeRatingDTO mockRecipeHvedebreadRatingDTO3() {
         return RecipeRatingDTO.builder()
                 .description("Skønt")
-                .rating(MockRatingDTOUtil.mockRatingDTO5())
-                .recipe(MockRecipeDTOUtil.mockRecipeHvedeBreadDTO())
+                .rating(5)
+                .recipeId("56789_rating4")
                 .id("34567_hvedebroed_rating2")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .createdBy("Oskar")

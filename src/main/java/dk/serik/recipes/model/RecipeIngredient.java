@@ -55,10 +55,10 @@ public class RecipeIngredient extends BaseEntity {
 	@Override
 	public String toString() {
 		return "RecipeIngredient{" +
-				"recipe=" + recipe +
-				", ingredient=" + ingredient +
+				"recipe=" + recipe.getName() +
+				", ingredient=" + ingredient.getName() +
 				", amount=" + amount +
-				", unit=" + unit +
+				", unit=" + unit.getLabel() +
 				", created=" + created +
 				", createdBy='" + createdBy + '\'' +
 				", updated=" + updated +

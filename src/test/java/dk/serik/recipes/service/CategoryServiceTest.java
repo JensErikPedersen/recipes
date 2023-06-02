@@ -1,7 +1,5 @@
 package dk.serik.recipes.service;
 
-import dk.serik.recipes.MapperTestConfiguration;
-import dk.serik.recipes.RecipesTestConfiguration;
 import dk.serik.recipes.dto.CategoryDTO;
 import dk.serik.recipes.model.Category;
 import dk.serik.recipes.repository.CategoryJpaRepository;
@@ -11,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -24,7 +21,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-@Import({RecipesTestConfiguration.class, MapperTestConfiguration.class})
 public class CategoryServiceTest {
 	
 	@Autowired
@@ -139,7 +135,6 @@ public class CategoryServiceTest {
 		CategoryDTO dto = CategoryDTO.builder()
 				.name("Vand")
 				.description("Det er postevand")
-				.recipes(null)
 				.id("1234").build();
 		return dto;
 	}
@@ -148,7 +143,7 @@ public class CategoryServiceTest {
 		CategoryDTO dto = CategoryDTO.builder()
 				.name("Vand")
 				.description("Det er postevand")
-				.recipes(null).build();
+				.id("1234").build();
 		return dto;
 	}
 

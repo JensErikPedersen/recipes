@@ -6,22 +6,18 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
-import java.util.Objects;
-import java.util.Set;
 
 @JsonInclude(Include.NON_NULL)
 @Getter
 public class CategoryDTO extends BaseDTO {
 	private String name;
 	private String description;
-	private Set<RecipeDTO> recipes;
 
 	@Builder
-	public CategoryDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, Set<RecipeDTO> recipes) {
+	public CategoryDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.name = name;
 		this.description = description;
-		this.recipes = recipes;
 	}
 
 
@@ -35,7 +31,6 @@ public class CategoryDTO extends BaseDTO {
 				", createdBy='" + createdBy + '\'' +
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
-				", recipeEntities=" + recipes +
 				'}';
 	}
 

@@ -2,16 +2,25 @@ package dk.serik.recipes.mapper;
 
 import dk.serik.recipes.dto.CategoryDTO;
 import dk.serik.recipes.model.Category;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
 
+import java.util.Objects;
 
-//@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-@Mapper
-public interface CategoryMapper {
+public class CategoryMapper {
 
-    @Mapping(target = "recipes", ignore = true)
-    CategoryDTO categoryToDTO(Category category);
-    Category categoryDTOToCategory(CategoryDTO categoryDTO);
+    public static CategoryDTO from(Category category) {
+        if(Objects.isNull(category)) {
+            return null;
+        }
+        CategoryDTO dto = CategoryDTO.builder()
+                .description(category.getDescription())
+                .name(category.getName())
+                .id(category.getId())
+                .updatedBy(category.getUpdatedBy())
+                .updated(category.getUpdated())
+                .created(category.getCreated())
+                .createdBy(category.getCreatedBy())
+                .build();
+        return dto;
+    }
+
 }

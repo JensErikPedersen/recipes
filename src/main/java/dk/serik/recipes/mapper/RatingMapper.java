@@ -2,13 +2,28 @@ package dk.serik.recipes.mapper;
 
 import dk.serik.recipes.dto.RatingDTO;
 import dk.serik.recipes.model.Rating;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import lombok.extern.slf4j.Slf4j;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface RatingMapper {
+import java.util.Objects;
 
-    Rating ratingDtoToRating(RatingDTO ratingDTO);
-    RatingDTO ratingToRatingDTO(Rating rating);
+
+@Slf4j
+public class RatingMapper {
+    public static RatingDTO from(Rating entity) {
+        if(Objects.isNull(entity)) {
+            return null;
+        }
+
+        RatingDTO dto = RatingDTO.builder()
+                .id(entity.getId())
+                .rating(entity.getRating())
+                .description(entity.getDescription())
+                .createdBy(entity.getCreatedBy())
+                .created(entity.getCreated())
+                .updatedBy(entity.getUpdatedBy())
+                .updatedBy(entity.getUpdatedBy())
+                .build();
+        log.info("Mapped DTO: {}", dto);
+        return dto;
+    }
 }

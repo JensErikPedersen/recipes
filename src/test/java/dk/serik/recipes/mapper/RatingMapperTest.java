@@ -1,47 +1,52 @@
 package dk.serik.recipes.mapper;
 
 import dk.serik.recipes.dto.RatingDTO;
-import dk.serik.recipes.mockutil.MockRatingDTOUtil;
 import dk.serik.recipes.model.Rating;
-import dk.serik.recipes.mockutil.MockRatingUtil;
+import dk.serik.recipes.testutil.OffsetDateTimeProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
+import org.springframework.test.util.ReflectionTestUtils;
 
 public class RatingMapperTest {
-
-    private RatingMapper mapper = Mappers.getMapper(RatingMapper.class);
     @Test
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
     public void passMapperFromValidEntityToDto() {
-        RatingDTO mappedDto = mapper.ratingToRatingDTO(MockRatingUtil.mockRating5());
+        RatingDTO mappedDto = RatingMapper.from(mockRating5());
         Assertions.assertThat(mappedDto).isNotNull();
-        Assertions.assertThat(mappedDto).isEqualTo(MockRatingDTOUtil.mockRatingDTO5());
+        Assertions.assertThat(mappedDto).isEqualTo(mockRatingDTO5());
     }
-
-    @Test
-    @DisplayName("Given valid dto, When mapped by mapper, Then Entity is Ok")
-    public void passMapperFromValidDtoToEntity() {
-        Rating mappedEntity = mapper.ratingDtoToRating(MockRatingDTOUtil.mockRatingDTO5());
-        Assertions.assertThat(mappedEntity).isNotNull();
-        Assertions.assertThat(mappedEntity.getRating()).isEqualTo(MockRatingUtil.mockRating5().getRating());
-        Assertions.assertThat(mappedEntity.getDescription()).isEqualTo(MockRatingUtil.mockRating5().getDescription());
-    }
-
 
     @Test
     @DisplayName("Given Unit is null, When mapped to DTO, Then DTO is Null")
     public void passMapperFromNullEntityToNullDto() {
-        RatingDTO mappedDto = mapper.ratingToRatingDTO(null);
+        RatingDTO mappedDto = RatingMapper.from(null);
         Assertions.assertThat(mappedDto).isNull();
     }
 
-    @Test
-    @DisplayName("Given UnitDTO is null, When mapped to Entity, Then Entity is Null")
-    public void passMapperFromNullDtoToNullEntity() {
-        Rating mappedDto = mapper.ratingDtoToRating(null);
-        Assertions.assertThat(mappedDto).isNull();
+
+    private static Rating mockRating5() {
+        Rating mock = new Rating();
+        mock.setRating(5);
+        mock.setUpdatedBy("Majken");
+        mock.setCreatedBy("Jens");
+        mock.setDescription("Outstanding");
+        ReflectionTestUtils.setField(mock, "id", "56789_rating5");
+        ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-01-25T14:25:15"));
+        ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-11-05T19:47:29"));
+        return mock;
     }
 
+    private static RatingDTO mockRatingDTO5() {
+        RatingDTO dto = RatingDTO.builder()
+                .id("56789_rating5")
+                .rating(5)
+                .description("Outstanding")
+                .createdBy("Majken")
+                .updatedBy("Jens")
+                .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
+                .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
+                .build();
+        return dto;
+    }
 }
