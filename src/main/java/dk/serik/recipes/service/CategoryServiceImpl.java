@@ -1,11 +1,15 @@
 package dk.serik.recipes.service;
 
+import dk.serik.recipes.bean.Session;
 import dk.serik.recipes.dto.CategoryDTO;
+import dk.serik.recipes.exceptions.ApplicationErrorCodes;
+import dk.serik.recipes.exceptions.ServiceException;
 import dk.serik.recipes.mapper.CategoryMapper;
 import dk.serik.recipes.model.Category;
 import dk.serik.recipes.repository.CategoryJpaRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -26,6 +30,8 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
 	
 	private CategoryJpaRepository categoryJpaRepository;
+
+	private Session session;
 
 	@Override
 	public Optional<List<CategoryDTO>> findAll() {
@@ -64,18 +70,36 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDTO save(CategoryDTO categoryDto) {
-		return null;
+		Category entity = new Category();
+		entity.setDescription(categoryDto.getDescription());
+		entity.setName(categoryDto.getName());
+		entity.setCreatedBy(session.getUserName());
+		Category managedCategory = categoryJpaRepository.save(entity);
+		CategoryDTO dto = CategoryMapper.from(managedCategory);
+		return dto;
 	}
 
 	@Override
 	public void delete(String id) {
-
+		Optional<Category> toBeDeleted = categoryJpaRepository.findById(id);
+		if(toBeDeleted.isPresent()) {
+			categoryJpaRepository.delete(toBeDeleted.get());
+		}
 	}
 
 	@Override
 	public CategoryDTO update(CategoryDTO dto) {
-		return null;
+		Optional<Category> managedCategory = categoryJpaRepository.findById(dto.getId());
+		if(managedCategory.isPresent()) {
+			managedCategory.get().setName(dto.getName());
+			managedCategory.get().setDescription(dto.getDescription());
+			return CategoryMapper.from(managedCategory.get());
+		}
+		log.info(String.format("Category with id %s could not be found", dto.getId()));
+		throw ServiceException.builder()
+				.message(String.format("Category with id %s could not be found", dto.getId()))
+				.httpStatus(HttpStatus.NOT_FOUND)
+				.code(ApplicationErrorCodes.CATEGORY_NOT_FOUND.getCode())
+				.build();
 	}
-
-
 }

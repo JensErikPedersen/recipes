@@ -56,7 +56,7 @@ public class TagJpaRepositoryTest {
 
         // Then
         Assertions.assertThat(tag.isPresent()).isTrue();
-        Assertions.assertThat(tag.get().getLabel()).isEqualTo("Mexi");
+        Assertions.assertThat(tag.get().getName()).isEqualTo("Mexi");
     }
 
     @Test
@@ -84,7 +84,7 @@ public class TagJpaRepositoryTest {
         Assertions.assertThat(unitEntities.size()).isEqualTo(7);
         assertThat(now).isCloseTo(saveAndFlush.getCreated(), within(0, ChronoUnit.SECONDS));
         assertThat("Jens").isEqualTo(saveAndFlush.getCreatedBy());
-        assertThat( saveAndFlush.getLabel()).isEqualTo("Italiensk");
+        assertThat( saveAndFlush.getName()).isEqualTo("Italiensk");
     }
 
     @Test
@@ -93,7 +93,7 @@ public class TagJpaRepositoryTest {
         // Given
         Optional<Tag> tag = repository.findTagByLabel("Thai");
         Assertions.assertThat(tag.isPresent()).isTrue();
-        Assertions.assertThat(tag.get().getLabel()).isEqualTo("Thai");
+        Assertions.assertThat(tag.get().getName()).isEqualTo("Thai");
 
         // When
         repository.delete(tag.get());
@@ -111,14 +111,14 @@ public class TagJpaRepositoryTest {
         Assertions.assertThat(tag.isPresent()).isTrue();
 
         // When
-        tag.get().setLabel("Thaifood");
+        tag.get().setName("Thaifood");
         OffsetDateTime now = OffsetDateTime.now();
         Tag saveAndFlush = repository.saveAndFlush(tag.get());
 
         // Then
         assertThat(now).isCloseTo(saveAndFlush.getUpdated(), within(0, ChronoUnit.SECONDS));
         assertThat("Jens").isEqualTo(saveAndFlush.getUpdatedBy());
-        assertThat(saveAndFlush.getLabel()).isEqualTo("Thaifood");
+        assertThat(saveAndFlush.getName()).isEqualTo("Thaifood");
     }
 
     @Test
@@ -130,7 +130,7 @@ public class TagJpaRepositoryTest {
 
         // Then
         Assertions.assertThat(tag.isPresent()).isTrue();
-        Assertions.assertThat(tag.get().getLabel()).isEqualTo("Godt til kaffen");
+        Assertions.assertThat(tag.get().getName()).isEqualTo("Godt til kaffen");
         Set<Recipe> recipeSet = tag.get().getRecipes();
         assertThat(recipeSet.size()).isEqualTo(3);
     }
@@ -139,7 +139,7 @@ public class TagJpaRepositoryTest {
 
     private Tag buildTag() {
         Tag tag = new Tag();
-        tag.setLabel("Italiensk");
+        tag.setName("Italiensk");
         tag.setCreatedBy(session.getUserName());
         return tag;
     }

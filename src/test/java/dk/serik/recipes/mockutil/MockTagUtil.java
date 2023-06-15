@@ -12,7 +12,7 @@ public class MockTagUtil {
 
     public static Tag mockTag() {
         Tag mock = new Tag();
-        mock.setLabel("Sødt");
+        mock.setName("Sødt");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
         ReflectionTestUtils.setField(mock, "id", "12345");

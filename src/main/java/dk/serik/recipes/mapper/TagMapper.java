@@ -14,7 +14,7 @@ public class TagMapper {
         }
         TagDTO dto = TagDTO.builder()
                 .id(entity.getId())
-                .label(entity.getLabel())
+                .label(entity.getName())
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())
                 .updatedBy(entity.getUpdatedBy())

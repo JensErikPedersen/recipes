@@ -19,5 +19,5 @@ public class Tag extends BaseIdentifierEntity {
 	private Set<Recipe> recipes;
 	
 	@Column(nullable = false)
-	private String label;
+	private String name;
 }

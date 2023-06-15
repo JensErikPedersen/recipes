@@ -27,8 +27,11 @@ public class MethodArgumentNotValidExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ExceptionEnvelope methodArgumentNotValidException(MethodArgumentNotValidException ex) {
         logger.info("handle ConstraintViolationException: " + ex);
-        ExceptionEnvelope exceptionEnvelope = new ExceptionEnvelope(100, "Validation Exception",
-                "One or more fields, parameters or type do not pass violation criteria");
+        ExceptionEnvelope exceptionEnvelope =ExceptionEnvelope.builder()
+                .errorCode(ApplicationErrorCodes.VALIDATION_EXCEPTION.getCode())
+                .message("Validation Exception")
+                .description("One or more fields, parameters or type do not pass violation criteria")
+                .build();
         BindingResult result = ex.getBindingResult();
         List<FieldError> fieldErrors = result.getFieldErrors();
 

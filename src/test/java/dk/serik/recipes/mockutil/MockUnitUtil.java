@@ -10,7 +10,7 @@ public class MockUnitUtil {
     public static Unit mockGram() {
         Unit mock = new Unit();
         mock.setDescription("Gram");
-        mock.setLabel("g");
+        mock.setName("g");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
         ReflectionTestUtils.setField(mock, "id", "12345_gram");
@@ -22,7 +22,7 @@ public class MockUnitUtil {
     public static Unit mockDl() {
         Unit mock = new Unit();
         mock.setDescription("Deciliter");
-        mock.setLabel("dl");
+        mock.setName("dl");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
         ReflectionTestUtils.setField(mock, "id", "12345_deciliter");

@@ -17,7 +17,7 @@ import java.util.Set;
 public class Unit extends BaseIdentifierEntity {
 	
 	@Column(nullable = false, unique = true)
-	private String label;
+	private String name;
 	
 	@Column(nullable = false)
 	private String description;
@@ -27,7 +27,7 @@ public class Unit extends BaseIdentifierEntity {
 
 	@Override
 	public String toString() {
-		return "UnitEntity [label=" + label + ", description=" + description + ", recipeIngredientEntities="
+		return "UnitEntity [label=" + name + ", description=" + description + ", recipeIngredientEntities="
 				+ recipeIngredientEntities + ", id=" + id + "]";
 	}
 	

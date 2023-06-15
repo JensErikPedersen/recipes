@@ -12,22 +12,25 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApplicationExceptionHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApplicationExceptionHandler.class);
 
-    @ExceptionHandler(value = { BusinessException.class })
+    @ExceptionHandler(value = { ServiceException.class })
     @ResponseBody
-    public ResponseEntity<ExceptionEnvelope> handleBusinessException(BusinessException ex, WebRequest request) {
+    public ResponseEntity<ExceptionEnvelope> handleBusinessException(ServiceException ex, WebRequest request) {
         logger.info("Handler BusinessException: " + ex);
-        ExceptionEnvelope exceptionEnvelope = new ExceptionEnvelope().setMessage(ex.getMessage()).setErrorCode(ex.getCode());
+        ExceptionEnvelope exceptionEnvelope = ExceptionEnvelope.builder()
+                .message(ex.getMessage())
+                .description(ex.getDescription())
+                .errorCode(ex.getCode())
+                .build();
         return new ResponseEntity<>(exceptionEnvelope, ex.getHttpStatus());
     }
 
@@ -35,8 +38,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(value = { Exception.class })
     @ResponseBody
     public ExceptionEnvelope handleGeneralException(Exception ex) {
-        ClientError error = ClientError.UNHANDLED_EXCEPTION;
-        ExceptionEnvelope exceptionEnvelope = new ExceptionEnvelope().setMessage(error.getDescription()).setErrorCode(error.getCode());
+        ExceptionEnvelope exceptionEnvelope = ExceptionEnvelope.builder()
+                .message(ex.getMessage())
+                .errorCode(ApplicationErrorCodes.UNHANDLED_EXCEPTION.getCode())
+                .build();
         return exceptionEnvelope;
     }
 
@@ -45,8 +50,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ResponseBody
     public ExceptionEnvelope handleConstraintViolationException(ConstraintViolationException ex) {
         logger.info("handle ConstraintViolationException: " + ex);
-        ExceptionEnvelope exceptionEnvelope = new ExceptionEnvelope(100, "Validation Exception",
-                "One or more fields, parameters or type do not pass violation criteria");
+        ExceptionEnvelope exceptionEnvelope = ExceptionEnvelope.builder()
+                .errorCode(ApplicationErrorCodes.VALIDATION_EXCEPTION.getCode())
+                .message("Validation Exception")
+                .description("One or more fields, parameters or type do not pass violation criteria")
+                .build();
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
         processFieldErrors(exceptionEnvelope, violations);
 

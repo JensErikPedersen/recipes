@@ -10,18 +10,18 @@ import java.time.OffsetDateTime;
 @Getter
 public class TagDTO extends BaseDTO {
 
-    private String label;
+    private String name;
 
     @Builder
-    public TagDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String label) {
+    public TagDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name) {
         super(id, created, createdBy, updated, updatedBy);
-        this.label = label;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "TagDTO{" +
-                "label='" + label + '\'' +
+                "label='" + name + '\'' +
                 ", id='" + id + '\'' +
                 ", created=" + created +
                 ", createdBy='" + createdBy + '\'' +

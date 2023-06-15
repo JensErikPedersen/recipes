@@ -1,6 +1,6 @@
 package dk.serik.recipes.service;
 
-import dk.serik.recipes.RecipesTestConfiguration;
+import dk.serik.recipes.config.TestingConfiguration;
 import dk.serik.recipes.repository.IngredientJpaRepository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@Import(RecipesTestConfiguration.class)
+@Import(TestingConfiguration.class)
 @Disabled
 public class IngredientServiceTest {
 	

@@ -55,7 +55,7 @@ public class UnitJpaRepositoryTest {
 
 		// Then
 		Assertions.assertTrue(opUnit.isPresent());
-		Assertions.assertEquals("dl", opUnit.get().getLabel());
+		Assertions.assertEquals("dl", opUnit.get().getName());
 		Assertions.assertEquals("Deciliter", opUnit.get().getDescription());
 	}
 	
@@ -93,7 +93,7 @@ public class UnitJpaRepositoryTest {
 		// Given
 		Optional<Unit> opUnit = repository.findByDescriptionContains("Gram");
 		Assertions.assertTrue(opUnit.isPresent());
-		Assertions.assertEquals("gr", opUnit.get().getLabel());
+		Assertions.assertEquals("gr", opUnit.get().getName());
 
 		// When
 		repository.delete(opUnit.get());
@@ -125,7 +125,7 @@ public class UnitJpaRepositoryTest {
 	
 	private Unit buildUnitEntity() {
 		Unit unit = new Unit();
-		unit.setLabel("knvsps");
+		unit.setName("knvsps");
 		unit.setDescription("Knivspids");
 		return unit;
 	}
