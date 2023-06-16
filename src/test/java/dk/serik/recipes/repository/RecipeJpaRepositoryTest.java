@@ -22,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -65,7 +66,7 @@ public class RecipeJpaRepositoryTest {
 	@DisplayName("Given existing Recipe with known id, When fetching Recipe by id, Then recipe is fetched ok")
 	public void givenExistingRecipe_WhenFetchingByKnownUUID_ThenOk() {
 		//When
-		Optional<Recipe> reOptional = recipeJpaRepository.findById("4ea753a3-07ff-47ce-82bb-9dcc1aa25477");
+		Optional<Recipe> reOptional = recipeJpaRepository.findById(UUID.fromString("4ea753a3-07ff-47ce-82bb-9dcc1aa25477"));
 
 		//Then
 		Assertions.assertTrue(reOptional.isPresent());
@@ -110,14 +111,14 @@ public class RecipeJpaRepositoryTest {
 	@DisplayName("Given existing Recipe, When deleting Recipe, Then Recipe is removed")
 	public void givenExistingRecipe_WhenDeleted_ThenOk() {
 		// Given
-		Optional<Recipe> reOptional = recipeJpaRepository.findById("4ea753a3-07ff-47ce-82bb-9dcc1aa25477");
+		Optional<Recipe> reOptional = recipeJpaRepository.findById(UUID.fromString("4ea753a3-07ff-47ce-82bb-9dcc1aa25477"));
 		Assertions.assertTrue(reOptional.isPresent());
 
 		//When
 		recipeJpaRepository.delete(reOptional.get());
 
 		//Then
-		reOptional = recipeJpaRepository.findById("4ea753a3-07ff-47ce-82bb-9dcc1aa25477");
+		reOptional = recipeJpaRepository.findById(UUID.fromString("4ea753a3-07ff-47ce-82bb-9dcc1aa25477"));
 		Assertions.assertFalse(reOptional.isPresent());
 		List<Recipe> recipes = recipeJpaRepository.findAll();
 		Assertions.assertFalse(recipes.isEmpty());
@@ -129,7 +130,7 @@ public class RecipeJpaRepositoryTest {
 	@DisplayName("Given Recipe exist, When changing Name, Then all updated and updatedBy is changed")
 	public void givenExistingRecipe_WhenNameIsChanged_ThenOk() {
 		// Given
-		Optional<Recipe> reOptional = recipeJpaRepository.findById("195f5356-2230-4122-9a23-a266151f865c");
+		Optional<Recipe> reOptional = recipeJpaRepository.findById(UUID.fromString("195f5356-2230-4122-9a23-a266151f865c"));
 		Assertions.assertTrue(reOptional.isPresent());
 
 		// When
@@ -160,7 +161,7 @@ public class RecipeJpaRepositoryTest {
 	@DisplayName("Given Recipe with 6 Ingredients, When Recipe is Fetched, Then Recipe and RecipeIngredient are fetched")
 	public void givenRecipeWithIngredients_WhenFetchingRecipe_ThenAllIngredientOk() {
 		// When
-		Optional<Recipe> reOptional = recipeJpaRepository.findById("ce07075c-38b4-4b52-831c-5a9ce105e4af");  // Hvedebrød med Rugmel
+		Optional<Recipe> reOptional = recipeJpaRepository.findById(UUID.fromString("ce07075c-38b4-4b52-831c-5a9ce105e4af"));  // Hvedebrød med Rugmel
 		Assertions.assertTrue(reOptional.isPresent());
 		log.info("Recipe: {}", reOptional.get());
 		Set<RecipeIngredient> recipeIngredients = reOptional.get().getRecipeIngredients();
@@ -176,18 +177,18 @@ public class RecipeJpaRepositoryTest {
 	@DisplayName("Given Recipe with Ingredient, When Recipe is Deleted, Then Recipe and All RecipeIngredients are deleted")
 	public void givenExistingRecipeWithIngredients_WhenDeleted_ThenOk() {
 		// Given
-		Optional<Recipe> reOptional = recipeJpaRepository.findById("5d22c394-b5ce-48c3-8199-72ccc92c737c");  // Fuldkorns hvedebrød
+		Optional<Recipe> reOptional = recipeJpaRepository.findById(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"));  // Fuldkorns hvedebrød
 		Assertions.assertTrue(reOptional.isPresent());
 
 		// When
 		recipeJpaRepository.delete(reOptional.get());
-		reOptional = recipeJpaRepository.findById("5d22c394-b5ce-48c3-8199-72ccc92c737c");
+		reOptional = recipeJpaRepository.findById(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"));
 
 		// Then
 		Assertions.assertTrue(reOptional.isEmpty());
 		
 		// check for clean-up of recipeingrediententities
-		Optional<List<RecipeIngredient>> reIngOpList = recipeIngredientJpaRepository.findAllByRecipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c");
+		Optional<List<RecipeIngredient>> reIngOpList = recipeIngredientJpaRepository.findAllByRecipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"));
 //		log.info("Recipe Ingredients size: {}", reIngOpList.get().size());
 		Assertions.assertTrue(reIngOpList.isPresent());
 		Assertions.assertEquals(0,  reIngOpList.get().size());

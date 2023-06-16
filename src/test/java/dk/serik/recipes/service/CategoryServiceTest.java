@@ -17,13 +17,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -82,16 +82,16 @@ public class CategoryServiceTest {
 	@Test
 	@DisplayName("Given No Categories When FindById Then none is found")
 	public void givenNoCatregories_WhenFetchingByUnknwonId_ThenNotFound() {
-		when(categoryJpaRepository.findById("0")).thenReturn(Optional.empty());
-		assertThat(categoryService.findById("0")).isEmpty();
+		when(categoryJpaRepository.findById(UUID.fromString("29af0d97-b11c-4ca4-82f5-e938a1234c25"))).thenReturn(Optional.empty());
+		assertThat(categoryService.findById(UUID.fromString("29af0d97-b11c-4ca4-82f5-e938a1234c25"))).isEmpty();
 		verify(categoryJpaRepository).findById(any());
 	}
 	
 	@Test
 	@DisplayName("Given Known Category When FindById Then one is found")
 	public void givenKnownCategory_WhenFetchingByKnownId_ThenOneIsFound() {
-		when(categoryJpaRepository.findById("1")).thenReturn(Optional.of(dessertToBeSaved()));
-		assertThat(categoryService.findById("1")).isPresent();
+		when(categoryJpaRepository.findById(UUID.fromString("29af0d97-b11c-4ca4-82f5-e938a1234c25"))).thenReturn(Optional.of(dessertToBeSaved()));
+		assertThat(categoryService.findById(UUID.fromString("29af0d97-b11c-4ca4-82f5-e938a1234c25"))).isPresent();
 		verify(categoryJpaRepository).findById(any());
 	}
 	
@@ -136,7 +136,7 @@ public class CategoryServiceTest {
 	@DisplayName("Given Valid Category, When updating Description, Then Description is saved ok")
 	public void shouldUpdateDescriptionOk() {
 		// Given
-		when(categoryJpaRepository.findById("913a5159-3717-4b9d-a290-0158d31ea8aa")).thenReturn(Optional.of(savedDessert()));
+		when(categoryJpaRepository.findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"))).thenReturn(Optional.of(savedDessert()));
 
 		//When
 		CategoryDTO dto = categoryService.update(mockToBeUpdatedDessertDTO());
@@ -150,7 +150,7 @@ public class CategoryServiceTest {
 	@DisplayName("Given Category do Not Exist, When Updation Description, Then Exception is thrown")
 	public void shouldThrowExceptionWhenUpdatingCategoryThatNotExist() {
 		// Given
-		when(categoryJpaRepository.findById("913a5159-3717-4b9d-a290-0158d31ea8aa")).thenReturn(Optional.empty());
+		when(categoryJpaRepository.findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"))).thenReturn(Optional.empty());
 
 		// When
 		assertThatThrownBy(() -> categoryService.update(mockToBeUpdatedDessertDTO()))
@@ -162,14 +162,14 @@ public class CategoryServiceTest {
 	@DisplayName("Given existing Category, When deleted, Then removed from database")
 	public void shouldBeDeletedOk() {
 		// Given
-		when(categoryJpaRepository.findById("913a5159-3717-4b9d-a290-0158d31ea8aa")).thenReturn(Optional.of(savedDessert()));
+		when(categoryJpaRepository.findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"))).thenReturn(Optional.of(savedDessert()));
 
 		// When
-		categoryService.delete("913a5159-3717-4b9d-a290-0158d31ea8aa");
+		categoryService.delete(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"));
 
 		// Then
 		verify(categoryJpaRepository, Mockito.times(1)).delete(savedDessert());
-		verify(categoryJpaRepository, Mockito.times(1)).findById("913a5159-3717-4b9d-a290-0158d31ea8aa");
+		verify(categoryJpaRepository, Mockito.times(1)).findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"));
 
 	}
 
@@ -191,7 +191,7 @@ public class CategoryServiceTest {
 		Category entity = new Category();
 		entity.setName("Dessert");
 		entity.setDescription("Den søde afrundning på en god middag");
-		ReflectionTestUtils.setField(entity, "id", "913a5159-3717-4b9d-a290-0158d31ea8aa");
+		ReflectionTestUtils.setField(entity, "id", UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"));
 		entity.setRecipes(null);
 		return entity;
 	}
@@ -200,7 +200,7 @@ public class CategoryServiceTest {
 		CategoryDTO dto = CategoryDTO.builder()
 				.name("Dessert")
 				.description("Den søde afrundning på en god middag")
-				.id("913a5159-3717-4b9d-a290-0158d31ea8aa").build();
+				.id(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa")).build();
 		return dto;
 	}
 
@@ -208,7 +208,7 @@ public class CategoryServiceTest {
 		CategoryDTO dto = CategoryDTO.builder()
 				.name("Dessert")
 				.description("Til alle med en sød tand")
-				.id("913a5159-3717-4b9d-a290-0158d31ea8aa").build();
+				.id(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa")).build();
 		return dto;
 	}
 

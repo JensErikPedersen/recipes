@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.UUID;
+
 public class CategoryMapperTest {
     @Test
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
@@ -30,7 +32,7 @@ public class CategoryMapperTest {
         mock.setDescription("Brød til alle måltider");
         mock.setUpdatedBy("Jens");
         mock.setCreatedBy("Majken");
-        ReflectionTestUtils.setField(mock, "id", "12345_bread");
+        ReflectionTestUtils.setField(mock, "id", UUID.fromString("bfee03d7-3b55-418c-a867-1b3a9e85a22b"));
         ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-01-25T14:25:15"));
         ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-11-05T19:47:29"));
         return mock;
@@ -38,7 +40,7 @@ public class CategoryMapperTest {
 
     private CategoryDTO mockCategoryDTO() {
         CategoryDTO dto = CategoryDTO.builder()
-                .id("12345_bread")
+                .id(UUID.fromString("bfee03d7-3b55-418c-a867-1b3a9e85a22b"))
                 .name("Brød")
                 .description("Brød til alle måltider")
                 .createdBy("Majken")

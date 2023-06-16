@@ -8,12 +8,14 @@ import lombok.Getter;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
+import java.util.UUID;
+
 @AllArgsConstructor
 @Getter
 @JsonInclude(Include.NON_NULL)
 public class BaseDTO {
 
-	public String id;
+	public UUID id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	public OffsetDateTime created;

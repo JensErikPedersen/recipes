@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.UUID;
+
 public class RatingMapperTest {
     @Test
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
@@ -31,7 +33,7 @@ public class RatingMapperTest {
         mock.setUpdatedBy("Majken");
         mock.setCreatedBy("Jens");
         mock.setDescription("Outstanding");
-        ReflectionTestUtils.setField(mock, "id", "56789_rating5");
+        ReflectionTestUtils.setField(mock, "id", UUID.fromString("7c89ec02-63b9-4d68-9720-c22396fca1c7"));
         ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-01-25T14:25:15"));
         ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-11-05T19:47:29"));
         return mock;
@@ -39,7 +41,7 @@ public class RatingMapperTest {
 
     private static RatingDTO mockRatingDTO5() {
         RatingDTO dto = RatingDTO.builder()
-                .id("56789_rating5")
+                .id(UUID.fromString("7c89ec02-63b9-4d68-9720-c22396fca1c7"))
                 .rating(5)
                 .description("Outstanding")
                 .createdBy("Majken")

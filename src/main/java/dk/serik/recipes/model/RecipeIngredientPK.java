@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @SuppressWarnings("serial")
 @Embeddable
@@ -17,9 +18,9 @@ import java.util.Objects;
 @Setter
 public class RecipeIngredientPK implements Serializable {
 		
-	private String recipe;
+	private UUID recipe;
 	
-	private String ingredient;
+	private UUID ingredient;
 
 	@Override
 	public int hashCode() {

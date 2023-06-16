@@ -20,7 +20,8 @@ public class UnitMapper {
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())
                 .updatedBy(entity.getUpdatedBy())
-                .updatedBy(entity.getUpdatedBy())
+                .updated(entity.getUpdated())
+                .description(entity.getDescription())
                 .build();
         log.info("Mapped DTO: {}", dto);
         return dto;

@@ -6,13 +6,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface RecipeIngredientJpaRepository extends JpaRepository<RecipeIngredient, String> {
+public interface RecipeIngredientJpaRepository extends JpaRepository<RecipeIngredient, UUID> {
 
-	Optional<RecipeIngredient> findByRecipeIdAndIngredientId(String recipeId, String ingredientId);
+	Optional<RecipeIngredient> findByRecipeIdAndIngredientId(UUID recipeId, UUID ingredientId);
 	
-	Optional<List<RecipeIngredient>> findAllByRecipeId(String recipeId);
+	Optional<List<RecipeIngredient>> findAllByRecipeId(UUID recipeId);
 	
-	Optional<List<RecipeIngredient>> findAllByIngredientId(String ingredientId);
+	Optional<List<RecipeIngredient>> findAllByIngredientId(UUID ingredientId);
 }

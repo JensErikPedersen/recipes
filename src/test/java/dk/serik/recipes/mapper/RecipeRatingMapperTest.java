@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +29,7 @@ public class RecipeRatingMapperTest {
     @DisplayName("Given valid entity, When mapped by mapper, Then DTO is Ok")
     public void passMapperFromValidEntityToDto() {
         //Given
-        Optional<RecipeRating> recipeRating = recipeRatingJpaRepository.findById("72d00adc-99c7-4c51-b4e9-29c9e769a231");
+        Optional<RecipeRating> recipeRating = recipeRatingJpaRepository.findById(UUID.fromString("72d00adc-99c7-4c51-b4e9-29c9e769a231"));
         assertThat(recipeRating.isPresent()).isTrue();
 
         // When
@@ -51,9 +52,9 @@ public class RecipeRatingMapperTest {
 
     private RecipeRatingDTO expectedDto() {
         RecipeRatingDTO dto = RecipeRatingDTO.builder()
-                .id("72d00adc-99c7-4c51-b4e9-29c9e769a231")
-                .ratingId("26f09c94-79ec-439c-9776-d826efad187e")
-                .recipeId("06309a26-9ef8-43d2-82a0-f88e0be094e0")
+                .id(UUID.fromString("72d00adc-99c7-4c51-b4e9-29c9e769a231"))
+                .ratingId(UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e"))
+                .recipeId(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0"))
                 .description("Fantastisk")
                 .rating(5)
                 .createdBy("Jens")

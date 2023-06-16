@@ -5,6 +5,8 @@ import dk.serik.recipes.model.Unit;
 import dk.serik.recipes.testutil.OffsetDateTimeProvider;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.UUID;
+
 public class MockUnitUtil {
 
     public static Unit mockGram() {
@@ -13,7 +15,7 @@ public class MockUnitUtil {
         mock.setName("g");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
-        ReflectionTestUtils.setField(mock, "id", "12345_gram");
+        ReflectionTestUtils.setField(mock, "id", UUID.fromString("f7823293-7874-4459-9fb7-6b420a0627fa"));
         ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-01-25T14:25:15"));
         ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-11-05T19:47:29"));
         return mock;
@@ -25,7 +27,7 @@ public class MockUnitUtil {
         mock.setName("dl");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
-        ReflectionTestUtils.setField(mock, "id", "12345_deciliter");
+        ReflectionTestUtils.setField(mock, "id", UUID.fromString("046d0928-0806-480b-ad8b-c6845e99643b"));
         ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-01-25T14:25:15"));
         ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-11-05T19:47:29"));
         return mock;
@@ -33,7 +35,7 @@ public class MockUnitUtil {
 
     public static UnitDTO mockUnitDeciliterDTO() {
         UnitDTO mock = UnitDTO.builder()
-                .id("12345_deciliter")
+                .id(UUID.fromString("046d0928-0806-480b-ad8b-c6845e99643b"))
                 .createdBy("Majken")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
@@ -46,7 +48,7 @@ public class MockUnitUtil {
 
     public static UnitDTO mockUnitGramDTO() {
         UnitDTO mock = UnitDTO.builder()
-                .id("12345_gram")
+                .id(UUID.fromString("441a657c-d4bb-4ff0-8e76-38325dbf03cb"))
                 .createdBy("Majken")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")

@@ -17,6 +17,7 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -41,7 +42,7 @@ public class RatingJpaRepositotyTest {
 	
 	@Test
 	public void givenRatingsExisting_WhenFetchingOneById_ThenOk() {
-		Optional<Rating> opRating = ratingJpaRepository.findById("62149cc5-73e4-45ef-8ac2-4d725815d5cf");
+		Optional<Rating> opRating = ratingJpaRepository.findById(UUID.fromString("62149cc5-73e4-45ef-8ac2-4d725815d5cf"));
 		assertThat(opRating.isPresent());
 		assertThat(opRating.get().getRating()).isEqualTo(4);
 	}
@@ -69,7 +70,7 @@ public class RatingJpaRepositotyTest {
 	
 	@Test
 	public void givenExistingRatingEntity_WhenDeleted_ThenOk() {
-		Optional<Rating> opRating = ratingJpaRepository.findById("62149cc5-73e4-45ef-8ac2-4d725815d5cf");
+		Optional<Rating> opRating = ratingJpaRepository.findById(UUID.fromString("62149cc5-73e4-45ef-8ac2-4d725815d5cf"));
 		assertThat(opRating.isPresent());
 		
 		ratingJpaRepository.delete(opRating.get());
@@ -81,7 +82,7 @@ public class RatingJpaRepositotyTest {
 	
 	@Test
 	public void givenExistingRatingEntity_WhenUpdated_ThenOk() {
-		Optional<Rating> opRating = ratingJpaRepository.findById("62149cc5-73e4-45ef-8ac2-4d725815d5cf");
+		Optional<Rating> opRating = ratingJpaRepository.findById(UUID.fromString("62149cc5-73e4-45ef-8ac2-4d725815d5cf"));
 		assertThat(opRating.isPresent());		
 		opRating.get().setDescription("Magnifique!");
 		OffsetDateTime now = OffsetDateTime.now();

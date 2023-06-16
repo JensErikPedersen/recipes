@@ -7,6 +7,7 @@ import lombok.Getter;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @JsonInclude(Include.NON_NULL)
 @Getter
@@ -17,7 +18,7 @@ public class RecipeDTO extends BaseDTO {
 	
 	private String instructions;
 
-	private String categoryId;
+	private UUID categoryId;
 
 	private String categoryName;
 
@@ -28,7 +29,7 @@ public class RecipeDTO extends BaseDTO {
 	private List<TagDTO> tags;
 
 	@Builder
-	public RecipeDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, String instructions, String categoryId, String categoryName, List<RecipeIngredientDTO> recipeIngredients, List<RecipeRatingDTO> recipeRatings, List<TagDTO> tags) {
+	public RecipeDTO(UUID id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, String instructions, UUID categoryId, String categoryName, List<RecipeIngredientDTO> recipeIngredients, List<RecipeRatingDTO> recipeRatings, List<TagDTO> tags) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.name = name;
 		this.description = description;

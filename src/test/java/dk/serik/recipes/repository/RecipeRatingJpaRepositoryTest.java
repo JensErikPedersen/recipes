@@ -18,6 +18,7 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -43,7 +44,7 @@ public class RecipeRatingJpaRepositoryTest {
     @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     public void givenRecipeAndRatingsExist_WhenFetchingAllRatings5Then3IsFetched() {
         //When
-        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId("06309a26-9ef8-43d2-82a0-f88e0be094e0", "26f09c94-79ec-439c-9776-d826efad187e");
+        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0"), UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e"));
 
         //Then
         assertThat(recipeRatings.isPresent()).isTrue();
@@ -55,7 +56,7 @@ public class RecipeRatingJpaRepositoryTest {
     @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     public void givenRecipeExist_WhenFetchingAllRatingsThen6IsFetched() {
         //When
-        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeId("06309a26-9ef8-43d2-82a0-f88e0be094e0"); // all ratings for Oelandshvedebread
+        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeId(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0")); // all ratings for Oelandshvedebread
 
         //Then
         assertThat(recipeRatings.isPresent()).isTrue();
@@ -67,7 +68,7 @@ public class RecipeRatingJpaRepositoryTest {
     @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     public void givenRatingsExist_WhenFetchingAllRatings5Then3IsFetched() {
         //When
-        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRatingId("26f09c94-79ec-439c-9776-d826efad187e"); // all 5 ratings
+        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRatingId(UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e")); // all 5 ratings
 
         //Then
         assertThat(recipeRatings.isPresent()).isTrue();
@@ -80,7 +81,7 @@ public class RecipeRatingJpaRepositoryTest {
     @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     public void givenRatingExist_WhenDeleted_ThenOnlyOneIsDeleted() {
         // Given
-        Optional<RecipeRating> recipeRating = recipeRatingJpaRepository.findById("2dce3031-9ead-454c-9987-8f548ccaa70b");
+        Optional<RecipeRating> recipeRating = recipeRatingJpaRepository.findById(UUID.fromString("2dce3031-9ead-454c-9987-8f548ccaa70b"));
         assertThat(recipeRating.isPresent()).isTrue();
         List<RecipeRating> allRecipeRatings = recipeRatingJpaRepository.findAll();
         assertThat(allRecipeRatings.size()).isEqualTo(10);
@@ -89,7 +90,7 @@ public class RecipeRatingJpaRepositoryTest {
         recipeRatingJpaRepository.delete(recipeRating.get());
 
         // Then
-        recipeRating = recipeRatingJpaRepository.findById("2dce3031-9ead-454c-9987-8f548ccaa70b");
+        recipeRating = recipeRatingJpaRepository.findById(UUID.fromString("2dce3031-9ead-454c-9987-8f548ccaa70b"));
         assertThat(recipeRating.isPresent()).isFalse();
         allRecipeRatings = recipeRatingJpaRepository.findAll();
         assertThat(allRecipeRatings.size()).isEqualTo(9);
@@ -100,10 +101,10 @@ public class RecipeRatingJpaRepositoryTest {
     @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     public void givenRecipeExist_WhenAddingNewRating5_Then4RatingsOf5Exists() {
         // Given
-        Optional<Recipe> recipe = recipeJpaRepository.findById("06309a26-9ef8-43d2-82a0-f88e0be094e0"); // Oelandhvedebread
+        Optional<Recipe> recipe = recipeJpaRepository.findById(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0")); // Oelandhvedebread
         assertThat(recipe.isPresent()).isTrue();
 
-        Optional<Rating> rating = ratingJpaRepository.findById("26f09c94-79ec-439c-9776-d826efad187e"); // rating 5
+        Optional<Rating> rating = ratingJpaRepository.findById(UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e")); // rating 5
         assertThat(rating.isPresent()).isTrue();
 
         RecipeRating recipeRating = new RecipeRating();
@@ -121,7 +122,7 @@ public class RecipeRatingJpaRepositoryTest {
         assertThat(savedRecipeRating.getCreatedBy()).isEqualTo(session.getUserName());
         assertThat(savedRecipeRating.getDescription()).isEqualTo("Særklasse");
 
-        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId("06309a26-9ef8-43d2-82a0-f88e0be094e0", "26f09c94-79ec-439c-9776-d826efad187e");
+        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0"), UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e"));
 
         //Then
         assertThat(recipeRatings.isPresent()).isTrue();
@@ -133,11 +134,11 @@ public class RecipeRatingJpaRepositoryTest {
     @Sql({"/db/test-data/insert_recipes.sql", "/db/test-data/insert_recipe_ratings.sql"})
     public void givenRecipeExist_WhenUpdatingRating5To4_Then2RatingsOf5Exists() {
         //Given
-        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId("06309a26-9ef8-43d2-82a0-f88e0be094e0", "26f09c94-79ec-439c-9776-d826efad187e");
+        Optional<List<RecipeRating>> recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0"), UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e"));
         assertThat(recipeRatings.isPresent()).isTrue();
         assertThat(recipeRatings.get().size()).isEqualTo(3);
 
-        Optional<Rating> rating = ratingJpaRepository.findById("62149cc5-73e4-45ef-8ac2-4d725815d5cf"); // rating 4
+        Optional<Rating> rating = ratingJpaRepository.findById(UUID.fromString("62149cc5-73e4-45ef-8ac2-4d725815d5cf")); // rating 4
         assertThat(rating.isPresent()).isTrue();
 
         //When
@@ -149,7 +150,7 @@ public class RecipeRatingJpaRepositoryTest {
         assertThat(now).isCloseTo(saveAndFlush.getUpdated(), within(0, ChronoUnit.SECONDS));
 
         //Then
-        recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId("06309a26-9ef8-43d2-82a0-f88e0be094e0", "26f09c94-79ec-439c-9776-d826efad187e");
+        recipeRatings = recipeRatingJpaRepository.findAllByRecipeIdAndRatingId(UUID.fromString("06309a26-9ef8-43d2-82a0-f88e0be094e0"), UUID.fromString("26f09c94-79ec-439c-9776-d826efad187e"));
         assertThat(recipeRatings.isPresent()).isTrue();
         assertThat(recipeRatings.get().size()).isEqualTo(2);
 

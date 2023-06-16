@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @JsonInclude(Include.NON_NULL)
 @Getter
@@ -14,7 +15,7 @@ public class CategoryDTO extends BaseDTO {
 	private String description;
 
 	@Builder
-	public CategoryDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description) {
+	public CategoryDTO(UUID id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.name = name;
 		this.description = description;

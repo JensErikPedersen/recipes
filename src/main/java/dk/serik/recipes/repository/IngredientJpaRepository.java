@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface IngredientJpaRepository extends JpaRepository<Ingredient, String> {
+public interface IngredientJpaRepository extends JpaRepository<Ingredient, UUID> {
 	
 	Optional<List<Ingredient>> findAllByNameContains(String name);
 	

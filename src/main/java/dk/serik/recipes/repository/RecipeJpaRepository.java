@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface RecipeJpaRepository extends JpaRepository<Recipe, String> {
+public interface RecipeJpaRepository extends JpaRepository<Recipe, UUID> {
 	
 	List<Recipe> findAllByCategoryName(String categoryName);
 	

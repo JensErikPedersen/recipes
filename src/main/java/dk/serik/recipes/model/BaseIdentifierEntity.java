@@ -1,26 +1,25 @@
 package dk.serik.recipes.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
 
+import java.sql.Types;
 import java.util.Objects;
+import java.util.UUID;
 
 @MappedSuperclass
 public class BaseIdentifierEntity extends BaseEntity {
 
 	    @Setter(AccessLevel.NONE)
 		@Getter(AccessLevel.PUBLIC)
-	    @Id
-	    @GenericGenerator(name = "generator", strategy = "uuid2")
-	    @GeneratedValue(generator = "generator")
-	    @Column(updatable = false, nullable = false, columnDefinition = "uniqueidentifier")
-	    protected String id;
+		@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
+		@JdbcTypeCode(value = Types.VARCHAR)
+		@Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
+	    protected UUID id;
 	   
 	    @Override
 	    public boolean equals(Object o) {

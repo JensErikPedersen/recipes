@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.UUID;
+
 public class IngredientMapperTest {
     @Test
     @DisplayName("Given Category is OK, When Map to DTO, Then Ok")
@@ -31,7 +33,7 @@ public class IngredientMapperTest {
         mock.setDescription("Sigtet hvedemel uden skalder og kim");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
-        ReflectionTestUtils.setField(mock, "id", "12345_hvedemel");
+        ReflectionTestUtils.setField(mock, "id", UUID.fromString("5f01d434-5a68-4359-9f2e-0a6793dce48d"));
         ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-01-25T14:25:15"));
         ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-11-05T19:47:29"));
         return mock;
@@ -39,7 +41,7 @@ public class IngredientMapperTest {
 
     private IngredientDTO mockIngredientHvedemelDTO() {
         IngredientDTO mock = IngredientDTO.builder()
-                .id("12345_hvedemel")
+                .id(UUID.fromString("5f01d434-5a68-4359-9f2e-0a6793dce48d"))
                 .name("Hvedemel")
                 .description("Sigtet hvedemel uden skalder og kim")
                 .createdBy("Majken")

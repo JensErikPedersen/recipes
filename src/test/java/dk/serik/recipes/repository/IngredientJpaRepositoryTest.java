@@ -17,6 +17,7 @@ import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -79,10 +80,10 @@ public class IngredientJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingIngredient_WhenDeleted_ThenOk() {
-		Optional<Ingredient> opIngredient = repository.findById("e00aec55-2eb7-4eeb-a594-0bbb948f09c1");
+		Optional<Ingredient> opIngredient = repository.findById(UUID.fromString("e00aec55-2eb7-4eeb-a594-0bbb948f09c1"));
 		Assertions.assertTrue(opIngredient.isPresent());
 		repository.delete(opIngredient.get());
-		opIngredient = repository.findById("e00aec55-2eb7-4eeb-a594-0bbb948f09c1");
+		opIngredient = repository.findById(UUID.fromString("e00aec55-2eb7-4eeb-a594-0bbb948f09c1"));
 		Assertions.assertFalse(opIngredient.isPresent());
 		
 		List<Ingredient> ingredients = repository.findAll();
@@ -92,7 +93,7 @@ public class IngredientJpaRepositoryTest {
 	
 	@Test
 	public void givenExistingIngredient_WhenUpdateDescription_ThenOk() {
-		Optional<Ingredient> opIngredient = repository.findById("9d2b8e95-e897-470a-b1dd-0cf03fb01465");
+		Optional<Ingredient> opIngredient = repository.findById(UUID.fromString("9d2b8e95-e897-470a-b1dd-0cf03fb01465"));
 		Assertions.assertTrue(opIngredient.isPresent());
 		opIngredient.get().setDescription("Bare rugmel");
 		Ingredient saveAndFlush = repository.saveAndFlush(opIngredient.get());

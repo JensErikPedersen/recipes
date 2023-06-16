@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Optional<CategoryDTO> findById(String id) {
+	public Optional<CategoryDTO> findById(UUID id) {
 		Optional<Category> categoryEntity = categoryJpaRepository.findById(id);
 		if(categoryEntity.isPresent()) {
 			return Optional.ofNullable(CategoryMapper.from(categoryEntity.get()));
@@ -80,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(UUID id) {
 		Optional<Category> toBeDeleted = categoryJpaRepository.findById(id);
 		if(toBeDeleted.isPresent()) {
 			categoryJpaRepository.delete(toBeDeleted.get());
