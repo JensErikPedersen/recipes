@@ -28,7 +28,7 @@ public class MockTagUtil {
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
                 .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-                .label("Sødt")
+                .name("Sødt")
                 .build();
         return mock;
     }
@@ -43,7 +43,7 @@ public class MockTagUtil {
                 .created(OffsetDateTimeProvider.provide("2022-12-55T19:47:29"))
                 .updatedBy("Majken")
                 .updated(OffsetDateTimeProvider.provide("2023-03-25T14:25:15"))
-                .label("Mums")
+                .name("Mums")
                 .build();
 
         dtos.add(mock);

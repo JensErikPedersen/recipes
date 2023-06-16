@@ -173,7 +173,7 @@
     <changeSet author="jense (generated)" id="1683489681403-4">
         <insert tableName="tag">
             <column name="id" value="17a6448b-4efe-43f4-970b-8bf1ce2b754e"/>
-            <column name="label" value="Spicy"/>
+            <column name="name" value="Spicy"/>
             <column name="created" value="2022-10-25T17:36:03"/>
             <column name="created_by" value="Jens"/>
             <column name="updated" value="2022-10-25T17:36:03"/>
@@ -181,7 +181,7 @@
         </insert>
         <insert tableName="tag">
             <column name="id" value="1b24e657-01e7-4279-a6c4-4aa7840d771c"/>
-            <column name="label" value="Thai"/>
+            <column name="name" value="Thai"/>
             <column name="created" value="2022-10-25T17:35:03"/>
             <column name="created_by" value="Jens"/>
             <column name="updated" value="2022-10-25T17:35:03"/>
@@ -189,7 +189,7 @@
         </insert>
         <insert tableName="tag">
             <column name="id" value="2b6560cc-77db-4c4e-a51a-8ee2786bdaf8"/>
-            <column name="label" value="Børnevenlig"/>
+            <column name="name" value="Børnevenlig"/>
             <column name="created" value="2022-10-25T17:41:03"/>
             <column name="created_by" value="Jens"/>
             <column name="updated" value="2022-10-25T17:41:03"/>
@@ -197,7 +197,7 @@
         </insert>
         <insert tableName="tag">
             <column name="id" value="448b4e7b-d94a-439d-a4b5-db336936e0db"/>
-            <column name="label" value="Godt til kaffen"/>
+            <column name="name" value="Godt til kaffen"/>
             <column name="created" value="2022-11-14T17:40:03"/>
             <column name="created_by" value="Jens"/>
             <column name="updated" value="2022-12-25T17:40:03"/>
@@ -205,7 +205,7 @@
         </insert>
         <insert tableName="tag">
             <column name="id" value="d2f969f7-3cf0-4771-aea2-a55344b05e5a"/>
-            <column name="label" value="Mexi"/>
+            <column name="name" value="Mexi"/>
             <column name="created" value="2022-10-25T17:40:03"/>
             <column name="created_by" value="Jens"/>
             <column name="updated" value="2022-10-25T17:40:03"/>
@@ -213,7 +213,7 @@
         </insert>
         <insert tableName="tag">
             <column name="id" value="d495e037-f4d8-4342-aea5-8d5a51538553"/>
-            <column name="label" value="Godt til grillen"/>
+            <column name="name" value="Godt til grillen"/>
             <column name="created" value="2023-03-25T19:55:03"/>
             <column name="created_by" value="Jens"/>
             <column name="updated" value="2023-04-13T17:34:03"/>
@@ -223,7 +223,7 @@
     <changeSet author="jense (generated)" id="1683489681403-5">
         <insert tableName="unit">
             <column name="id" value="615ba803-966f-43e5-8d2a-d38b5198a421"/>
-            <column name="label" value="tsk"/>
+            <column name="name" value="tsk"/>
             <column name="description" value="Teske"/>
             <column name="created" value="2023-04-23T22:02:19"/>
             <column name="created_by" value="Jens"/>
@@ -232,7 +232,7 @@
         </insert>
         <insert tableName="unit">
             <column name="id" value="a7c8c9a8-04b4-4890-9082-cd7d4a175b71"/>
-            <column name="label" value="spsk"/>
+            <column name="name" value="spsk"/>
             <column name="description" value="Spiseske"/>
             <column name="created" value="2023-04-23T22:02:19"/>
             <column name="created_by" value="Majken"/>
@@ -241,7 +241,7 @@
         </insert>
         <insert tableName="unit">
             <column name="id" value="b9cef3df-4bb5-49ab-8bde-5848d1363bce"/>
-            <column name="label" value="dl"/>
+            <column name="name" value="dl"/>
             <column name="description" value="Deciliter"/>
             <column name="created" value="2023-04-23T22:02:19"/>
             <column name="created_by" value="Majken"/>
@@ -250,7 +250,7 @@
         </insert>
         <insert tableName="unit">
             <column name="id" value="c5173731-3a7e-498c-84b1-b2d3abe68cef"/>
-            <column name="label" value="gr"/>
+            <column name="name" value="gr"/>
             <column name="description" value="Gram"/>
             <column name="created" value="2023-04-23T22:02:19"/>
             <column name="created_by" value="Majken"/>

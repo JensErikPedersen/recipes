@@ -180,7 +180,7 @@ public class RecipeMapperTest {
     private List<TagDTO> mockTags() {
         List<TagDTO> mockTags = new ArrayList<>();
         TagDTO dto = TagDTO.builder()
-                .label("Godt til kaffen")
+                .name("Godt til kaffen")
                 .created(OffsetDateTimeProvider.provide("2022-11-14T17:40:03"))
                 .createdBy("Jens")
                 .build();

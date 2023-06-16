@@ -38,7 +38,7 @@ public class MockUnitUtil {
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
                 .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-                .label("dl")
+                .name("dl")
                 .description("Deciliter")
                 .build();
         return mock;
@@ -51,7 +51,7 @@ public class MockUnitUtil {
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
                 .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-                .label("g")
+                .name("g")
                 .description("Gram")
                 .build();
         return mock;
