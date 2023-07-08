@@ -22,6 +22,7 @@ public class BaseEntity implements Comparable, Serializable {
 
 	    @Column(nullable = false)
 	    protected String createdBy;
+
 		@Setter(AccessLevel.PRIVATE)
 		@Column(nullable = false)
 	    protected OffsetDateTime updated;

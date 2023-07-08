@@ -1,34 +1,15 @@
-package dk.serik.recipes.mapper;
+package dk.serik.recipes.mockutil;
 
 import dk.serik.recipes.dto.IngredientDTO;
-import dk.serik.recipes.mockutil.MockIngredientUtil;
 import dk.serik.recipes.model.Ingredient;
 import dk.serik.recipes.testutil.OffsetDateTimeProvider;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.UUID;
 
-public class IngredientMapperTest {
-    @Test
-    @DisplayName("Given Category is OK, When Map to DTO, Then Ok")
-    public void passMapperFromValidEntityToDto() {
-        IngredientDTO mappedDto = IngredientMapper.from(MockIngredientUtil.mockHvedemel());
-        Assertions.assertThat(mappedDto).isNotNull();
-        Assertions.assertThat(mappedDto).isEqualTo(MockIngredientUtil.mockHvedemelDTO());
-    }
+public class MockIngredientUtil {
 
-
-    @Test
-    @DisplayName("Given Unit is null, When mapped to DTO, Then DTO is Null")
-    public void passMapperFromNullEntityToNullDto() {
-       IngredientDTO mappedDto = IngredientMapper.from(null);
-       Assertions.assertThat(mappedDto).isNull();
-    }
-
-    private Ingredient mockHvedemel() {
+    public static Ingredient mockHvedemel() {
         Ingredient mock = new Ingredient();
         mock.setName("Hvedemel");
         mock.setDescription("Sigtet hvedemel uden skalder og kim");
@@ -40,7 +21,9 @@ public class IngredientMapperTest {
         return mock;
     }
 
-    private IngredientDTO mockIngredientHvedemelDTO() {
+
+
+    public static IngredientDTO mockHvedemelDTO() {
         IngredientDTO mock = IngredientDTO.builder()
                 .id("5f01d434-5a68-4359-9f2e-0a6793dce48d")
                 .name("Hvedemel")
@@ -53,4 +36,26 @@ public class IngredientMapperTest {
         return mock;
     }
 
+    public static Ingredient mockHavsalt() {
+        Ingredient mock = new Ingredient();
+        mock.setName("Havsalt");
+        mock.setDescription("Havsalt fra middelhavet");
+        mock.setCreatedBy("Majken");
+        mock.setUpdatedBy("Jens");
+        ReflectionTestUtils.setField(mock, "id", UUID.fromString("01a50907-8141-4dd1-acdf-c4384669c2b2"));
+        ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-05-25T14:25:15"));
+        ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-04-05T19:47:29"));
+        return mock;
+    }
+    public static IngredientDTO mockHavsaltDTO() {
+        return IngredientDTO.builder()
+                .id("01a50907-8141-4dd1-acdf-c4384669c2b2")
+                .name("Havsalt")
+                .description("Havsalt fra middelhavet")
+                .createdBy("Majken")
+                .updatedBy("Jens")
+                .updated(OffsetDateTimeProvider.provide("2023-05-25T14:25:15"))
+                .created(OffsetDateTimeProvider.provide("2022-04-05T19:47:29"))
+                .build();
+    }
 }

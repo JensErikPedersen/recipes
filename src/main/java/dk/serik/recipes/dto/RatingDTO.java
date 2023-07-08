@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
@@ -15,7 +14,7 @@ public class RatingDTO extends BaseDTO {
     private String description;
 
     @Builder
-    public RatingDTO(UUID id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, Integer rating, String description) {
+    public RatingDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, Integer rating, String description) {
         super(id, created, createdBy, updated, updatedBy);
         this.rating = rating;
         this.description = description;

@@ -14,7 +14,7 @@ public class IngredientMapper {
             return null;
         }
         IngredientDTO dto = IngredientDTO.builder()
-                .id(entity.getId())
+                .id(entity.getId().toString())
                 .description(entity.getDescription())
                 .name(entity.getName())
                 .createdBy(entity.getCreatedBy())

@@ -15,8 +15,6 @@ public interface IngredientService {
 
     Optional<List<IngredientDTO>> findAllByNameContains(String name);
 
-    Optional<List<IngredientDTO>> findAllByDescriptionContains(String name);
-
     IngredientDTO save(IngredientDTO dto);
 
     void delete(String id);

@@ -41,12 +41,19 @@ public class RecipeMapperTest {
         assertThat(dto).isEqualTo(mockRecipeDto());
     }
 
+    @Test
+    @DisplayName("Given Recipe Entity is Null, When Mapping to DTO, Then DTO is Null")
+    public void shouldReturnDTONull() {
+        RecipeDTO dto = RecipeMapper.from(null);
+        assertThat(dto).isNull();
+    }
+
     private RecipeDTO mockRecipeDto() {
         RecipeDTO dto = RecipeDTO.builder()
                 .name("Fuldkorns hvedebrød")
                 .description("Et dejligt Fuldkorns brød som smager godt og mætter dejligt")
                 .instructions("1. Hæld vand og gær i en røremaskine...")
-                .id(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
+                .id("5d22c394-b5ce-48c3-8199-72ccc92c737c")
                 .categoryId(UUID.fromString("14d4c0b0-46ea-498d-a3a5-56060a3d7a7c"))
                 .categoryName("Brød")
                 .recipeIngredients(mockRecipeIngredients())
@@ -64,11 +71,11 @@ public class RecipeMapperTest {
     private List<RecipeIngredientDTO> mockRecipeIngredients() {
         List<RecipeIngredientDTO> mocks = new ArrayList<>();
         RecipeIngredientDTO dto = RecipeIngredientDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ingredientId(UUID.fromString("549ab6e6-f2d8-4ab3-8ba8-6bc7af82f2fb"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ingredientId("549ab6e6-f2d8-4ab3-8ba8-6bc7af82f2fb")
                 .ingredientName("Hvedemel")
                 .amount(new BigDecimal(550.00))
-                .unitId(UUID.fromString("c5173731-3a7e-498c-84b1-b2d3abe68cef"))
+                .unitId("c5173731-3a7e-498c-84b1-b2d3abe68cef")
                 .unitLabel("gr")
                 .created(OffsetDateTimeProvider.provide("2022-10-18T17:34:02"))
                 .createdBy("Jens")
@@ -76,11 +83,11 @@ public class RecipeMapperTest {
         mocks.add(dto);
 
         dto = RecipeIngredientDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ingredientId(UUID.fromString("e00aec55-2eb7-4eeb-a594-0bbb948f09c1"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ingredientId("e00aec55-2eb7-4eeb-a594-0bbb948f09c1")
                 .ingredientName("Vand")
                 .amount(new BigDecimal(5.00))
-                .unitId(UUID.fromString("b9cef3df-4bb5-49ab-8bde-5848d1363bce"))
+                .unitId("b9cef3df-4bb5-49ab-8bde-5848d1363bce")
                 .unitLabel("dl")
                 .created(OffsetDateTimeProvider.provide("2022-10-15T21:08:02"))
                 .createdBy("Majken")
@@ -88,11 +95,11 @@ public class RecipeMapperTest {
         mocks.add(dto);
 
         dto = RecipeIngredientDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ingredientId(UUID.fromString("4a8819f6-2f7b-48ac-a5c1-20beb2e7e0b4"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ingredientId("4a8819f6-2f7b-48ac-a5c1-20beb2e7e0b4")
                 .ingredientName("Fuldkorns hvedemel")
                 .amount(new BigDecimal(170.00))
-                .unitId(UUID.fromString("c5173731-3a7e-498c-84b1-b2d3abe68cef"))
+                .unitId("c5173731-3a7e-498c-84b1-b2d3abe68cef")
                 .unitLabel("gr")
                 .created(OffsetDateTimeProvider.provide("2022-10-15T21:08:02"))
                 .createdBy("Majken")
@@ -100,11 +107,11 @@ public class RecipeMapperTest {
         mocks.add(dto);
 
         dto = RecipeIngredientDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ingredientId(UUID.fromString("381e5cd5-0a5d-48d2-b69c-71516254937e"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ingredientId("381e5cd5-0a5d-48d2-b69c-71516254937e")
                 .ingredientName("Surdej")
                 .amount(new BigDecimal(1.00))
-                .unitId(UUID.fromString("b9cef3df-4bb5-49ab-8bde-5848d1363bce"))
+                .unitId("b9cef3df-4bb5-49ab-8bde-5848d1363bce")
                 .unitLabel("dl")
                 .created(OffsetDateTimeProvider.provide("2022-10-18T17:34:02"))
                 .createdBy("Jens")
@@ -112,11 +119,11 @@ public class RecipeMapperTest {
         mocks.add(dto);
 
         dto = RecipeIngredientDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ingredientId(UUID.fromString("713ff039-25f2-471f-a1a4-ab8fc9efc8b0"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ingredientId("713ff039-25f2-471f-a1a4-ab8fc9efc8b0")
                 .ingredientName("Gær")
                 .amount(new BigDecimal(10.00))
-                .unitId(UUID.fromString("c5173731-3a7e-498c-84b1-b2d3abe68cef"))
+                .unitId("c5173731-3a7e-498c-84b1-b2d3abe68cef")
                 .unitLabel("gr")
                 .created(OffsetDateTimeProvider.provide("2022-10-18T17:34:02"))
                 .createdBy("Jens")
@@ -124,11 +131,11 @@ public class RecipeMapperTest {
         mocks.add(dto);
 
         dto = RecipeIngredientDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ingredientId(UUID.fromString("e0aa2252-c5f1-4c87-b42c-9dd10486f366"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ingredientId("e0aa2252-c5f1-4c87-b42c-9dd10486f366")
                 .ingredientName("Salt")
                 .amount(new BigDecimal(16.00))
-                .unitId(UUID.fromString("c5173731-3a7e-498c-84b1-b2d3abe68cef"))
+                .unitId("c5173731-3a7e-498c-84b1-b2d3abe68cef")
                 .unitLabel("gr")
                 .created(OffsetDateTimeProvider.provide("2022-10-15T21:08:02"))
                 .createdBy("Majken")
@@ -142,33 +149,33 @@ public class RecipeMapperTest {
         List<RecipeRatingDTO> mockRecipeRatings = new ArrayList<>();
 
         RecipeRatingDTO dto = RecipeRatingDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ratingId(UUID.fromString("66946e5d-d798-474a-8111-4989bd4c04cd"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ratingId("66946e5d-d798-474a-8111-4989bd4c04cd")
                 .rating(1)
                 .description("Ikke lige mig")
-                .id(UUID.fromString("c20fd30b-56b9-4848-8bd4-17bd3fe21df6"))
+                .id("c20fd30b-56b9-4848-8bd4-17bd3fe21df6")
                 .created(OffsetDateTimeProvider.provide("2023-02-27T15:07:50"))
                 .createdBy("Gerda")
                 .build();
         mockRecipeRatings.add(dto);
 
         dto = RecipeRatingDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ratingId(UUID.fromString("2ea87b61-3ffa-433f-bc29-3fdfc43168e2"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ratingId("2ea87b61-3ffa-433f-bc29-3fdfc43168e2")
                 .rating(3)
                 .description("Gennemsnitligt")
-                .id(UUID.fromString("bb8ea663-c008-413b-b4ae-d15606d2e15d"))
+                .id("bb8ea663-c008-413b-b4ae-d15606d2e15d")
                 .created(OffsetDateTimeProvider.provide("2023-01-15T21:24:39"))
                 .createdBy("Karl")
                 .build();
         mockRecipeRatings.add(dto);
 
         dto = RecipeRatingDTO.builder()
-                .recipeId(UUID.fromString("5d22c394-b5ce-48c3-8199-72ccc92c737c"))
-                .ratingId(UUID.fromString("2ea87b61-3ffa-433f-bc29-3fdfc43168e2"))
+                .recipeId("5d22c394-b5ce-48c3-8199-72ccc92c737c")
+                .ratingId("2ea87b61-3ffa-433f-bc29-3fdfc43168e2")
                 .rating(3)
                 .description("Udemærket")
-                .id(UUID.fromString("a676d57a-32f9-4d3c-aa05-02b624eb7301"))
+                .id("a676d57a-32f9-4d3c-aa05-02b624eb7301")
                 .created(OffsetDateTimeProvider.provide("2022-11-14T17:40:03"))
                 .createdBy("Jens")
                 .build();

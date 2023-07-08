@@ -15,7 +15,7 @@ public class RatingMapper {
         }
 
         RatingDTO dto = RatingDTO.builder()
-                .id(entity.getId())
+                .id(entity.getId().toString())
                 .rating(entity.getRating())
                 .description(entity.getDescription())
                 .createdBy(entity.getCreatedBy())

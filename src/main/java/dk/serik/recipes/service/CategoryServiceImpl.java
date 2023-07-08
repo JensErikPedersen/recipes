@@ -49,8 +49,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Optional<CategoryDTO> findById(UUID id) {
-		Optional<Category> categoryEntity = categoryJpaRepository.findById(id);
+	public Optional<CategoryDTO> findById(String id) {
+		Optional<Category> categoryEntity = categoryJpaRepository.findById(UUID.fromString(id));
 		if(categoryEntity.isPresent()) {
 			return Optional.ofNullable(CategoryMapper.from(categoryEntity.get()));
 		}
@@ -81,8 +81,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void delete(UUID id) {
-		Optional<Category> toBeDeleted = categoryJpaRepository.findById(id);
+	public void delete(String id) {
+		Optional<Category> toBeDeleted = categoryJpaRepository.findById(UUID.fromString(id));
 		if(toBeDeleted.isPresent()) {
 			categoryJpaRepository.delete(toBeDeleted.get());
 		}
@@ -90,7 +90,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDTO update(CategoryDTO dto) {
-		Optional<Category> managedCategory = categoryJpaRepository.findById(dto.getId());
+		Optional<Category> managedCategory = categoryJpaRepository.findById(UUID.fromString(dto.getId()));
 		if(managedCategory.isPresent()) {
 			managedCategory.get().setName(dto.getName());
 			managedCategory.get().setDescription(dto.getDescription());

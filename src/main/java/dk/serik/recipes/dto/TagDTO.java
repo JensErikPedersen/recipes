@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
@@ -14,7 +13,7 @@ public class TagDTO extends BaseDTO {
     private String name;
 
     @Builder
-    public TagDTO(UUID id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name) {
+    public TagDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name) {
         super(id, created, createdBy, updated, updatedBy);
         this.name = name;
     }

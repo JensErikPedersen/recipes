@@ -24,7 +24,7 @@ public class MockTagUtil {
 
     public static TagDTO mockTagDTO() {
         TagDTO mock = TagDTO.builder()
-                .id(UUID.fromString("1dbdaf66-0e50-4a7f-868e-2689da2bc32a"))
+                .id("1dbdaf66-0e50-4a7f-868e-2689da2bc32a")
                 .createdBy("Majken")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
@@ -39,7 +39,7 @@ public class MockTagUtil {
         dtos.add(mockTagDTO());
 
         TagDTO mock = TagDTO.builder()
-                .id(UUID.fromString("e350edf2-5023-4829-a3ac-ec8ed3e62bb1"))
+                .id("e350edf2-5023-4829-a3ac-ec8ed3e62bb1")
                 .createdBy("Jens")
                 .created(OffsetDateTimeProvider.provide("2022-12-55T19:47:29"))
                 .updatedBy("Majken")

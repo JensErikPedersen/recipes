@@ -11,12 +11,12 @@ public class RecipeIngredientMapper {
             return null;
         }
         RecipeIngredientDTO dto = RecipeIngredientDTO.builder()
-                .ingredientId(entity.getIngredient().getId())
-                .recipeId(entity.getRecipe().getId())
+                .ingredientId(entity.getIngredient().getId().toString())
+                .recipeId(entity.getRecipe().getId().toString())
                 .ingredientName(entity.getIngredient().getName())
                 .amount(entity.getAmount())
                 .unitLabel(entity.getUnit().getName())
-                .unitId(entity.getUnit().getId())
+                .unitId(entity.getUnit().getId().toString())
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())
                 .updated(entity.getUpdated())

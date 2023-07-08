@@ -15,7 +15,7 @@ public class UnitMapper {
         }
 
         UnitDTO dto = UnitDTO.builder()
-                .id(entity.getId())
+                .id(entity.getId().toString())
                 .name(entity.getName())
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())

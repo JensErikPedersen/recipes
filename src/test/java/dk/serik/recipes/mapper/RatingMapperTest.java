@@ -41,7 +41,7 @@ public class RatingMapperTest {
 
     private static RatingDTO mockRatingDTO5() {
         RatingDTO dto = RatingDTO.builder()
-                .id(UUID.fromString("7c89ec02-63b9-4d68-9720-c22396fca1c7"))
+                .id("7c89ec02-63b9-4d68-9720-c22396fca1c7")
                 .rating(5)
                 .description("Outstanding")
                 .createdBy("Majken")

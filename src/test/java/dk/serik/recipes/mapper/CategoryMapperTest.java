@@ -40,7 +40,7 @@ public class CategoryMapperTest {
 
     private CategoryDTO mockCategoryDTO() {
         CategoryDTO dto = CategoryDTO.builder()
-                .id(UUID.fromString("bfee03d7-3b55-418c-a867-1b3a9e85a22b"))
+                .id("bfee03d7-3b55-418c-a867-1b3a9e85a22b")
                 .name("Brød")
                 .description("Brød til alle måltider")
                 .createdBy("Majken")

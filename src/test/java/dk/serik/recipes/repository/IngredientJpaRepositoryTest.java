@@ -5,6 +5,7 @@ import dk.serik.recipes.model.Ingredient;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -53,14 +54,16 @@ public class IngredientJpaRepositoryTest {
 	}
 	
 	@Test
-	public void givenExistingIngredientFlour_WhenFetchingByNameContains_ThenReturnTwo() {
+	@DisplayName("Given existing Ingredients Flour, When fetching by Name Contains, Then three is returned")
+	public void shouldReturnThreeIngredientsByName() {
 		Optional<List<Ingredient>> opIngredients = repository.findAllByNameContains("mel");
 		Assertions.assertTrue(opIngredients.isPresent());
 		Assertions.assertEquals(3, opIngredients.get().size());
 	}
 
 	@Test
-	public void giventExistingIngredientsKimAndSkaldele_WhenFetchingByDescriptionContains_TheReturnTwo() {
+	@DisplayName("Given Existing Ingredients 'KimAndSkaldele', When Fetching by Description Contains, Then three is returned")
+	public void shouldReturnThreeIngredientsByDescription() {
 		Optional<List<Ingredient>> opIngredients = repository.findAllByDescriptionContains("skaldele og kim");
 		Assertions.assertTrue(opIngredients.isPresent());
 		Assertions.assertEquals(3, opIngredients.get().size());

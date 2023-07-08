@@ -29,7 +29,7 @@ public class RecipeDTO extends BaseDTO {
 	private List<TagDTO> tags;
 
 	@Builder
-	public RecipeDTO(UUID id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, String instructions, UUID categoryId, String categoryName, List<RecipeIngredientDTO> recipeIngredients, List<RecipeRatingDTO> recipeRatings, List<TagDTO> tags) {
+	public RecipeDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description, String instructions, UUID categoryId, String categoryName, List<RecipeIngredientDTO> recipeIngredients, List<RecipeRatingDTO> recipeRatings, List<TagDTO> tags) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.name = name;
 		this.description = description;

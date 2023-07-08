@@ -20,7 +20,7 @@ public class RecipeMapper {
                 .description(entity.getDescription())
                 .instructions(entity.getInstructions())
                 .name(entity.getName())
-                .id(entity.getId())
+                .id(entity.getId().toString())
                 .categoryId(entity.getCategory().getId())
                 .categoryName(entity.getCategory().getName())
                 .recipeIngredients(entity.getRecipeIngredients().stream()

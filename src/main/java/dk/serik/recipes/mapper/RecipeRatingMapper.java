@@ -12,11 +12,11 @@ public class RecipeRatingMapper {
             return null;
         }
         RecipeRatingDTO dto = RecipeRatingDTO.builder()
-                .id(entity.getId())
+                .id(entity.getId().toString())
                 .rating(entity.getRating().getRating())
-                .ratingId(entity.getRating().getId())
+                .ratingId(entity.getRating().getId().toString())
                 .description(entity.getDescription())
-                .recipeId(entity.getRecipe().getId())
+                .recipeId(entity.getRecipe().getId().toString())
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())
                 .updated(entity.getUpdated())

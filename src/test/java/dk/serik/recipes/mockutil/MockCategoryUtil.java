@@ -35,7 +35,7 @@ public class MockCategoryUtil {
 
     public static CategoryDTO mockCategoryDTO() {
         CategoryDTO dto = CategoryDTO.builder()
-                .id(UUID.fromString("9fc423a3-1bfc-45b0-baed-5cdffe7fd792"))
+                .id("9fc423a3-1bfc-45b0-baed-5cdffe7fd792")
                 .name("Brød")
                 .description("Brød til alle måltider")
                 .createdBy("Majken")

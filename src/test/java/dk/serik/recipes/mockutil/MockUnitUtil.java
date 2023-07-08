@@ -35,7 +35,7 @@ public class MockUnitUtil {
 
     public static UnitDTO mockUnitDeciliterDTO() {
         UnitDTO mock = UnitDTO.builder()
-                .id(UUID.fromString("046d0928-0806-480b-ad8b-c6845e99643b"))
+                .id("046d0928-0806-480b-ad8b-c6845e99643b")
                 .createdBy("Majken")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
@@ -48,7 +48,7 @@ public class MockUnitUtil {
 
     public static UnitDTO mockUnitGramDTO() {
         UnitDTO mock = UnitDTO.builder()
-                .id(UUID.fromString("441a657c-d4bb-4ff0-8e76-38325dbf03cb"))
+                .id("441a657c-d4bb-4ff0-8e76-38325dbf03cb")
                 .createdBy("Majken")
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")

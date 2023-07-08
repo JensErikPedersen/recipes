@@ -6,25 +6,24 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RecipeIngredientDTO extends BaseDTO{
-	private UUID recipeId;
+	private String recipeId;
 
-	private UUID ingredientId;
+	private String ingredientId;
 
 	private String ingredientName;
 
 	private BigDecimal amount;
 
-	private UUID unitId;
+	private String unitId;
 	private String unitLabel;
 
 	@Builder
-	public RecipeIngredientDTO(UUID recipeId, UUID ingredientId, String ingredientName, BigDecimal amount, UUID unitId, String unitLabel, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, UUID id) {
+	public RecipeIngredientDTO(String recipeId, String ingredientId, String ingredientName, BigDecimal amount, String unitId, String unitLabel, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String id) {
 		super(id, created, createdBy, updated, updatedBy);
 		this.recipeId = recipeId;
 		this.ingredientId = ingredientId;
