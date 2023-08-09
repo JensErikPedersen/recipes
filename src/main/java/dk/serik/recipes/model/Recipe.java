@@ -49,7 +49,7 @@ public class Recipe extends BaseIdentifierEntity {
 		sb.append(	", description='" + description + '\'');
 		sb.append(", instructions='" + instructions + '\'');
 		sb.append(	", category=" + category);
-		recipeIngredients.forEach(ri -> sb.append("Ingredient: " + ri.getIngredient().getName() + ", Amount: " + ri.getAmount() + " " + ri.getUnit().getName() + ", "));
+		recipeIngredients.forEach(ri -> sb.append("Ingredient: " + ri.getIngredient().getName() + ", Amount: " + ri.getAmount() + " " + ri.getUnit().getLabel() + ", "));
 		recipeRatings.forEach(rr -> sb.append("Rating: " + rr.getRating().getRating()));
 		tags.forEach(rt -> sb.append("Tag: " + rt.getName()));
 		sb.append(", id='" + id + '\'');

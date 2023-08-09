@@ -11,8 +11,8 @@ public class MockUnitUtil {
 
     public static Unit mockGram() {
         Unit mock = new Unit();
-        mock.setDescription("Gram");
-        mock.setName("g");
+        mock.setName("Gram");
+        mock.setLabel("g");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
         ReflectionTestUtils.setField(mock, "id", UUID.fromString("f7823293-7874-4459-9fb7-6b420a0627fa"));
@@ -23,8 +23,8 @@ public class MockUnitUtil {
 
     public static Unit mockDl() {
         Unit mock = new Unit();
-        mock.setDescription("Deciliter");
-        mock.setName("dl");
+        mock.setName("Deciliter");
+        mock.setLabel("dl");
         mock.setCreatedBy("Majken");
         mock.setUpdatedBy("Jens");
         ReflectionTestUtils.setField(mock, "id", UUID.fromString("046d0928-0806-480b-ad8b-c6845e99643b"));
@@ -40,8 +40,8 @@ public class MockUnitUtil {
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
                 .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-                .name("dl")
-                .description("Deciliter")
+                .label("dl")
+                .name("Deciliter")
                 .build();
         return mock;
     }
@@ -53,8 +53,8 @@ public class MockUnitUtil {
                 .created(OffsetDateTimeProvider.provide("2022-11-05T19:47:29"))
                 .updatedBy("Jens")
                 .updated(OffsetDateTimeProvider.provide("2023-01-25T14:25:15"))
-                .name("g")
-                .description("Gram")
+                .label("g")
+                .name("Gram")
                 .build();
         return mock;
     }

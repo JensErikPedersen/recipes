@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
-public class RatingJpaRepositotyTest {
+public class RatingJpaRepositotyIT {
 	
 	@Autowired
 	private RatingJpaRepository ratingJpaRepository;

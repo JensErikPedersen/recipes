@@ -163,15 +163,29 @@ public class CategoryServiceTest {
 		when(categoryJpaRepository.findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"))).thenReturn(Optional.of(savedDessert()));
 
 		// When
-		categoryService.delete("913a5159-3717-4b9d-a290-0158d31ea8aa");
+		boolean delete = categoryService.delete("913a5159-3717-4b9d-a290-0158d31ea8aa");
 
 		// Then
+		assertThat(delete).isTrue();
 		verify(categoryJpaRepository, Mockito.times(1)).delete(savedDessert());
 		verify(categoryJpaRepository, Mockito.times(1)).findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"));
 
 	}
-	
-	// TODO: Test coverages
+
+	@Test
+	@DisplayName("Given not existing Category, When deleted, Then false is returned")
+	public void shouldNotBeDeleted() {
+		// Given
+		when(categoryJpaRepository.findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"))).thenReturn(Optional.empty());
+
+		// When
+		boolean delete = categoryService.delete("913a5159-3717-4b9d-a290-0158d31ea8aa");
+
+		// Then
+		assertThat(delete).isFalse();
+		verify(categoryJpaRepository, Mockito.times(1)).findById(UUID.fromString("913a5159-3717-4b9d-a290-0158d31ea8aa"));
+
+	}
 	
 	// utilities, mocks etc.
 	

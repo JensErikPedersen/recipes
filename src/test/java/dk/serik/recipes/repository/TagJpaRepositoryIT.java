@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @DataJpaTest
 @Slf4j
-public class TagJpaRepositoryTest {
+public class TagJpaRepositoryIT {
     @Autowired
     private TagJpaRepository repository;
     @MockBean

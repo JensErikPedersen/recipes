@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.within;
 
 @DataJpaTest
 @Slf4j
-public class RecipeIngredientJpaRepositoryTest {
+public class RecipeIngredientJpaRepositoryIT {
 	
 	@Autowired
 	private RecipeIngredientJpaRepository recipeIngredientJpaRepository;

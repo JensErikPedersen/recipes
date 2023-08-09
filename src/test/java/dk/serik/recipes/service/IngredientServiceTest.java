@@ -2,6 +2,7 @@ package dk.serik.recipes.service;
 
 import dk.serik.recipes.bean.Session;
 import dk.serik.recipes.dto.IngredientDTO;
+import dk.serik.recipes.exceptions.ServiceException;
 import dk.serik.recipes.mockutil.MockIngredientUtil;
 import dk.serik.recipes.model.Ingredient;
 import dk.serik.recipes.repository.IngredientJpaRepository;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -34,6 +37,8 @@ public class IngredientServiceTest {
 	@Mock
 	private Session session;
 
+	@Captor
+	ArgumentCaptor<Ingredient> ingredientCaptor;
 	@BeforeEach
 	public void setupTest() {
 		lenient().when(session.getUserName()).thenReturn("Jens");
@@ -183,11 +188,104 @@ public class IngredientServiceTest {
 	}
 
 	@Test
-	@DisplayName("Given existing Ingredients, When searching will null, Then Empty is returned")
+	@DisplayName("Given existing Ingredients, When searching with null, Then Empty is returned")
 	public void shouldReturnEmptyWhenSearchingWithNull() {
+		// Given
+		given(repository.findAllByNameContains(null)).willReturn(Optional.empty());
 
+		// When
+		Optional<List<IngredientDTO>> ingredientDTOS = service.findAllByNameContains(null);
+
+		// Then
+		then(repository).should(times(1)).findAllByNameContains(null);
+		assertThat(ingredientDTOS.isEmpty()).isTrue();
 	}
 
+	@Test
+	@DisplayName("Given valid new Ingredient, When saved, Then new Ingredient is returned")
+	public void shouldBeSavedAndReturned() {
+		// Given
+		given(repository.save(any())).willReturn(MockIngredientUtil.mockHavsalt());
+
+		// When
+		IngredientDTO savedDto = service.save(MockIngredientUtil.mockNewHavsaltDTO());
+
+		// Then
+		then(repository).should(times(1)).save(any());
+		assertThat(savedDto).isNotNull();
+		assertThat(savedDto.getId()).isEqualTo("01a50907-8141-4dd1-acdf-c4384669c2b2");
+		assertThat(savedDto.getCreatedBy()).isEqualTo("Jens");
+	}
+
+	@Test
+	@DisplayName("Given Ingredient is Null, When saved, Then a ServiceException is thrown")
+	public void shouldThrowExceptionWhenIngredientIsNull() {
+		assertThrows(ServiceException.class, () -> {
+			service.save(null);
+		}, "Ingredient is Null");
+	}
+
+	@Test
+	@DisplayName("Given existing Ingredient, When deleted, Then true is returned")
+	public void shouldReturnTrueWhenDeleted() {
+		// Given
+		given(repository.findById(UUID.fromString("381e5cd5-0a5d-48d2-b69c-71516254937e"))).willReturn(Optional.of(MockIngredientUtil.mockHvedemel()));
+
+		// When
+		boolean isDeleted = service.delete("381e5cd5-0a5d-48d2-b69c-71516254937e");
+
+		// Then
+		then(repository).should(times(1)).findById(any());
+		assertThat(isDeleted).isTrue();
+		then(repository).should(times(1)).delete(MockIngredientUtil.mockHvedemel());
+	}
+
+	@Test
+	@DisplayName("Given Ingredient not found, When deleted, Then false is returned")
+	public void shouldReturnFalseWhenDeleteUnknown() {
+		// Given
+		given(repository.findById(UUID.fromString("381e5cd5-0a5d-48d2-b69c-71516254937e"))).willReturn(Optional.empty());
+
+		// When
+		boolean isDeleted = service.delete("381e5cd5-0a5d-48d2-b69c-71516254937e");
+
+		// Then
+		then(repository).should(times(1)).findById(UUID.fromString("381e5cd5-0a5d-48d2-b69c-71516254937e"));
+		assertThat(isDeleted).isFalse();
+	}
+
+	@Test
+	@DisplayName("Given id is null, When deleted, Then service exception is thrown")
+	public void shouldThrowExceptionWhenIdIsNull() {
+		assertThrows(ServiceException.class, () -> {
+			service.delete(null);
+		}, "Ingredient Id is Null");
+	}
+
+	@Test
+	@DisplayName("Given existing Ingredient, When updating description, Then return updated Ingredient")
+	public void shouldUpdateDescriptionAndReturnUpdated() {
+		// Given
+		given(repository.findById(UUID.fromString("01a50907-8141-4dd1-acdf-c4384669c2b2"))).willReturn(Optional.of(MockIngredientUtil.mockHavsalt()));
+		// When
+		IngredientDTO updated = service.update(MockIngredientUtil.mockHavsaltDTOToUpdate());
+		// Then
+		then(repository).should(times(1)).findById(UUID.fromString("01a50907-8141-4dd1-acdf-c4384669c2b2"));
+		assertThat(updated).isNotNull();
+		then(repository).should().save(ingredientCaptor.capture());
+		assertThat(ingredientCaptor.getValue().getDescription()).isEqualTo(MockIngredientUtil.mockHavsaltDTOToUpdate().getDescription());
+	}
+
+	@Test
+	@DisplayName("Given Ingredient do not exist, When updating description, Then throw exception")
+	public void shouldThrowExceptionWhenUpdatingNonExistingIngredient() {
+		// Given
+		given(repository.findById(UUID.fromString("5f01d434-5a68-4359-9f2e-0a6793dce48d"))).willReturn(Optional.empty());
+		//When / Then
+		assertThrows(ServiceException.class, () -> {
+			service.update(MockIngredientUtil.mockHvedemelDTO());
+		}, "Could not update Ingredient with id 5f01d434-5a68-4359-9f2e-0a6793dce48d since it was not found");
+	}
 
 	private List<Ingredient> mockList() {
 		List<Ingredient> mocks = new ArrayList<>();

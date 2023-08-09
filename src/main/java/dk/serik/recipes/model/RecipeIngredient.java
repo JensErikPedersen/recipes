@@ -58,7 +58,7 @@ public class RecipeIngredient extends BaseEntity {
 				"recipe=" + recipe.getName() +
 				", ingredient=" + ingredient.getName() +
 				", amount=" + amount +
-				", unit=" + unit.getName() +
+				", unit=" + unit.getLabel() +
 				", created=" + created +
 				", createdBy='" + createdBy + '\'' +
 				", updated=" + updated +

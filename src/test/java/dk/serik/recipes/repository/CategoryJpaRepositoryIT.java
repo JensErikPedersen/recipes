@@ -5,6 +5,7 @@ import dk.serik.recipes.model.Category;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -25,7 +26,7 @@ import static org.assertj.core.api.Assertions.within;
 @DataJpaTest
 @Slf4j
 public class
-CategoryJpaRepositoryTest {
+CategoryJpaRepositoryIT {
 
 	@Autowired
 	private CategoryJpaRepository categoryRepository;
@@ -40,7 +41,8 @@ CategoryJpaRepositoryTest {
 	
 	@ParameterizedTest
 	@CsvSource(value={"Brød:Jens", "Kager:Majken"}, delimiter = ':')
-	public void givenCategoryIsPresent_WhenFetchingCategory_ThenCreatedByOk(String category, String createdBy) {
+	@DisplayName("Given existing Category, When Fetching Category by Name, Then Category is returned")
+	public void shouldFindCategoryByName(String category, String createdBy) {
 		Optional<Category> categoryEntity = categoryRepository.findByName(category);
 		Assertions.assertTrue(categoryEntity.isPresent());
 		Assertions.assertEquals(createdBy, categoryEntity.get().getCreatedBy());
@@ -48,7 +50,8 @@ CategoryJpaRepositoryTest {
 	
 	
 	@Test
-	public void givenCategoryWienerBread_WhenSavingCategory_ThenOk() {
+	@DisplayName("Given new Category, When saved, Then Category is saved in Database")
+	public void shouldSaveNewCategory() {
 		OffsetDateTime now = OffsetDateTime.now();
 		Category category = categoryRepository.saveAndFlush(buildWienerBreadEntity());
 		assertThat(now).isCloseTo(category.getCreated(), within(0, ChronoUnit.SECONDS));
@@ -57,14 +60,16 @@ CategoryJpaRepositoryTest {
 	}
 	
 	@Test
-	public void givenThreeCategories_WhenFetchingAll_ThenFourInList() {
+	@DisplayName("Given four Categories exist, When Fetching all, Then all four is returned")
+	public void shouldReturnFourCategories() {
 		List<Category> categoryEntities = categoryRepository.findAll();
 		Assertions.assertFalse(categoryEntities.isEmpty());
 		Assertions.assertEquals(4, categoryEntities.size());
 	}
 	
 	@Test
-	public void givenExistingCategory_WhenNameIsChanged_ThenOk() {
+	@DisplayName("Given existing Category, When category name is updated, Then name and updated info is updated")
+	public void shouldUpdateNameAndUpdatedInfo() {
 		Optional<Category> categoryEntity = categoryRepository.findByName("Brød");
 		Assertions.assertTrue(categoryEntity.isPresent());
 		categoryEntity.get().setName("Bread");
@@ -76,7 +81,8 @@ CategoryJpaRepositoryTest {
 	}
 	
 	@Test
-	public void givenExistingCategories_WhenLookupByName_er_ThenFindTwo() {
+	@DisplayName("Given existing categories containing 'er' in name, When finding all by name contains 'er', Then two categories is returned")
+	public void shouldReturnTwoCategoriesWhenFetchByName() {
 		Optional<List<Category>> opCategories = categoryRepository.findAllByNameContains("er");
 		Assertions.assertTrue(opCategories.isPresent());
 		Assertions.assertEquals(2, opCategories.get().size());

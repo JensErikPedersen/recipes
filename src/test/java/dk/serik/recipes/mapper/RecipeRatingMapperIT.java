@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @Slf4j
-public class RecipeRatingMapperTest {
+public class RecipeRatingMapperIT {
 
     @Autowired
     private RecipeRatingJpaRepository recipeRatingJpaRepository;

@@ -17,7 +17,7 @@ public interface IngredientService {
 
     IngredientDTO save(IngredientDTO dto);
 
-    void delete(String id);
+    boolean delete(String id);
 
     IngredientDTO update(IngredientDTO dto);
 

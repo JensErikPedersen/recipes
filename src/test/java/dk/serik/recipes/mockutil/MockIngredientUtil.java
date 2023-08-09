@@ -40,11 +40,18 @@ public class MockIngredientUtil {
         Ingredient mock = new Ingredient();
         mock.setName("Havsalt");
         mock.setDescription("Havsalt fra middelhavet");
-        mock.setCreatedBy("Majken");
-        mock.setUpdatedBy("Jens");
+        mock.setCreatedBy("Jens");
         ReflectionTestUtils.setField(mock, "id", UUID.fromString("01a50907-8141-4dd1-acdf-c4384669c2b2"));
-        ReflectionTestUtils.setField(mock, "updated", OffsetDateTimeProvider.provide("2023-05-25T14:25:15"));
         ReflectionTestUtils.setField(mock, "created", OffsetDateTimeProvider.provide("2022-04-05T19:47:29"));
+        return mock;
+    }
+
+
+    public static Ingredient mockNewHavsalt() {
+        Ingredient mock = new Ingredient();
+        mock.setName("Havsalt");
+        mock.setDescription("Havsalt fra middelhavet");
+        mock.setCreatedBy("Jens");
         return mock;
     }
     public static IngredientDTO mockHavsaltDTO() {
@@ -52,10 +59,30 @@ public class MockIngredientUtil {
                 .id("01a50907-8141-4dd1-acdf-c4384669c2b2")
                 .name("Havsalt")
                 .description("Havsalt fra middelhavet")
-                .createdBy("Majken")
+                .createdBy("Jens")
                 .updatedBy("Jens")
                 .updated(OffsetDateTimeProvider.provide("2023-05-25T14:25:15"))
                 .created(OffsetDateTimeProvider.provide("2022-04-05T19:47:29"))
+                .build();
+    }
+
+    public static IngredientDTO mockHavsaltDTOToUpdate() {
+        return IngredientDTO.builder()
+                .id("01a50907-8141-4dd1-acdf-c4384669c2b2")
+                .name("Havsalt")
+                .description("Havsalt fra middelhavet i store flager")
+                .createdBy("Jens")
+//                .updatedBy("Jens")
+//                .updated(OffsetDateTimeProvider.provide("2023-05-25T14:25:15"))
+                .created(OffsetDateTimeProvider.provide("2022-04-05T19:47:29"))
+                .build();
+    }
+
+    public static IngredientDTO mockNewHavsaltDTO() {
+        return IngredientDTO.builder()
+                .name("Havsalt")
+                .description("Havsalt fra middelhavet")
+                .createdBy("Majken")
                 .build();
     }
 }

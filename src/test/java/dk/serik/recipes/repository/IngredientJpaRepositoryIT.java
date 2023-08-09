@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.within;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
-public class IngredientJpaRepositoryTest {
+public class IngredientJpaRepositoryIT {
 	
 	@Autowired
 	private IngredientJpaRepository repository;

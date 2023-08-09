@@ -10,22 +10,22 @@ import java.time.OffsetDateTime;
 @Getter
 public class UnitDTO extends BaseDTO {
 
+    private String label;
+
     private String name;
 
-    private String description;
-
     @Builder
-    public UnitDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String name, String description) {
+    public UnitDTO(String id, OffsetDateTime created, String createdBy, OffsetDateTime updated, String updatedBy, String label, String name) {
         super(id, created, createdBy, updated, updatedBy);
+        this.label = label;
         this.name = name;
-        this.description = description;
     }
 
     @Override
     public String toString() {
         return "UnitDTO{" +
-                "label='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "label='" + label + '\'' +
+                ", description='" + name + '\'' +
                 ", id='" + id + '\'' +
                 ", created=" + created +
                 ", createdBy='" + createdBy + '\'' +

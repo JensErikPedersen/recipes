@@ -19,4 +19,16 @@ public class IngredientDTO extends BaseDTO {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "IngredientDTO{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", id='" + id + '\'' +
+                ", created=" + created +
+                ", createdBy='" + createdBy + '\'' +
+                ", updated=" + updated +
+                ", updatedBy='" + updatedBy + '\'' +
+                '}';
+    }
 }

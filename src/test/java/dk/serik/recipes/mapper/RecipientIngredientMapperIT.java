@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.within;
 
 @DataJpaTest
 @Slf4j
-public class RecipientIngredientMapperTest {
+public class RecipientIngredientMapperIT {
 
     @Autowired
     private RecipeIngredientJpaRepository recipeIngredientJpaRepository;

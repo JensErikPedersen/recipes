@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.within;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Slf4j
-public class RecipeJpaRepositoryTest {
+public class RecipeJpaRepositoryIT {
 
 	@Autowired
 	private RecipeJpaRepository recipeJpaRepository;

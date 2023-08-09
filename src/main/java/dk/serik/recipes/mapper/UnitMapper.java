@@ -16,12 +16,12 @@ public class UnitMapper {
 
         UnitDTO dto = UnitDTO.builder()
                 .id(entity.getId().toString())
-                .name(entity.getName())
+                .label(entity.getLabel())
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())
                 .updatedBy(entity.getUpdatedBy())
                 .updated(entity.getUpdated())
-                .description(entity.getDescription())
+                .name(entity.getName())
                 .build();
         log.info("Mapped DTO: {}", dto);
         return dto;

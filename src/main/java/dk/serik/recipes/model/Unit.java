@@ -17,17 +17,17 @@ import java.util.Set;
 public class Unit extends BaseIdentifierEntity {
 	
 	@Column(nullable = false, unique = true)
-	private String name;
+	private String label;
 	
 	@Column(nullable = false)
-	private String description;
+	private String name;
 	
 	@OneToMany(mappedBy= "unit",  fetch= FetchType.LAZY)
 	private Set<RecipeIngredient> recipeIngredientEntities;
 
 	@Override
 	public String toString() {
-		return "UnitEntity [label=" + name + ", description=" + description + ", recipeIngredientEntities="
+		return "UnitEntity [label=" + label + ", description=" + name + ", recipeIngredientEntities="
 				+ recipeIngredientEntities + ", id=" + id + "]";
 	}
 	

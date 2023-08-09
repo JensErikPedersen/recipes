@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -71,21 +72,27 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDTO save(CategoryDTO categoryDto) {
-		Category entity = new Category();
-		entity.setDescription(categoryDto.getDescription());
-		entity.setName(categoryDto.getName());
-		entity.setCreatedBy(session.getUserName());
-		Category managedCategory = categoryJpaRepository.save(entity);
-		CategoryDTO dto = CategoryMapper.from(managedCategory);
-		return dto;
+		if(Objects.nonNull(categoryDto)) {
+			Category entity = new Category();
+			entity.setDescription(categoryDto.getDescription());
+			entity.setName(categoryDto.getName());
+			entity.setCreatedBy(session.getUserName());
+			Category managedCategory = categoryJpaRepository.save(entity);
+			CategoryDTO dto = CategoryMapper.from(managedCategory);
+			return dto;
+		}
+
+		return null;
 	}
 
 	@Override
-	public void delete(String id) {
+	public boolean delete(String id) {
 		Optional<Category> toBeDeleted = categoryJpaRepository.findById(UUID.fromString(id));
 		if(toBeDeleted.isPresent()) {
 			categoryJpaRepository.delete(toBeDeleted.get());
+			return true;
 		}
+		return false;
 	}
 
 	@Override

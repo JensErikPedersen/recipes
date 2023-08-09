@@ -15,7 +15,7 @@ public class RecipeIngredientMapper {
                 .recipeId(entity.getRecipe().getId().toString())
                 .ingredientName(entity.getIngredient().getName())
                 .amount(entity.getAmount())
-                .unitLabel(entity.getUnit().getName())
+                .unitLabel(entity.getUnit().getLabel())
                 .unitId(entity.getUnit().getId().toString())
                 .createdBy(entity.getCreatedBy())
                 .created(entity.getCreated())
